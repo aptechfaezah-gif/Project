@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | JerryBites Restaurant</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<style>
+
+/* GLOBAL */
+body{
+  font-family: 'Poppins', sans-serif;
+  background:#111;
+  color:#ddd;
+  scroll-behavior:smooth;
+}
+
+.section-padding{
+  padding:80px 0;
+}
+
+.section-title{
+  font-family:'Playfair Display', serif;
+  font-size:40px;
+  color:#d4af37;
+  margin-bottom:30px;
+}
+
+/* NAVBAR */
+.navbar{
+  background:rgba(0,0,0,0.9);
+}
+.navbar-brand{
+  font-family:'Playfair Display', serif;
+  color:#d4af37 !important;
+  font-size:28px;
+}
+.nav-link:hover{
+  color:#d4af37 !important;
+}
+/* Navbar Hover  */
+.navbar .nav-link{
+  position: relative;
+}
+
+.navbar .nav-link::after{
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background: #d4af37;
+  left: 0;
+  bottom: -5px;
+  transition: 0.3s;
+}
+
+.navbar .nav-link:hover::after{
+  width: 100%;
+}
+
+/* HERO */
+.contact-hero{
+  background:url('assests/images/00.jpg') center/cover no-repeat;
+  height:60vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+
+.contact-hero::after{
+  content:"";
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.55); 
+}
+
+.contact-hero h1{
+  position:relative;
+  z-index:2;
+  color:#ffffff;
+  font-weight:800;
+  text-shadow:0 0 20px rgba(255,255,255,0.9);
+}
+/* SECTION */
+.section-padding{
+  padding:100px 0;
+}
+
+.gold-text{
+  color:#d4af37;
+}
+
+.contact-box{
+  background:#1a1a1a;
+  padding:40px;
+  height:100%;
+  border-radius:10px;
+  box-shadow:0 0 25px rgba(0,0,0,0.6);
+}
+
+.contact-box h3{
+  font-weight:700;
+  margin-bottom:20px;
+}
+
+.contact-info i{
+  color:#d4af37;
+  margin-right:10px;
+}
+
+.form-control{
+  background:#1a1a1a;
+  border:1px solid #333;
+  color:#fff;
+}
+
+.form-control:focus{
+  background:#1a1a1a;
+  border-color:#d4af37;
+  box-shadow:none;
+}
+
+.btn-gold{
+  background:#d4af37;
+  border:none;
+  padding:12px 30px;
+  font-weight:600;
+}
+
+.btn-gold:hover{
+  background:#fff;
+   color: #000;
+}
+
+/* RESERVE SECTION  */
+.reserve-section{
+  background:url('assests/images/for\ contact.jpg') center/cover no-repeat;
+  padding:120px 0;
+  text-align:center;
+  position:relative;
+}
+
+.reserve-section::after{
+  content:"";
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.55); 
+  top:0;
+  left:0;
+}
+
+.reserve-content{
+  position:relative;
+  z-index:2;
+}
+
+.reserve-content h2{
+  font-size:45px;
+  font-weight:700;
+  color:#fff;
+}
+
+.reserve-btn{
+  background:#d4af37;
+  padding:12px 30px;
+  text-decoration:none;
+  color:#000;
+  font-weight:600;
+  margin-top:20px;
+  display:inline-block;
+}
+
+.reserve-btn:hover{
+  background:#fff;
+}
+
+/* MAP  */
+.map-section iframe{
+  width:100%;
+  height:450px;
+  border:0;
+}
+.map-section{
+  margin-top:80px;
+}
+
+/* FOOTER */
+.footer{
+  background:#000;
+  padding:60px 0 20px;
+  border-top:1px solid #d4af37; 
+}
+
+.footer h5{
+  color:#d4af37;
+  margin-bottom:20px;
+  
+}
+
+.footer a{
+  text-decoration:none;
+  color:#ccc;
+  transition:0.3s;
+}
+.footer a:hover{
+  color:#d4af37;
+}
+
+.social-icons a{
+  font-size:20px;
+  margin-right:15px;
+  color:#ccc;
+  transition:0.3s;
+}
+.social-icons a:hover{
+  color:#d4af37;
+}
+
+.footer-bottom{
+  border-top:1px solid #333;
+  margin-top:30px;
+  padding-top:15px;
+  text-align:center;
+  color:#aaa;
+}
+.quick-links li {
+  margin-bottom:10px;
+}
+
+.quick-links a {
+  position:relative;
+  display:inline-block;
+}
+
+.quick-links a::after{
+  content:"";
+  position:absolute;
+  width:0;
+  height:2px;
+  background:#d4af37;
+  left:0;
+  bottom:-3px;
+  transition:0.3s;
+}
+
+.quick-links a:hover::after{
+  width:100%;
+}
+.form-control,
+.form-control:focus,
+textarea,
+textarea:focus,
+input,
+input:focus {
+  color: #fff !important;
+}
+::placeholder {
+  color: #aaa !important;
+  opacity: 1;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:focus {
+  -webkit-text-fill-color: #fff !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+/* Animation  */
+.animate-left {
+  opacity: 0;
+  transform: translateX(-80px);
+  animation: slideLeft 1.2s ease forwards;
+}
+
+.animate-right {
+  opacity: 0;
+  transform: translateX(80px);
+  animation: slideRight 1.2s ease forwards;
+}
+
+
+.animate-right {
+  animation-delay: 0.3s;
+}
+
+
+@keyframes slideLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideRight {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+/*login */
+.btn-login{
+  background: transparent;
+  border: 2px solid #d4af37;
+  color: #d4af37;
+  padding: 8px 22px;
+  border-radius: 30px;
+  transition: 0.3s;
+}
+
+.btn-login:hover{
+  background: #d4af37;
+  color: #000;
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #d4af37;
+}
+#chatToggle{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#d4af37;
+color:black;
+border-radius:50%;
+width:60px;
+height:60px;
+border:none;
+font-size:26px;
+cursor:pointer;
+z-index:9999;
+}
+
+#chatContainer{
+position:fixed;
+bottom:90px;
+right:20px;
+width:350px;
+display:none;
+z-index:9999;
+}
+/* Full Screen Mode */
+#chatContainer.fullscreen {
+  width: 90vw !important;
+  height: 80vh !important;
+  bottom: 10vh !important;
+}
+
+#chatContainer.fullscreen #chatBox {
+  height: calc(80vh - 120px) !important;
+}
+#chatBox{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* User Message (Right Side) */
+.user-msg{
+  align-self: flex-end;
+  background: #d4af37;
+  color: #000;
+  padding: 8px 12px;
+  border-radius: 12px;
+  max-width: 75%;
+}
+
+/* AI Message (Left Side) */
+.ai-msg{
+  align-self: flex-start;
+  background: #1a1a1a;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 12px;
+  max-width: 75%;
+}
+/* FIX WHITE ON REFRESH */
+#chatContainer{
+  background:#111 !important;
+  color:#fff;
+}
+
+#chatBox{
+  background:#111 !important;
+}
+
+</style>
+</head>
+
+<body>
+    <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container">
+
+    <!-- Logo -->
+    <a class="navbar-brand" href="contact.html">JerryBites</a>
+
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navmenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navmenu">
+
+      <!-- Center Menu -->
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="menu.html">Menu</a></li>
+        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
+      </ul>
+
+      <!-- Right Side Login Button -->
+      <a href="login.html" class="btn btn-login">Login</a>
+
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="contact-hero">
+  <h1>CONTACT US</h1>
+</section>
+
+<!-- CONTACT SECTION -->
+<section class="section-padding">
+<div class="container">
+<div class="row g-4 align-items-stretch">
+
+<!-- LEFT -->
+<div class="col-lg-6 d-flex animate-left">
+<div class="contact-box w-100">
+
+<p class="gold-text">— KEEP CLOSE</p>
+<h3>Get In Touch</h3>
+
+<p>
+Experience premium dining and unforgettable ambiance at JerryBites Restaurant.
+We are always ready to serve you.
+</p>
+
+<div class="contact-info mt-4">
+<p><i class="bi bi-geo-alt-fill"></i>
+Shop No.08, Samia Plaza, Gulshan-e-Iqbal Block 04, Karachi, Pakistan
+</p>
+
+<p><i class="bi bi-telephone-fill"></i>0345-3956208</p>
+<p><i class="bi bi-envelope-fill"></i>faisalali@jarries.com</p>
+<p><i class="bi bi-clock-fill"></i>Open 04:00 PM – 01:00 AM</p>
+</div>
+
+</div>
+</div>
+
+<!-- RIGHT -->
+<div class="col-lg-6 d-flex animate-right">
+<div class="contact-box w-100">
+
+<h3>Your Details</h3>
+<p>Let us know how to get back to you.</p>
+
+<form id="contactForm">
+
+<div class="row">
+<div class="col-md-6 mb-3">
+<input type="text" class="form-control" id="name"
+pattern="^[A-Za-z]{3,30}(?: [A-Za-z]{3,30})*$"
+title="Name should contain only letters and spaces (min 3 characters)"
+placeholder="Name *" required>
+</div>
+
+<div class="col-md-6 mb-3">
+<input type="email" class="form-control" id="email"
+pattern="^[^ ]+@[^ ]+\.[a-z]{2,3}$"
+placeholder="Email Address *" required>
+</div>
+</div>
+
+<div class="mb-3">
+<input type="text" class="form-control" id="subject"
+pattern=".{3,50}"
+placeholder="Subject *" required>
+</div>
+
+<div class="mb-3">
+<textarea class="form-control" id="message" rows="5"
+pattern=".{10,500}"
+placeholder="Comments / Questions *" required></textarea>
+</div>
+
+<button type="submit" class="btn btn-gold">SEND MESSAGE</button>
+
+</form>
+
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- RESERVE SECTION -->
+<section class="reserve-section">
+<div class="reserve-content">
+<p class="gold-text">— BOOK NOW</p>
+<h2>Reserve A Table Now</h2>
+<a href="#" class="reserve-btn" data-bs-toggle="modal" data-bs-target="#reservationModal">
+  MAKE A RESERVATION</a>
+</div>
+</section>
+
+<!-- MAP -->
+<section class="map-section">
+  <iframe
+    src="https://www.google.com/maps?q=JerryBites%20Restaurant%20Gulshan-e-Iqbal%20Karachi&output=embed"
+    allowfullscreen=""
+    loading="lazy">
+  </iframe>
+</section>
+<!-- RESERVATION MODAL -->
+<div class="modal fade" id="reservationModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content" style="background:#111; color:#fff;">
+      
+      <div class="modal-header border-0">
+        <h5 class="modal-title" style="color:#d4af37;">Reserve A Table</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        <form id="reservationForm">
+
+          <div class="mb-3">
+            <input type="text" class="form-control"
+            pattern="^[A-Za-z]{3,30}(?: [A-Za-z]{3,30})*$"
+            placeholder="Full Name *" required>
+          </div>
+
+          <div class="mb-3">
+            <input type="tel" class="form-control"
+            pattern="^[0-9]{11}$"
+            placeholder="Phone Number (11 digits) *" required>
+          </div>
+
+          <div class="mb-3">
+            <input type="date" class="form-control" required>
+          </div>
+
+          <div class="mb-3">
+            <input type="time" class="form-control" required>
+          </div>
+
+          <div class="mb-3">
+            <input type="number" class="form-control"
+            min="1" max="20"
+            placeholder="Number of Guests *" required>
+          </div>
+
+          <button type="submit" class="btn btn-gold w-100">
+            CONFIRM RESERVATION
+          </button>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer text-white">
+<div class="container">
+<div class="row">
+
+<!-- Left -->
+<div class="col-md-4 mb-4">
+<h5>JerryBites Restaurant</h5>
+<p>
+Experience luxury dining with world-class chefs, premium ingredients, 
+and unforgettable ambiance.
+</p>
+</div>
+
+<!-- Middle -->
+<div class="col-md-3 mb-4 text-md-center">
+<h5>Quick Links</h5>
+<ul class="list-unstyled quick-links">
+<li><a href="index.html">Home</a></li>
+<li><a href="about.html">About Us</a></li>
+<li><a href="menu.html">Our Menu</a></li>
+<li><a href="gallery.html">Gallery</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</div>
+
+<!-- Right  -->
+<div class="col-md-4 offset-md-1 mb-4 text-md-start">
+<h5>Contact Info</h5>
+
+<div class="contact-info">
+<p><i class="bi bi-geo-alt-fill me-2"></i>Shop No.08, Samia Plaza, Gulshan-e-Iqbal block o4(Near Disco Bakery Kaybees Restaurant), Karachi Pakistan</p>
+<p><i class="bi bi-telephone-fill me-2"></i>03453956208</p>
+<p>
+<i class="bi bi-envelope-fill me-2"></i>
+<a href="https://mail.google.com/mail/?view=cm&fs=1&to=faisalali@jarries.com" target="_blank">
+faisalali@jarries.com
+</a>
+</p>
+</div>
+
+<!-- Social Icons  -->
+<div class="social-icons mt-3">
+<a href="#"><i class="bi bi-facebook"></i></a>
+<a href="#"><i class="bi bi-instagram"></i></a>
+<a href="https://mail.google.com/mail/?view=cm&fs=1&to=jarriesrestaurant@gmail.com" target="_blank">
+<i class="bi bi-envelope-fill"></i>
+</a>
+</div>
+
+</div>
+
+</div>
+
+<div class="footer-bottom text-center">
+© 2026 JerryBites Restaurant | All Rights Reserved
+</div>
+
+</div>
+</footer>
+<!-- CHAT ICON -->
+<button id="chatToggle">💬</button>
+
+<div id="chatContainer" class="card shadow">
+  <div class="card-header bg-dark text-warning d-flex justify-content-between align-items-center">
+    <span>JerryBites AI Assistant</span>
+    <div>
+      <button class="btn btn-sm btn-success me-1" onclick="toggleFullScreen()">⛶</button>
+      <button class="btn btn-sm btn-warning me-1" onclick="refreshChat()">🔄</button>
+      <button class="btn btn-sm btn-danger" onclick="toggleChat()">✖</button>
+    </div>
+  </div>
+
+  <div id="chatBox" class="card-body" style="height:300px; overflow-y:auto; background:#111; color:#fff;"></div>
+
+  <div class="card-footer bg-dark">
+    <div class="input-group">
+      <input id="userInput" type="text" class="form-control" placeholder="Ask about restaurant..." />
+      <button class="btn btn-warning" onclick="askAI()">Send</button>
+    </div>
+  </div>
+</div>
+<script>
+
+/* FORM VALIDATION + ALERT */
+document.getElementById("contactForm").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  if(this.checkValidity()){
+    alert("Thanks for your message! We will contact you soon.");
+    this.reset();
+  }
+});
+
+// Reservation Form Alert
+document.getElementById("reservationForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  if(this.checkValidity()){
+    alert("Reservation Confirmed! We look forward to serving you.");
+    this.reset();
+    var modal = bootstrap.Modal.getInstance(document.getElementById('reservationModal'));
+    modal.hide();
+  }
+});
+
+const API_KEY = "AIzaSyBzEgSmcfaXfPc5CN8Ddb0y8noF5HFRi40";
+
+const API_URL =
+"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + API_KEY;
+
+document.getElementById("chatToggle").onclick = toggleChat;
+
+function toggleChat(){
+  const chat = document.getElementById("chatContainer");
+  chat.style.display = chat.style.display === "none" ? "block" : "none";
+}
+
+async function askAI(){
+
+  const input = document.getElementById("userInput");
+  const text = input.value.trim();
+  if(!text) return;
+
+  const chatBox = document.getElementById("chatBox");
+
+  
+  chatBox.innerHTML += "<p class='user-msg'><strong>You:</strong> " + text + "</p>";
+  input.value = "";
+
+  const body = {
+    contents:[{role:"user",parts:[{text}]}],
+    system_instruction:{
+      parts:[{text:`You are the official AI assistant of JerryBites Restaurant.
+
+Your job is ONLY to answer questions related to JerryBites Restaurant.
+
+If the question is unrelated, reply:
+"I can only provide information about JerryBites Restaurant."
+
+--------------------------------------------------
+📌 RESTAURANT DETAILS
+--------------------------------------------------
+
+Name: JerryBites Restaurant
+Location: Shop No.08, Samia Plaza, Gulshan-e-Iqbal Block 04, Karachi, Pakistan
+Opening Hours: 04:00 PM to 01:00 AM (Daily)
+Phone Number: 0345-3956208
+Email: faisalali@jarries.com
+
+--------------------------------------------------
+📌 ABOUT
+--------------------------------------------------
+
+JerryBites Restaurant is a modern, premium dining restaurant
+offering high-quality food, comfortable environment, and family-friendly atmosphere.
+
+Theme: Dark & Gold Luxury Style
+Environment: Clean, professional, and welcoming.
+
+--------------------------------------------------
+📌 MENU CATEGORIES
+--------------------------------------------------
+
+1. Starters
+2. Burgers
+3. Pizza
+4. BBQ Items
+5. Chicken Dishes
+6. Rice Items
+7. Deals & Combos
+8. Cold Drinks
+9. Desserts
+10. Special Items
+11. Steaks
+12. Cake
+13. Fries
+14. Fried Rice
+15. Zinger burger
+16. Beef burger
+17. Chicken wings
+18. Chicken Broast
+
+--------------------------------------------------
+📌 DEALS
+--------------------------------------------------
+
+- Family Deals
+- Student Deals
+- Combo Offers
+- Special Discount Deals (Seasonal)
+- Weekend Offers
+
+(Always mention that prices may vary and customer should contact for latest prices.)
+
+--------------------------------------------------
+📌 SERVICES
+--------------------------------------------------
+
+- Dine-In Service
+- Table Reservation
+- Takeaway
+- Customer Support
+- Family Gatherings
+
+--------------------------------------------------
+📌 RESERVATION RULES
+--------------------------------------------------
+
+Customers can book tables in advance.
+Ask for:
+- Name
+- Phone Number
+- Date
+- Time
+- Number of Guests
+
+--------------------------------------------------
+📌 RESPONSE STYLE
+--------------------------------------------------
+
+- Keep answers short and clear.
+- Use simple language.
+- Be professional and polite.
+- Use bullet points when listing items.
+- Do not provide information about other restaurants.`}]
+    }
+  };
+
+  try {
+
+    const res = await fetch(API_URL,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(body)
+    });
+
+    const data = await res.json();
+
+    console.log(data); 
+    if(!res.ok){
+      chatBox.innerHTML += "<p><strong>AI:</strong> Error: " + (data.error?.message || "Request failed") + "</p>";
+      return;
+    }
+
+    const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+    if(!reply){
+      chatBox.innerHTML += "<p><strong>AI:</strong> No response received.</p>";
+      return;
+    }
+
+    chatBox.innerHTML += "<p class='ai-msg'><strong>AI:</strong> " + reply + "</p>";
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+  } catch(error){
+    chatBox.innerHTML += "<p><strong>AI:</strong> Network Error. Please check internet or API key.</p>";
+    console.log(error);
+  }
+}
+function refreshChat() {
+  const chatBox = document.getElementById("chatBox");
+
+  // Smooth fade out
+  chatBox.style.transition = "0.3s";
+  chatBox.style.opacity = "0";
+
+  setTimeout(() => {
+    chatBox.innerHTML = "";
+    chatBox.style.opacity = "1";
+  }, 300);
+}
+function toggleFullScreen() {
+  const chat = document.getElementById("chatContainer");
+  chat.classList.toggle("fullscreen");
+}
+</script>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</html> 

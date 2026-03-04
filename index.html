@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JerryBites Restaurant</title>
+
+<!-- Bootstrap 5 CDN -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<!-- AOS Animation CSS -->
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<style>
+
+/* GLOBAL */
+body{
+  font-family: 'Poppins', sans-serif;
+  background:#111;
+  color:#ddd;
+  scroll-behavior:smooth;
+}
+
+.section-padding{
+  padding:80px 0;
+}
+
+.section-title{
+  font-family:'Playfair Display', serif;
+  font-size:40px;
+  color:#d4af37;
+  margin-bottom:30px;
+}
+
+/* NAVBAR */
+.navbar{
+  background:rgba(0,0,0,0.9);
+}
+.navbar-brand{
+  font-family:'Playfair Display', serif;
+  color:#d4af37 !important;
+  font-size:28px;
+}
+.nav-link:hover{
+  color:#d4af37 !important;
+}
+
+.navbar .nav-link{
+  position: relative;
+}
+
+.navbar .nav-link::after{
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background: #d4af37;
+  left: 0;
+  bottom: -5px;
+  transition: 0.3s;
+}
+
+.navbar .nav-link:hover::after{
+  width: 100%;
+}
+
+
+/* HERO */
+.hero{
+  height:98vh;
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('assests/images/resturant\ image.avif') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* BUTTON */
+.btn-gold{
+  background:#d4af37;
+  color:#000;
+  border-radius:30px;
+  padding:10px 25px;
+  transition:0.3s;
+}
+.btn-gold:hover{
+  background:#d4af37;
+  transform:scale(1.05);
+}
+
+/* DISH CARDS */
+.dish-card{
+  background: #1a1a1a;
+  border: 1px solid rgba(212,175,55,0.2);
+  border-radius: 15px;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+.dish-card:hover{
+  transform: translateY(-12px);
+  box-shadow: 0 15px 35px rgba(212,175,55,0.4);
+  border-color: #d4af37;
+}
+.dish-card img{
+  height: 220px;
+  object-fit: cover;
+  transition: 0.4s;
+}
+.dish-card:hover img{
+  transform: scale(1.1);
+}
+.dish-card h5{
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.dish-card p{
+  color: #ffffff;
+  opacity: 0.85;  
+}
+/* OFFER */
+.offer{
+  background:#d4af37;
+  padding:60px 0;
+  color:#000;
+}
+
+/* TESTIMONIALS */
+.testimonial-card{
+  background:#1a1a1a;
+  padding:30px;
+  border-radius:15px;
+  transition:0.4s;
+  
+}
+.testimonial-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 10px 25px rgba(212,175,55,0.4);
+}
+.stars{
+  color:#d4af37;
+}
+
+/* FOOTER */
+.footer{
+  background:#000;
+  padding:60px 0 20px;
+  border-top:1px solid #d4af37; 
+}
+
+.footer h5{
+  color:#d4af37;
+  margin-bottom:20px;
+  
+}
+
+.footer a{
+  text-decoration:none;
+  color:#ccc;
+  transition:0.3s;
+}
+.footer a:hover{
+  color:#d4af37;
+}
+
+.social-icons a{
+  font-size:20px;
+  margin-right:15px;
+  color:#ccc;
+  transition:0.3s;
+}
+.social-icons a:hover{
+  color:#d4af37;
+}
+
+.footer-bottom{
+  border-top:1px solid #333;
+  margin-top:30px;
+  padding-top:15px;
+  text-align:center;
+  color:#aaa;
+}
+.quick-links li {
+  margin-bottom:10px;
+}
+
+.quick-links a {
+  position:relative;
+  display:inline-block;
+}
+
+.quick-links a::after{
+  content:"";
+  position:absolute;
+  width:0;
+  height:2px;
+  background:#d4af37;
+  left:0;
+  bottom:-3px;
+  transition:0.3s;
+}
+
+.quick-links a:hover::after{
+  width:100%;
+}
+
+.testimonials-section{
+  border-top: 1px solid #d4af37;
+}
+.featured-section{
+  background:#111;
+  border-top:1px solid #d4af37;
+  border-bottom:1px solid #d4af37;
+}
+.price{
+  color:#d4af37;
+  font-weight:600;
+  font-size:18px;
+}
+/*login */
+.btn-login{
+  background: transparent;
+  border: 2px solid #d4af37;
+  color: #d4af37;
+  padding: 8px 22px;
+  border-radius: 30px;
+  transition: 0.3s;
+}
+
+.btn-login:hover{
+  background: #d4af37;
+  color: #000;
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #d4af37;
+}
+
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container">
+
+    <!-- Logo -->
+    <a class="navbar-brand" href="index.html">JerryBites</a>
+
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navmenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navmenu">
+
+      <!-- Center Menu -->
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="menu.html">Menu</a></li>
+        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+
+      <!-- Right Side Login Button -->
+      <a href="login.html" class="btn btn-login">Login</a>
+
+    </div>
+  </div>
+</nav>
+<!-- Hero -->
+
+<section class="hero d-flex align-items-center text-center text-white">
+  <div class="container">
+    <h1 class="display-3">Luxury Dining Experience</h1>
+    <p class="lead">Taste the perfection at JerryBites Restaurant</p>
+    <a href="menu.html" class="btn btn-gold mt-3">Explore Menu</a>
+  </div>
+</section>
+
+<!-- Welcome -->
+<section class="section-padding text-center">
+  <div class="container">
+    <h2 class="section-title" data-aos="fade-up">Welcome to JerryBites</h2>
+<p data-aos="fade-up" data-aos-delay="200">
+  Where flavor meets elegance. Experience premium dining crafted with passion and perfection.
+</p>
+  </div>
+</section>
+
+<!-- Featured Dishes -->
+<section class="section-padding featured-section">
+<div class="container">
+<h2 class="section-title text-center">Featured Dishes</h2>
+<div class="row g-4">
+
+<div class="col-md-4" data-aos="zoom-in">
+<div class="card dish-card">
+<img src="assests/images/new.webp" class="card-img-top">
+<div class="card-body text-center">
+<h5>Beef Burger</h5>
+<p>Delicous Beef Burger with fries</p>
+<h6 class="price">Rs 450</h6>
+</div>
+</div>
+</div>
+
+<div class="col-md-4" data-aos="zoom-in">
+<div class="card dish-card">
+<img src="assests/images/crispy fried chicken.webp" class="card-img-top">
+<div class="card-body text-center">
+<h5>Crispy chicken</h5>
+<p>Delicous crispy fried chicken</p>
+<h6 class="price">Rs 300</h6>
+</div>
+</div>
+</div>
+
+<div class="col-md-4" data-aos="zoom-in">
+<div class="card dish-card">
+<img src="assests/images/chocolate lava cake.webp" class="card-img-top">
+<div class="card-body text-center">
+<h5>Chocolate Lava</h5>
+<p>Rich molten chocolate cake</p>
+<h6 class="price">Rs 350</h6>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- Testimonials -->
+<section class="section-padding testimonials-section">
+<div class="container text-center">
+<h2 class="section-title">Customer Reviews</h2>
+
+<div class="row g-4">
+
+<div class="col-md-4" data-aos="fade-up">
+<div class="testimonial-card">
+<div class="stars mb-2">
+<i class="bi bi-star-fill"></i>
+<i class="bi bi-star-fill"></i>
+<i class="bi bi-star-fill"></i>
+<i class="bi bi-star-fill"></i>
+<i class="bi bi-star-fill"></i>
+</div>
+<p>"Absolutely luxurious experience! The ambiance and food were top-class."</p>
+<h6 class="mt-3">- Sarah</h6>
+</div>
+</div>
+
+<div class="col-md-4" data-aos="fade-up">
+<div class="testimonial-card">
+<div class="stars mb-2">
+<i class="bi bi-star-fill"></i>
+<i class="bi bi-star-fill"></i>
+<i class="bi bi-star-fill"></i>
+<i class="bi bi-star-fill"></i>
+<i class="bi bi-star-fill"></i>
+</div>
+<p>"Best steak in town! Highly recommended for fine dining lovers."</p>
+<h6 class="mt-3">- Ali</h6>
+</div>
+</div>
+
+<div class="col-md-4" data-aos="fade-up">
+<div class="testimonial-card">
+<div class="stars mb-2">
+<i class="bi bi-star-fill"></i>
+<i class="bi bi-star-fill"></i>
+<i class="bi bi-star-fill"></i>
+<i class="bi bi-star-fill"></i>
+<i class="bi bi-star-fill"></i>
+</div>
+<p>"Amazing taste, premium service, and beautiful atmosphere."</p>
+<h6 class="mt-3">- Maryam</h6>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+<!-- FOOTER -->
+<footer class="footer text-white">
+<div class="container">
+<div class="row">
+
+<!-- Left -->
+<div class="col-md-4 mb-4">
+<h5>JerryBites Restaurant</h5>
+<p>
+Experience luxury dining with world-class chefs, premium ingredients, 
+and unforgettable ambiance.
+</p>
+</div>
+
+<!-- Middle -->
+<div class="col-md-3 mb-4 text-md-center">
+<h5>Quick Links</h5>
+<ul class="list-unstyled quick-links">
+<li><a href="index.html">Home</a></li>
+<li><a href="about.html">About Us</a></li>
+<li><a href="menu.html">Our Menu</a></li>
+<li><a href="gallery.html">Gallery</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</div>
+
+<!-- Right -->
+<div class="col-md-4 offset-md-1 mb-4 text-md-start">
+<h5>Contact Info</h5>
+
+<div class="contact-info">
+<p><i class="bi bi-geo-alt-fill me-2"></i>Shop No.08, Samia Plaza, Gulshan-e-Iqbal block o4(Near Disco Bakery Kaybees Restaurant), Karachi Pakistan</p>
+<p><i class="bi bi-telephone-fill me-2"></i>03453956208</p>
+<p>
+<i class="bi bi-envelope-fill me-2"></i>
+<a href="https://mail.google.com/mail/?view=cm&fs=1&to=faisalali@jarries.com" target="_blank">
+faisalali@jarries.com
+</a>
+</p>
+</div>
+
+<!-- Social Icons -->
+<div class="social-icons mt-3">
+<a href="#"><i class="bi bi-facebook"></i></a>
+<a href="#"><i class="bi bi-instagram"></i></a>
+<a href="https://mail.google.com/mail/?view=cm&fs=1&to=jarriesrestaurant@gmail.com" target="_blank">
+<i class="bi bi-envelope-fill"></i>
+</a>
+</div>
+
+</div>
+
+</div>
+
+<div class="footer-bottom text-center">
+© 2026 JerryBites Restaurant | All Rights Reserved
+</div>
+
+</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+<!-- AOS JS -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+<script>
+  // animation speed
+  AOS.init({
+    duration: 1000,   
+    once: true        
+  });
+</script>
+</html>

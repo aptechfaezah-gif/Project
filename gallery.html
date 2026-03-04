@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery | JerrryBites</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<style>
+
+/* GLOBAL */
+body{
+  font-family: 'Poppins', sans-serif;
+  background:#111;
+  color:#ddd;
+  scroll-behavior:smooth;
+}
+
+.section-padding{
+  padding:80px 0;
+}
+
+.section-title{
+  font-family:'Playfair Display', serif;
+  font-size:40px;
+  color:#d4af37;
+  margin-bottom:30px;
+}
+
+/* NAVBAR */
+.navbar{
+  background:rgba(0,0,0,0.9);
+}
+.navbar-brand{
+  font-family:'Playfair Display', serif;
+  color:#d4af37 !important;
+  font-size:28px;
+}
+.nav-link:hover{
+  color:#d4af37 !important;
+}
+/* Navbar Hover */
+.navbar .nav-link{
+  position: relative;
+}
+
+.navbar .nav-link::after{
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background: #d4af37;
+  left: 0;
+  bottom: -5px;
+  transition: 0.3s;
+}
+
+.navbar .nav-link:hover::after{
+  width: 100%;
+}
+
+
+
+/* HERO */
+.gallery-hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+}
+
+.gallery-heading{
+  font-size:55px;
+  color:#d4af37;
+  font-weight:700;
+}
+
+.gallery-images img{
+  width:80px;
+  margin-right:15px;
+  cursor:pointer;
+  transition:0.3s;
+  border-bottom:3px solid transparent;
+}
+
+.gallery-images img:hover{
+  border-bottom:3px solid #d4af37;
+  transform:translateY(-5px);
+}
+
+.active-thumb{
+  border-bottom:3px solid #d4af37 !important;
+}
+
+.preview-box{
+  background:#222;
+  padding:20px;
+  border-radius:20px;
+  text-align:center;
+}
+
+.preview-box img{
+  width:100%;
+  max-height:400px;
+  object-fit:contain;
+  border-radius:15px;
+}
+
+/* Button */
+.view-btn{
+  background:#d4af37;
+  color:#000;
+  padding:12px 30px;
+  border-radius:30px;
+  text-decoration:none;
+  display:inline-block;
+  margin-top:30px;
+  transition:0.3s;
+}
+
+.view-btn:hover{
+  background:#fff;
+}
+
+/* Hidden Gallery */
+.full-gallery{
+  display:none;
+  padding:60px 0;
+}
+
+.full-gallery img{
+  width:100%;
+  border-radius:15px;
+  margin-bottom:20px;
+  transition:0.3s;
+}
+
+.full-gallery img:hover{
+  transform:scale(1.05);
+}
+.preview-box{
+  background:#111;
+}
+/* Hero Animation */
+.gallery-hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  opacity:0;
+  transform:translateY(40px);
+  transition:all 1s ease;
+}
+
+.gallery-hero.show{
+  opacity:1;
+  transform:translateY(0);
+}
+/* Image Overlay Modal */
+.image-modal{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.8);
+  backdrop-filter:blur(10px);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+  flex-direction:column;
+}
+
+.image-modal img{
+  max-width:70%;
+  max-height:80%;
+  border-radius:20px;
+  transition:0.3s;
+}
+
+.close-btn{
+  position:absolute;
+  top:30px;
+  right:40px;
+  font-size:30px;
+  color:#fff;
+  cursor:pointer;
+}
+
+.image-info{
+  position:absolute;
+  bottom:50px;
+  text-align:center;
+  color:#fff;
+  opacity:0;
+  transition:0.3s;
+}
+
+.image-modal:hover .image-info{
+  opacity:1;
+}
+
+.like-btn{
+  background:#d4af37;
+  border:none;
+  padding:10px 25px;
+  border-radius:30px;
+  margin-top:10px;
+  cursor:pointer;
+}
+
+.like-btn.liked{
+  background:red;
+  color:#fff;
+}
+.reveal{
+  opacity:0;
+  transform:translateY(60px);
+  transition:all 1s ease;
+}
+
+.reveal.active{
+  opacity:1;
+  transform:translateY(0);
+}
+/* FOOTER */
+.footer{
+  background:#000;
+  padding:60px 0 20px;
+}
+
+.footer h5{
+  color:#d4af37;
+  margin-bottom:20px;
+}
+
+.footer a{
+  text-decoration:none;
+  color:#ccc;
+  transition:0.3s;
+}
+.footer a:hover{
+  color:#d4af37;
+}
+
+.social-icons a{
+  font-size:20px;
+  margin-right:15px;
+  color:#ccc;
+  transition:0.3s;
+}
+.social-icons a:hover{
+  color:#d4af37;
+}
+
+.footer-bottom{
+  border-top:1px solid #333;
+  margin-top:30px;
+  padding-top:15px;
+  text-align:center;
+  color:#aaa;
+}
+.quick-links li {
+  margin-bottom:10px;
+}
+
+.quick-links a {
+  position:relative;
+  display:inline-block;
+}
+
+.quick-links a::after{
+  content:"";
+  position:absolute;
+  width:0;
+  height:2px;
+  background:#d4af37;
+  left:0;
+  bottom:-3px;
+  transition:0.3s;
+}
+
+.quick-links a:hover::after{
+  width:100%;
+}
+body.locked {
+  overflow: hidden;  
+}
+
+ 
+ .restaurant-section{
+  background: linear-gradient(135deg, #111, #1a1a1a, #0d0d0d);
+}
+.restaurant-section{
+  background:#1a1a1a;
+  border-top:1px solid #d4af37;
+  border-bottom:1px solid #d4af37;
+}
+.restaurant-section img{
+  box-shadow:0 20px 40px rgba(0,0,0,0.6);
+}
+/*login */
+.btn-login{
+  background: transparent;
+  border: 2px solid #d4af37;
+  color: #d4af37;
+  padding: 8px 22px;
+  border-radius: 30px;
+  transition: 0.3s;
+}
+
+.btn-login:hover{
+  background: #d4af37;
+  color: #000;
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #d4af37;
+}
+
+</style>
+</head>
+
+<body>
+    <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container">
+
+    <!-- Logo -->
+    <a class="navbar-brand" href="gallery.html">JerryBites</a>
+
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navmenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navmenu">
+
+      <!-- Center Menu -->
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="menu.html">Menu</a></li>
+        <li class="nav-item"><a class="nav-link active" href="gallery.html">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+
+      <!-- Right Side Login Button -->
+      <a href="login.html" class="btn btn-login">Login</a>
+
+    </div>
+  </div>
+</nav>
+
+
+<section class="gallery-hero section-padding">
+<div class="container">
+<div class="row align-items-center">
+
+<!-- LEFT SIDE -->
+<div class="col-lg-6">
+
+<h1 class="gallery-heading">Our Delicious Creations</h1>
+
+<p class="mt-3">
+Explore our handcrafted dishes made with passion and premium ingredients.
+Each meal tells a story of flavor and perfection.
+</p>
+
+<!-- 5 Thumbnails -->
+<div class="gallery-images mt-4">
+<img src="assests/images/burger-removebg-preview (1).png" onclick="changeImage(this)" class="active-thumb">
+<img src="assests/images/pzza-removebg-preview.png" onclick="changeImage(this)">
+<img src="assests/images/wings-removebg-preview.png" onclick="changeImage(this)">
+<img src="assests/images/hd_restoration_result_image.png" onclick="changeImage(this)">
+<img src="" onclick="changeImage(this)">
+</div>
+
+<a href="javascript:void(0)" class="view-btn" onclick="openGallery()">View Gallery</a>
+</div>
+
+<!-- RIGHT SIDE PREVIEW -->
+<div class="col-lg-6">
+<div class="preview-box">
+<img id="mainImage" src="assests/images/burger-removebg-preview (1).png">
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- FULL GALLERY -->
+ 
+<section id="gallery-section" class="full-gallery">
+<div class="container">
+    <h2 class="text-center mb-5" style="color:#d4af37; font-size:40px; font-weight:700;">
+  Our Gallery</h2>
+<div class="row">
+
+<div class="col-md-4">
+<img src="assests/images/steak plater2.jpg" onclick="openModal(this)" data-name="Steak"data-price="Rs. 1200">
+</div>
+
+<div class="col-md-4">
+<img src="assests/images/fried rice.jpg" onclick="openModal(this)" data-name="Chicken Fried Rice"data-price="Rs. 400">
+</div>
+
+<div class="col-md-4">
+<img src="assests/images/ice creamnew.webp" onclick="openModal(this)" data-name="Ice cream"data-price="Rs. 320">
+</div>
+
+<div class="col-md-4">
+<img src="assests/images/sandwich.webp" onclick="openModal(this)" data-name="Sandwich"data-price="Rs. 400">
+</div>
+
+<div class="col-md-4">
+<img src="assests/images/new masla wings.avif" onclick="openModal(this)" data-name="Chicken extra masala wings"data-price="Rs. 300">
+</div>
+
+<div class="col-md-4">
+<img src="assests/images/12beef burger.webp" onclick="openModal(this)" data-name="Juicy Beef Burger"data-price="Rs. 500">
+</div>
+
+<div class="col-md-4">
+<img src="assests/images/gold cake.avif" onclick="openModal(this)" data-name="GOld Cake"data-price="Rs. 3500">
+</div>
+
+<div class="col-md-4">
+<img src="assests/images/chicken broast123.webp" onclick="openModal(this)" data-name="Chicken Broast"data-price="Rs. 450">
+</div>
+
+<div class="col-md-4">
+<img src="assests/images/seekh kebab.webp" onclick="openModal(this)" data-name="Seekh Kebab"data-price="Rs. 400">
+</div>
+
+</div>
+</div>
+</section>
+<!-- IMAGE MODAL -->
+<div class="image-modal" id="imageModal">
+  <span class="close-btn" onclick="closeModal()">✖</span>
+  <img id="modalImage">
+  <div class="image-info">
+    <h4 id="imageName">Delicious Dish</h4>
+    <h5 id="imagePrice" style="color :#d4af37;"></h5>
+    <button class="like-btn" onclick="toggleLike(this)">❤ Like</button>
+  </div>
+</div>
+<!-- RESTAURANT SECTION -->
+<section class="restaurant-section section-padding">
+<div class="container">
+<div class="row align-items-center">
+
+<div class="col-lg-6 reveal">
+<h2 style="color:#d4af37; font-weight:700;">
+  About Our Restaurant
+</h2>
+
+<p class="mt-3">
+We serve premium quality food with fresh ingredients and modern presentation.
+Our mission is to deliver taste, comfort and unforgettable dining experience.
+</p>
+
+</div>
+
+<div class="col-lg-6 reveal">
+<img src="assests/images/our restaurant.jpg" class="img-fluid rounded-4">
+</div>
+
+</div>
+</div>
+</section>
+<!-- FOOTER -->
+<footer class="footer text-white">
+<div class="container">
+<div class="row">
+
+<!-- Left -->
+<div class="col-md-4 mb-4">
+<h5>JerryBites Restaurant</h5>
+<p>
+Experience luxury dining with world-class chefs, premium ingredients, 
+and unforgettable ambiance.
+</p>
+</div>
+
+<!-- Middle -->
+<div class="col-md-3 mb-4 text-md-center">
+<h5>Quick Links</h5>
+<ul class="list-unstyled quick-links">
+<li><a href="index.html">Home</a></li>
+<li><a href="about.html">About Us</a></li>
+<li><a href="menu.html">Our Menu</a></li>
+<li><a href="gallery.html">Gallery</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</div>
+
+<!-- Right  -->
+<div class="col-md-4 offset-md-1 mb-4 text-md-start">
+<h5>Contact Info</h5>
+
+<div class="contact-info">
+<p><i class="bi bi-geo-alt-fill me-2"></i>Shop No.08, Samia Plaza, Gulshan-e-Iqbal block o4(Near Disco Bakery Kaybees Restaurant), Karachi Pakistan</p>
+<p><i class="bi bi-telephone-fill me-2"></i>03453956208</p>
+<p>
+<i class="bi bi-envelope-fill me-2"></i>
+<a href="https://mail.google.com/mail/?view=cm&fs=1&to=faisalali@jarries.com" target="_blank">
+faisalali@jarries.com
+</a>
+</p>
+</div>
+
+<!-- Social Icons  -->
+<div class="social-icons mt-3">
+<a href="#"><i class="bi bi-facebook"></i></a>
+<a href="#"><i class="bi bi-instagram"></i></a>
+<a href="https://mail.google.com/mail/?view=cm&fs=1&to=jarriesrestaurant@gmail.com" target="_blank">
+<i class="bi bi-envelope-fill"></i>
+</a>
+</div>
+
+</div>
+
+</div>
+
+<div class="footer-bottom text-center">
+© 2026 JerryBites Restaurant | All Rights Reserved
+</div>
+
+</div>
+</footer>
+
+<script>
+
+function changeImage(element){
+
+  document.getElementById("mainImage").src = element.src;
+
+  let thumbs = document.querySelectorAll(".gallery-images img");
+  thumbs.forEach(img=> img.classList.remove("active-thumb"));
+
+  element.classList.add("active-thumb");
+}
+function openGallery(){
+
+  // Unlock page scrolling
+  document.body.classList.remove("locked");
+
+  // Show full gallery
+  document.querySelector(".full-gallery").style.display = "block";
+
+  // Smooth scroll to gallery
+  document.getElementById("gallery-section").scrollIntoView({
+    behavior: "smooth"
+  });
+
+}
+window.addEventListener("load", function(){
+
+  document.querySelector(".gallery-hero").classList.add("show");
+
+  // Hide full sections
+  document.querySelector(".full-gallery").style.display = "none";
+
+  // Lock scrolling
+  document.body.classList.add("locked");
+
+});
+
+function openModal(element){
+  document.getElementById("imageModal").style.display="flex";
+  document.getElementById("modalImage").src = element.src;
+
+  document.getElementById("imageName").innerText =
+      element.getAttribute("data-name");
+
+  document.getElementById("imagePrice").innerText =
+      element.getAttribute("data-price");
+}
+
+function closeModal(){
+  document.getElementById("imageModal").style.display="none";
+}
+
+function toggleLike(button){
+  button.classList.toggle("liked");
+
+  if(button.classList.contains("liked")){
+    button.innerText="❤ Liked";
+  }else{
+    button.innerText="❤ Like";
+  }
+}
+// Scroll Animation
+function revealOnScroll(){
+  let elements = document.querySelectorAll(".reveal");
+
+  elements.forEach(el=>{
+    let windowHeight = window.innerHeight;
+    let elementTop = el.getBoundingClientRect().top;
+
+    if(elementTop < windowHeight - 100){
+      el.classList.add("active");
+    }
+  });
+}
+
+window.addEventListener("scroll", revealOnScroll);
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

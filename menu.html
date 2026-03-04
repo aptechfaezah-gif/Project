@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu | JerryBites Bites</title>
+
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+/* GLOBAL */
+body{
+  font-family: 'Poppins', sans-serif;
+  background:#111;
+  color:#ddd;
+  scroll-behavior:smooth;
+}
+
+.section-padding{
+  padding:80px 0;
+}
+
+.section-title{
+  font-family:'Playfair Display', serif;
+  font-size:40px;
+  color:#d4af37;
+  margin-bottom:30px;
+}
+
+/* NAVBAR */
+.navbar{
+  background:rgba(0,0,0,0.9);
+}
+.navbar-brand{
+  font-family:'Playfair Display', serif;
+  color:#d4af37 !important;
+  font-size:28px;
+}
+.nav-link:hover{
+  color:#d4af37 !important;
+}
+/* Navbar Hover  */
+.navbar .nav-link{
+  position: relative;
+}
+
+.navbar .nav-link::after{
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background: #d4af37;
+  left: 0;
+  bottom: -5px;
+  transition: 0.3s;
+}
+
+.navbar .nav-link:hover::after{
+  width: 100%;
+}
+
+/* HERO SECTION */
+.menu-hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  padding:80px 0;
+}
+
+.menu-image{
+  position:relative;
+}
+
+.menu-image img{
+  width:100%;
+  border-radius:25px;
+  z-index:2;
+  position:relative;
+}
+
+
+.menu-image::before{
+  content:"";
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:#d4af37;
+  border-radius:25px;
+  top:20px;
+  left:20px;
+  z-index:1;
+}
+
+/* CONTENT */
+.menu-content h1{
+  font-family:'Playfair Display', serif;
+  font-size:60px;
+  font-weight:700;
+  color:#d4af37;
+}
+
+.menu-content p{
+  margin:20px 0;
+  line-height:1.7;
+}
+
+/* BUTTON */
+.menu-btn{
+  background:#d4af37;
+  color:#000;
+  padding:12px 30px;
+  border-radius:30px;
+  text-decoration:none;
+  font-weight:500;
+  transition:0.3s;
+}
+
+.menu-btn:hover{
+  background:#fff;
+  color:#000;
+}
+
+
+@media(max-width:992px){
+  .menu-content h1{
+    font-size:40px;
+  }
+}
+
+/* ANIMATION */
+
+.menu-image,
+.menu-content{
+  opacity:0;
+}
+
+/* Image animation */
+.menu-image{
+  transform:translateX(-100px);
+  animation:slideLeft 1s ease forwards;
+}
+
+/* Text animation */
+.menu-content{
+  transform:translateX(100px);
+  animation:slideRight 1s ease forwards;
+  animation-delay:0.3s;
+}
+
+@keyframes slideLeft{
+  to{
+    transform:translateX(0);
+    opacity:1;
+  }
+}
+
+@keyframes slideRight{
+  to{
+    transform:translateX(0);
+    opacity:1;
+  }
+}
+
+.card{
+  transition:0.3s;
+  border:none;
+}
+
+.card:hover{
+  transform:scale(1.05);
+}
+.card:hover{
+  transform: translateY(-8px);  
+  box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+}
+
+.order-btn{
+  background:#d4af37;
+  border:none;
+  padding:8px 20px;
+  border-radius:20px;
+  margin-top:10px;
+
+  opacity:0;
+  transform:translateY(10px);
+  transition:0.3s;
+}
+
+.card:hover .order-btn{
+  opacity:1;
+  transform:translateY(0);
+}
+/*  Card Images */
+.card-img-top{
+  height:220px;
+  object-fit:cover;
+}
+/* Sidebar */
+.category-sidebar{
+  position: sticky;
+  top: 100px;   
+  align-self: flex-start;
+}
+/* FOOTER */
+.footer{
+  background:#000;
+  padding:60px 0 20px;
+  border-top:1px solid #d4af37; 
+}
+
+.footer h5{
+  color:#d4af37;
+  margin-bottom:20px;
+}
+
+.footer a{
+  text-decoration:none;
+  color:#ccc;
+  transition:0.3s;
+}
+.footer a:hover{
+  color:#d4af37;
+}
+
+.social-icons a{
+  font-size:20px;
+  margin-right:15px;
+  color:#ccc;
+  transition:0.3s;
+}
+.social-icons a:hover{
+  color:#d4af37;
+}
+
+.footer-bottom{
+  border-top:1px solid #333;
+  margin-top:30px;
+  padding-top:15px;
+  text-align:center;
+  color:#aaa;
+}
+.quick-links li {
+  margin-bottom:10px;
+}
+
+.quick-links a {
+  position:relative;
+  display:inline-block;
+}
+
+.quick-links a::after{
+  content:"";
+  position:absolute;
+  width:0;
+  height:2px;
+  background:#d4af37;
+  left:0;
+  bottom:-3px;
+  transition:0.3s;
+}
+
+.quick-links a:hover::after{
+  width:100%;
+}
+.food-price{
+  color:#d4af37;
+  font-weight:600;
+  margin-bottom:10px;
+  font-size:18px;
+}
+/*  Menu Heading */
+.menu-heading{
+  font-family:'Playfair Display', serif;
+  font-size:45px;
+  color:#d4af37;
+  position:relative;
+  display:inline-block;
+  padding-bottom:15px;
+}
+
+.menu-heading::after{
+  content:"";
+  position:absolute;
+  width:70px;
+  height:3px;
+  background:#d4af37;
+  left:50%;
+  bottom:0;
+  transform:translateX(-50%);
+}
+
+.menu-subtitle{
+  color:#ccc;
+  font-size:16px;
+  letter-spacing:2px;
+  margin-top:15px;
+}
+/*login */
+.btn-login{
+  background: transparent;
+  border: 2px solid #d4af37;
+  color: #d4af37;
+  padding: 8px 22px;
+  border-radius: 30px;
+  transition: 0.3s;
+}
+
+.btn-login:hover{
+  background: #d4af37;
+  color: #000;
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #d4af37;
+}
+#orderModal{
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.8);
+  align-items:center;
+  justify-content:center;
+}
+
+
+</style>
+</head>
+
+<body>
+    <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container">
+
+    <!-- Logo -->
+    <a class="navbar-brand" href="menu.html">JerryBites</a>
+
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navmenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navmenu">
+
+      <!-- Center Menu -->
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link active" href="menu.html">Menu</a></li>
+        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+
+      <!-- Right Side Login Button -->
+      <a href="login.html" class="btn btn-login">Login</a>
+
+    </div>
+  </div>
+</nav>
+
+<!-- HERO SECTION -->
+<section class="menu-hero">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <!-- IMAGE SIDE -->
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <div class="menu-image">
+          <img src="assests/images/chef-removebg-preview.png" alt="Chef">
+        </div>
+      </div>
+
+      <!-- CONTENT SIDE -->
+      <div class="col-lg-6 menu-content">
+        <h1>Our Menu</h1>
+        <h2 class="text-light">Delicious Food Crafted With Passion</h2>
+        
+        <p>
+          Welcome to JerriesBites Menu Section.  
+          We serve premium quality dishes prepared by expert chefs using fresh ingredients.
+          From signature pizzas to special meals, every dish is made to impress.
+        </p>
+
+        <p>
+          Explore our categories and discover your favorite meal today.
+          Taste the difference with luxury dining experience.
+        </p>
+
+        <a href="#menu-section" class="menu-btn">
+          View Full Menu
+        </a>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- FULL MENU SECTION -->
+<section id="menu-section" class="section-padding">
+  <div class="container">
+    <!--  Heading -->
+    <div class="text-center mb-5">
+      <h2 class="menu-heading">Our Delicious Menu</h2>
+      <p class="menu-subtitle">Fresh • Premium • Made With Love</p>
+    </div>
+
+    <div class="row align-items-start">
+
+      <!-- FILTER SIDEBAR -->
+      <div class="col-lg-3 mb-4 category-sidebar">
+        <h4 class="text-warning mb-3">Categories</h4>
+
+        <div class="list-group">
+          <button class="list-group-item list-group-item-dark active"
+onclick="filterMenu('all', this)">All</button>
+
+<button class="list-group-item list-group-item-dark"
+onclick="filterMenu('pizza', this)">Pizza</button>
+
+<button class="list-group-item list-group-item-dark"
+onclick="filterMenu('burger', this)">Burger</button>
+
+<button class="list-group-item list-group-item-dark"
+onclick="filterMenu('broast', this)">Broast</button>
+
+<button class="list-group-item list-group-item-dark"
+onclick="filterMenu('chickenwings', this)">Chicken wings</button>
+
+<button class="list-group-item list-group-item-dark"
+onclick="filterMenu('icecreamitems', this)">Ice cream items</button>
+
+<button class="list-group-item list-group-item-dark"
+onclick="filterMenu('cake', this)">Cake</button>
+
+<button class="list-group-item list-group-item-dark"
+onclick="filterMenu('steak', this)">Steak</button>
+
+<button class="list-group-item list-group-item-dark"
+onclick="filterMenu('fries', this)">Fries</button>
+
+<button class="list-group-item list-group-item-dark"
+onclick="filterMenu('drink', this)">Drinks</button>
+        </div>
+      </div>
+
+      <!-- MENU ITEMS -->
+      <div class="col-lg-9">
+   <div class="row g-4" id="menu-container"></div>
+</div>
+
+         
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- ORDER MODAL -->
+<div id="orderModal"
+style="display:none; position:fixed; top:0; left:0;
+width:100%; height:100%;
+background:rgba(0,0,0,0.8);
+align-items:center; justify-content:center;">
+
+  <div style="
+background:#222;
+padding:25px;
+width:350px;
+max-width:90%;
+border-radius:15px;
+">
+
+    <h4 class="text-warning text-center">Place Order</h4>
+
+    <input type="text" id="cardNumber" class="form-control my-2" placeholder="Card Number">
+<input type="text" id="address" class="form-control my-2" placeholder="Address">
+<input type="text" id="location" class="form-control my-2" placeholder="Location">
+
+    <button class="btn btn-warning w-100 mt-2" onclick="submitOrder()">Confirm Order</button>
+    <button class="btn btn-secondary w-100 mt-2" onclick="closeOrder()">Cancel</button>
+
+  </div>
+
+</div>
+<!-- FOOTER -->
+<footer class="footer text-white">
+<div class="container">
+<div class="row">
+
+<!-- Left -->
+<div class="col-md-4 mb-4">
+<h5>Jarries Restaurant</h5>
+<p>
+Experience luxury dining with world-class chefs, premium ingredients, 
+and unforgettable ambiance.
+</p>
+</div>
+
+<!-- Middle -->
+<div class="col-md-3 mb-4 text-md-center">
+<h5>Quick Links</h5>
+<ul class="list-unstyled quick-links">
+<li><a href="index.html">Home</a></li>
+<li><a href="about.html">About Us</a></li>
+<li><a href="menu.html">Our Menu</a></li>
+<li><a href="gallery.html">Gallery</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</div>
+
+<!-- Right -->
+<div class="col-md-4 offset-md-1 mb-4 text-md-start">
+<h5>Contact Info</h5>
+
+<div class="contact-info">
+<p><i class="bi bi-geo-alt-fill me-2"></i>Shop No.08, Samia Plaza, Gulshan-e-Iqbal block o4(Near Disco Bakery Kaybees Restaurant), Karachi Pakistan</p>
+<p><i class="bi bi-telephone-fill me-2"></i>03453956208</p>
+<p>
+<i class="bi bi-envelope-fill me-2"></i>
+<a href="https://mail.google.com/mail/?view=cm&fs=1&to=faisalali@jarries.com" target="_blank">
+faisalali@jarries.com
+</a>
+</p>
+</div>
+
+<!-- Social Icons -->
+<div class="social-icons mt-3">
+<a href="#"><i class="bi bi-facebook"></i></a>
+<a href="#"><i class="bi bi-instagram"></i></a>
+<a href="https://mail.google.com/mail/?view=cm&fs=1&to=jarriesrestaurant@gmail.com" target="_blank">
+<i class="bi bi-envelope-fill"></i>
+</a>
+</div>
+
+</div>
+
+</div>
+
+<div class="footer-bottom text-center">
+© 2026 JerryBites Restaurant | All Rights Reserved
+</div>
+
+</div>
+</footer>
+<script>
+
+let allMenu = [];
+
+fetch("assests/data/menu.json")
+.then(res => res.json())
+.then(data => {
+    allMenu = data;
+    displayMenu(data);
+});
+
+function displayMenu(menuItems){
+    const container = document.getElementById("menu-container");
+    container.innerHTML = "";
+
+    menuItems.forEach(item => {
+        container.innerHTML += `
+        <div class="col-md-4">
+          <div class="card bg-dark text-light h-100">
+            <img src="${item.image}" class="card-img-top" loading="lazy">
+            <div class="card-body text-center">
+              <h5>${item.name}</h5>
+              <p class="food-price">Rs. ${item.price}</p>
+              <button class="order-btn" onclick="openOrder()">Order Now</button>
+            </div>
+          </div>
+        </div>
+        `;
+    });
+}
+
+function filterMenu(category, btn){
+
+    let filtered = category === "all"
+        ? allMenu
+        : allMenu.filter(item => item.category === category);
+
+    displayMenu(filtered);
+
+    document.querySelectorAll(".list-group-item")
+      .forEach(b => b.classList.remove("active"));
+
+    btn.classList.add("active");
+}
+
+
+// ORDER FUNCTIONS
+
+
+function openOrder(){
+  document.getElementById("orderModal").style.display="flex";
+  document.body.style.overflow="hidden";
+}
+
+function closeOrder(){
+  document.getElementById("orderModal").style.display="none";
+  document.body.style.overflow="auto";
+
+ 
+  document.getElementById("cardNumber").value = "";
+  document.getElementById("address").value = "";
+  document.getElementById("location").value = "";
+}
+
+function submitOrder(){
+  alert("Thank You! Your Order is Placed Successfully.");
+  closeOrder();
+}
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>                                                                 

@@ -1,0 +1,46 @@
+[
+  { "name":"BBQ Pizza","price":1500,"category":"pizza","image":"assests/images/bbq pizza.webp" },
+  { "name":"Overloaded Cheese Pizza","price":1200,"category":"pizza","image":"assests/images/extra cheese pizza.avif" },
+  { "name":"Pepperoni Pizza","price":1300,"category":"pizza","image":"assests/images/Pepperoni Pizza.jpg" },
+  { "name":"Special Pizza","price":1900,"category":"pizza","image":"assests/images/special pizza.jpg" },
+
+  { "name":"Beef Burger","price":550,"category":"burger","image":"assests/images/Beef burger.avif" },
+  { "name":"Chicken Cheese Burger","price":340,"category":"burger","image":"assests/images/chicken cheese burger.webp" },
+  { "name":"Zinger Burger","price":450,"category":"burger","image":"assests/images/zinger burger.jpg" },
+
+  { "name":"Chicken Broast","price":300,"category":"broast","image":"assests/images/broast.avif" },
+  { "name":"Chicken Crispy Popcorns","price":350,"category":"broast","image":"assests/images/chicken popcorns.jpg" },
+  { "name":"Hot and Spicy Broast","price":450,"category":"broast","image":"assests/images/Hot and spicy broast.avif" },
+  { "name":"Chicken Strips with Fries","price":390,"category":"broast","image":"assests/images/strips.webp" },
+
+  { "name":"BBQ Chicken Wings","price":400,"category":"chickenwings","image":"assests/images/bbq chicken wings.avif" },
+  { "name":"Sweet and Spicy Chicken Wings","price":400,"category":"chickenwings","image":"assests/images/sweet chicken wings.webp" },
+  { "name":"Crispy Chicken Wings","price":350,"category":"chickenwings","image":"assests/images/plane wings.webp" },
+
+  { "name":"Ice Cream Shakes","price":400,"category":"icecreamitems","image":"assests/images/3.avif" },
+  { "name":"Mango Ice Cream","price":200,"category":"icecreamitems","image":"assests/images/mango ice cream.webp" },
+  { "name":"Chocolate Ice Cream","price":250,"category":"icecreamitems","image":"assests/images/chocolate ice.jpg" },
+  { "name":"Ice Cream Cones","price":250,"category":"icecreamitems","image":"assests/images/cones2.jpg" },
+  { "name":"Special Ice Cream","price":550,"category":"icecreamitems","image":"assests/images/special ice cream.webp" },
+  { "name":"Special Cone","price":450,"category":"icecreamitems","image":"assests/images/2 scoop cone.jpg" },
+
+  { "name":"Lava Cake","price":300,"category":"cake","image":"assests/images/chocolate lava cake.webp" },
+  { "name":"Blue Berry Chocolate Cake","price":1200,"category":"cake","image":"assests/images/blue berry cake.jpg" },
+  { "name":"Ice Cream Cake","price":2000,"category":"cake","image":"assests/images/ice cream cake.jpg" },
+  { "name":"Cheese Cake","price":2200,"category":"cake","image":"assests/images/cheese cake.webp" },
+
+  { "name":"Chicken Steak","price":660,"category":"steak","image":"assests/images/chicken steak.jpg" },
+  { "name":"Mutton Steak","price":1000,"category":"steak","image":"assests/images/mutton steak.jpg" },
+  { "name":"Beef Steak","price":1500,"category":"steak","image":"assests/images/beef steak.jpg" },
+
+  { "name":"Fries","price":150,"category":"fries","image":"assests/images/fries.avif" },
+  { "name":"Masala Fries","price":200,"category":"fries","image":"assests/images/masla fries.webp" },
+  { "name":"Special Fries","price":400,"category":"fries","image":"assests/images/special fries.jpg" },
+  { "name":"Extra Cheese Fries","price":400,"category":"fries","image":"assests/images/extra cheese fries.jpg" },
+
+  { "name":"7up","price":190,"category":"drink","image":"assests/images/7up.jpg" },
+  { "name":"Dew","price":190,"category":"drink","image":"assests/images/Dew.webp" },
+  { "name":"Pepsi","price":190,"category":"drink","image":"assests/images/pepsi.webp" },
+  { "name":"Fanta","price":190,"category":"drink","image":"assests/images/fanta.jpg" },
+  { "name":"Special Fruit Drinks","price":300,"category":"drink","image":"assests/images/drinks.jpg" }
+]

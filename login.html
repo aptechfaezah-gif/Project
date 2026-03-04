@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login | JerryBites</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#0f0f0f;
+    font-family:'Poppins',sans-serif;
+}
+
+/* Main Card */
+.login-wrapper{
+    width:900px;
+    max-width:95%;
+    background:#161616;
+    border-radius:20px;
+    overflow:hidden;
+    display:flex;
+    box-shadow:0 25px 60px rgba(0,0,0,0.6);
+}
+
+/* LEFT SIDE IMAGE */
+.left-panel{
+    flex:1;
+    background:
+    linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),
+    url('assests/images/16.jpg')
+    center/cover no-repeat;
+    padding:40px;
+    color:#fff;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+}
+
+.brand{
+    font-size:22px;
+    font-weight:600;
+    color:#d4af37;
+}
+
+.left-text{
+    font-size:24px;
+    font-weight:500;
+    line-height:1.4;
+}
+
+/* RIGHT SIDE FORM */
+.right-panel{
+    flex:1;
+    padding:60px 50px;
+    background:#1a1a1a;
+    color:#fff;
+}
+
+.right-panel h2{
+    font-weight:600;
+    margin-bottom:10px;
+}
+
+.right-panel p{
+    color:#aaa;
+    font-size:14px;
+}
+
+/* Inputs */
+.form-control{
+    background:#111;
+    border:1px solid #333;
+    color:#fff;
+    height:45px;
+    margin-bottom:15px;
+}
+
+.form-control:focus{
+    background:#111;
+    border-color:#d4af37;
+    box-shadow:none;
+    color:#fff;
+}
+
+/* Checkbox */
+.form-check-label{
+    font-size:13px;
+    color:#aaa;
+}
+
+/* Button */
+.btn-gold{
+    background:#d4af37;
+    color:#000;
+    border:none;
+    height:45px;
+    font-weight:600;
+    margin-top:10px;
+}
+
+.btn-gold:hover{
+    background:#c19b2e;
+}
+
+/* Divider */
+.divider{
+    text-align:center;
+    margin:20px 0;
+    font-size:13px;
+    color:#777;
+}
+
+/* Social Buttons */
+.social-btn{
+    width:100%;
+    height:45px;
+    border:1px solid #333;
+    background:#111;
+    color:#fff;
+    margin-bottom:10px;
+}
+
+.social-btn:hover{
+    border-color:#d4af37;
+}
+
+
+@media(max-width:768px){
+    .login-wrapper{
+        flex-direction:column;
+    }
+    .left-panel{
+        height:250px;
+    }
+}
+
+.form-control{
+    background:#111 !important;
+    border:1px solid #333;
+    color:#fff !important;
+}
+
+
+.form-control::placeholder{
+    color:#aaa !important;
+}
+
+/*input */
+input:-webkit-autofill,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:hover,
+textarea:-webkit-autofill {
+    -webkit-text-fill-color: #fff !important;
+    -webkit-box-shadow: 0 0 0px 1000px #111 inset !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-wrapper">
+
+    <!-- LEFT -->
+    <div class="left-panel">
+        <div class="brand">JerryBites</div>
+        <div class="left-text">
+            Luxury Dining Experience<br>
+            Crafted With Passion 💛
+        </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right-panel">
+        <h2>Login to your account</h2>
+        <p>Welcome back! Please enter your details</p>
+
+        <form id="loginForm">
+    <input type="email" id="email" class="form-control" placeholder="Enter your Gmail" required>
+    <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+
+    <div class="form-check mb-2">
+        <input class="form-check-input" type="checkbox" required>
+        <label class="form-check-label">
+            I agree to Terms & Conditions
+        </label>
+    </div>
+
+    <button type="submit" class="btn btn-gold w-100">
+        Login
+    </button>
+</form>
+
+        <div class="login-rules mt-4">
+    <h6 style="color:#d4af37;">Login Rules</h6>
+    <ul style="font-size:13px; color:#aaa; padding-left:18px;">
+        <li>Your email must be valid and registered.</li>
+        <li>Password must be at least 6 characters.</li>
+        <li>Your data is securely protected.</li>
+        <li>We never share your personal information.</li>
+    </ul>
+
+    <p style="font-size:12px; color:#777;">
+        By logging in, you agree to our Privacy Policy and Terms & Conditions.
+    </p>
+</div>
+
+    </div>
+
+</div>
+
+    <script>
+document.getElementById("loginForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    let email = document.getElementById("email").value.trim();
+    let password = document.getElementById("password").value;
+
+    // Gmail validation 
+    let gmailPattern = /^[a-z0-9]+@gmail\.com$/;
+
+    if(!gmailPattern.test(email)){
+        alert("Please enter valid Gmail address (only small letters allowed).");
+        return;
+    }
+
+    // Password  
+    if(password.length < 6){
+        alert("Password must be at least 6 characters.");
+        return;
+    }
+
+    alert("You are logged in 💛");
+    window.location.href = "index.html";
+});
+
+</script>
+
+</body>
+</html>
