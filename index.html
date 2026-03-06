@@ -7,27 +7,25 @@
 
 <!-- Bootstrap 5 CDN -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
 <!-- Bootstrap Icons -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-
 <!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <!-- AOS Animation CSS -->
 <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
-<style>
 
-/* GLOBAL */
+<style>
+/* ============ GLOBAL ============ */
+*{ margin:0; padding:0; box-sizing:border-box; }
+
 body{
-  font-family: 'Poppins', sans-serif;
+  font-family:'Poppins', sans-serif;
   background:#111;
   color:#ddd;
   scroll-behavior:smooth;
 }
 
-.section-padding{
-  padding:80px 0;
-}
+.section-padding{ padding:80px 0; }
 
 .section-title{
   font-family:'Playfair Display', serif;
@@ -36,226 +34,973 @@ body{
   margin-bottom:30px;
 }
 
-/* NAVBAR */
-.navbar{
-  background:rgba(0,0,0,0.9);
-}
+/* ============ NAVBAR ============ */
+.navbar{ background:rgba(0,0,0,0.9); }
 .navbar-brand{
   font-family:'Playfair Display', serif;
   color:#d4af37 !important;
   font-size:28px;
 }
-.nav-link:hover{
-  color:#d4af37 !important;
-}
-
-.navbar .nav-link{
-  position: relative;
-}
-
+.nav-link:hover{ color:#d4af37 !important; }
+.navbar .nav-link{ position:relative; }
 .navbar .nav-link::after{
-  content: "";
-  position: absolute;
-  width: 0%;
-  height: 2px;
-  background: #d4af37;
-  left: 0;
-  bottom: -5px;
-  transition: 0.3s;
+  content:""; position:absolute;
+  width:0%; height:2px; background:#d4af37;
+  left:0; bottom:-5px; transition:0.3s;
+}
+.navbar .nav-link:hover::after{ width:100%; }
+
+/* Cart Badge */
+.cart-btn{ position:relative; cursor:pointer; }
+.cart-badge{
+  position:absolute; top:-8px; right:-10px;
+  background:#d4af37; color:#000;
+  border-radius:50%; width:20px; height:20px;
+  font-size:11px; font-weight:700;
+  display:flex; align-items:center; justify-content:center;
 }
 
-.navbar .nav-link:hover::after{
-  width: 100%;
-}
-
-
-/* HERO */
+/* ============ HERO ============ */
 .hero{
   height:98vh;
-  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('assests/images/resturant\ image.avif') center/cover no-repeat;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+              url('assests/images/resturant image.avif') center/cover no-repeat;
+  display:flex; align-items:center;
+  justify-content:center; text-align:center;
 }
 
-/* BUTTON */
+/* ============ BUTTONS ============ */
 .btn-gold{
-  background:#d4af37;
-  color:#000;
-  border-radius:30px;
-  padding:10px 25px;
-  transition:0.3s;
+  background:#d4af37; color:#000;
+  border-radius:30px; padding:10px 25px;
+  transition:0.3s; border:none; font-weight:600;
 }
 .btn-gold:hover{
-  background:#d4af37;
-  transform:scale(1.05);
+  background:#c9a230; transform:scale(1.05);
+  box-shadow:0 5px 20px rgba(212,175,55,0.4);
 }
 
-/* DISH CARDS */
+.btn-login{
+  background:transparent; border:2px solid #d4af37;
+  color:#d4af37; padding:8px 22px;
+  border-radius:30px; transition:0.3s;
+}
+.btn-login:hover{
+  background:#d4af37; color:#000;
+  transform:scale(1.05); box-shadow:0 0 15px #d4af37;
+}
+
+/* ============ DISH CARDS ============ */
 .dish-card{
-  background: #1a1a1a;
-  border: 1px solid rgba(212,175,55,0.2);
-  border-radius: 15px;
-  overflow: hidden;
-  transition: all 0.4s ease;
+  background:#1a1a1a;
+  border:1px solid rgba(212,175,55,0.2);
+  border-radius:15px; overflow:hidden;
+  transition:all 0.4s ease; cursor:pointer;
+  position:relative;
 }
 .dish-card:hover{
-  transform: translateY(-12px);
-  box-shadow: 0 15px 35px rgba(212,175,55,0.4);
-  border-color: #d4af37;
+  transform:translateY(-12px);
+  box-shadow:0 15px 35px rgba(212,175,55,0.4);
+  border-color:#d4af37;
+}
+.dish-card .img-wrapper{
+  overflow:hidden; height:220px; position:relative;
 }
 .dish-card img{
-  height: 220px;
-  object-fit: cover;
-  transition: 0.4s;
+  height:220px; width:100%;
+  object-fit:cover; transition:0.4s;
 }
-.dish-card:hover img{
-  transform: scale(1.1);
-}
-.dish-card h5{
-  color: #ffffff;
-  font-weight: 600;
-}
+.dish-card:hover img{ transform:scale(1.1); }
+.dish-card h5{ color:#fff; font-weight:600; }
+.dish-card p{ color:#fff; opacity:0.85; }
+.price{ color:#d4af37; font-weight:600; font-size:18px; }
 
-.dish-card p{
-  color: #ffffff;
-  opacity: 0.85;  
+/* Like Button on Card */
+.like-btn{
+  position:absolute; bottom:10px; right:10px;
+  background:rgba(0,0,0,0.7); border:none;
+  width:40px; height:40px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; transition:0.3s; z-index:10;
 }
-/* OFFER */
-.offer{
-  background:#d4af37;
-  padding:60px 0;
-  color:#000;
-}
+.like-btn i{ font-size:20px; color:#fff; transition:0.3s; }
+.like-btn.liked i{ color:#e74c3c; }
+.like-btn:hover{ transform:scale(1.15); background:rgba(0,0,0,0.9); }
 
-/* TESTIMONIALS */
-.testimonial-card{
+/* Like Count */
+.like-count{
+  color:#aaa; font-size:13px; margin-top:5px;
+  display:flex; align-items:center; justify-content:center; gap:5px;
+}
+.like-count i{ color:#e74c3c; font-size:14px; }
+
+/* Quick Add Cart on Card */
+.quick-cart-btn{
+  position:absolute; bottom:10px; left:10px;
+  background:#d4af37; border:none;
+  width:40px; height:40px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; transition:0.3s; z-index:10;
+}
+.quick-cart-btn i{ font-size:18px; color:#000; }
+.quick-cart-btn:hover{ transform:scale(1.15); background:#c9a230; }
+
+/* ============ PRODUCT MODAL ============ */
+.product-modal-overlay{
+  position:fixed; top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.9);
+  z-index:100000;
+  display:none; align-items:center;
+  justify-content:center;
+  backdrop-filter:blur(10px);
+  animation:fadeInOverlay 0.4s ease;
+  overflow-y:auto; padding:20px;
+}
+.product-modal-overlay.show{ display:flex; }
+
+.product-modal{
   background:#1a1a1a;
-  padding:30px;
-  border-radius:15px;
-  transition:0.4s;
-  
+  border:2px solid #d4af37;
+  border-radius:20px;
+  max-width:900px; width:95%;
+  animation:slideUp 0.5s ease;
+  max-height:95vh; overflow-y:auto;
+}
+
+.product-modal-close{
+  position:absolute; top:15px; right:20px;
+  background:none; border:none;
+  color:#d4af37; font-size:28px;
+  cursor:pointer; z-index:10;
+  transition:0.3s;
+}
+.product-modal-close:hover{ transform:rotate(90deg) scale(1.2); }
+
+.product-modal-img{
+  width:100%; height:350px;
+  object-fit:cover; border-radius:18px 18px 0 0;
+}
+
+.product-modal-body{ padding:30px; }
+
+.product-modal-title{
+  font-family:'Playfair Display', serif;
+  color:#d4af37; font-size:28px;
+  margin-bottom:5px;
+}
+
+.product-modal-desc{
+  color:#aaa; font-size:15px; margin-bottom:20px;
+}
+
+.product-modal-price{
+  color:#d4af37; font-size:24px;
+  font-weight:700; margin-bottom:20px;
+}
+
+/* Quantity Selector */
+.qty-selector{
+  display:flex; align-items:center;
+  gap:0; border-radius:12px;
+  overflow:hidden; border:2px solid #d4af37;
+  width:fit-content;
+}
+.qty-btn{
+  background:#2a2a2a; border:none;
+  color:#d4af37; width:45px; height:45px;
+  font-size:20px; font-weight:700;
+  cursor:pointer; transition:0.3s;
+  display:flex; align-items:center; justify-content:center;
+}
+.qty-btn:hover{ background:#d4af37; color:#000; }
+.qty-value{
+  width:55px; text-align:center;
+  background:#111; color:#fff;
+  font-size:18px; font-weight:600;
+  border:none; outline:none;
+}
+
+/* Drinks Section */
+.drinks-section{ margin-top:20px; }
+.drinks-title{
+  color:#fff; font-weight:600;
+  font-size:16px; margin-bottom:12px;
+}
+.drink-item{
+  display:flex; align-items:center;
+  justify-content:space-between;
+  background:#222; border:1px solid #333;
+  border-radius:10px; padding:10px 15px;
+  margin-bottom:8px; transition:0.3s;
+  cursor:pointer;
+}
+.drink-item:hover{ border-color:#d4af37; }
+.drink-item.selected{
+  border-color:#d4af37;
+  background:rgba(212,175,55,0.1);
+}
+.drink-item-left{
+  display:flex; align-items:center; gap:10px;
+}
+.drink-item-name{ color:#fff; font-size:14px; }
+.drink-item-price{ color:#d4af37; font-weight:600; font-size:14px; }
+.drink-qty{
+  display:flex; align-items:center; gap:0;
+  border-radius:8px; overflow:hidden;
+  border:1px solid #555;
+}
+.drink-qty-btn{
+  background:#333; border:none;
+  color:#d4af37; width:30px; height:30px;
+  font-size:16px; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:0.3s;
+}
+.drink-qty-btn:hover{ background:#d4af37; color:#000; }
+.drink-qty-val{
+  width:35px; text-align:center;
+  background:#111; color:#fff;
+  font-size:14px; border:none;
+}
+
+/* Action Buttons */
+.product-actions{
+  display:flex; gap:12px;
+  margin-top:25px; flex-wrap:wrap;
+}
+.btn-add-cart{
+  flex:1; padding:14px;
+  background:transparent; border:2px solid #d4af37;
+  color:#d4af37; border-radius:12px;
+  font-weight:700; font-size:15px;
+  cursor:pointer; transition:0.3s;
+  display:flex; align-items:center;
+  justify-content:center; gap:8px;
+}
+.btn-add-cart:hover{
+  background:rgba(212,175,55,0.15);
+  transform:scale(1.02);
+}
+.btn-buy-now{
+  flex:1; padding:14px;
+  background:#d4af37; border:none;
+  color:#000; border-radius:12px;
+  font-weight:700; font-size:15px;
+  cursor:pointer; transition:0.3s;
+  display:flex; align-items:center;
+  justify-content:center; gap:8px;
+}
+.btn-buy-now:hover{
+  background:#c9a230; transform:scale(1.02);
+  box-shadow:0 5px 25px rgba(212,175,55,0.5);
+}
+
+/* Ask Question */
+.ask-question-section{ margin-top:20px; }
+.ask-question-btn{
+  background:transparent; border:1px solid #555;
+  color:#ccc; padding:10px 20px;
+  border-radius:10px; cursor:pointer;
+  transition:0.3s; font-size:14px;
+  display:flex; align-items:center; gap:8px;
+  width:100%;
+}
+.ask-question-btn:hover{ border-color:#d4af37; color:#d4af37; }
+.question-form{
+  display:none; margin-top:10px;
+  animation:fadeInOverlay 0.3s ease;
+}
+.question-form.show{ display:block; }
+.question-input{
+  width:100%; padding:12px 15px;
+  background:#222; border:1px solid #444;
+  border-radius:10px; color:#fff;
+  font-size:14px; outline:none;
+  resize:vertical; min-height:80px;
+  transition:0.3s;
+}
+.question-input:focus{ border-color:#d4af37; }
+.question-submit{
+  margin-top:8px; padding:10px 25px;
+  background:#d4af37; color:#000;
+  border:none; border-radius:10px;
+  font-weight:600; cursor:pointer;
+  transition:0.3s;
+}
+.question-submit:hover{ background:#c9a230; }
+
+/* ============ CUSTOMER INFO MODAL ============ */
+.customer-modal-overlay{
+  position:fixed; top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.9);
+  z-index:200000;
+  display:none; align-items:center;
+  justify-content:center;
+  backdrop-filter:blur(10px);
+  padding:20px;
+}
+.customer-modal-overlay.show{ display:flex; }
+
+.customer-modal{
+  background:#1a1a1a;
+  border:2px solid #d4af37;
+  border-radius:20px;
+  max-width:500px; width:95%;
+  padding:35px; animation:slideUp 0.5s ease;
+  max-height:95vh; overflow-y:auto;
+}
+
+.customer-modal h4{
+  font-family:'Playfair Display', serif;
+  color:#d4af37; text-align:center;
+  margin-bottom:5px;
+}
+
+.customer-modal .subtitle{
+  color:#aaa; text-align:center;
+  font-size:13px; margin-bottom:25px;
+}
+
+.form-field{
+  margin-bottom:15px;
+}
+.form-field label{
+  color:#ccc; font-size:13px;
+  font-weight:500; margin-bottom:5px;
+  display:block;
+}
+.form-field input,
+.form-field select,
+.form-field textarea{
+  width:100%; padding:12px 15px;
+  background:#222; border:1px solid #444;
+  border-radius:10px; color:#fff;
+  font-size:14px; outline:none;
+  transition:0.3s;
+}
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus{
+  border-color:#d4af37;
+  box-shadow:0 0 10px rgba(212,175,55,0.2);
+}
+
+.order-summary{
+  background:#222; border-radius:12px;
+  padding:15px; margin-bottom:20px;
+  border:1px solid #333;
+}
+.order-summary h6{ color:#d4af37; margin-bottom:10px; }
+.order-summary-item{
+  display:flex; justify-content:space-between;
+  color:#ccc; font-size:13px; margin-bottom:5px;
+}
+.order-summary-total{
+  display:flex; justify-content:space-between;
+  color:#d4af37; font-weight:700;
+  font-size:16px; border-top:1px solid #444;
+  padding-top:10px; margin-top:10px;
+}
+
+.place-order-btn{
+  width:100%; padding:14px;
+  background:#d4af37; color:#000;
+  border:none; border-radius:12px;
+  font-weight:700; font-size:16px;
+  cursor:pointer; transition:0.3s;
+  letter-spacing:1px;
+}
+.place-order-btn:hover{
+  background:#c9a230; transform:scale(1.02);
+  box-shadow:0 5px 25px rgba(212,175,55,0.5);
+}
+
+/* ============ CART SIDEBAR ============ */
+.cart-sidebar{
+  position:fixed; top:0; right:-420px;
+  width:400px; max-width:90vw;
+  height:100%; background:#1a1a1a;
+  border-left:2px solid #d4af37;
+  z-index:150000; transition:0.4s ease;
+  display:flex; flex-direction:column;
+  box-shadow:-10px 0 40px rgba(0,0,0,0.5);
+}
+.cart-sidebar.open{ right:0; }
+
+.cart-sidebar-header{
+  padding:20px; border-bottom:1px solid #333;
+  display:flex; align-items:center;
+  justify-content:space-between;
+}
+.cart-sidebar-header h5{
+  color:#d4af37; margin:0;
+  font-family:'Playfair Display', serif;
+}
+.cart-close{
+  background:none; border:none;
+  color:#d4af37; font-size:24px;
+  cursor:pointer; transition:0.3s;
+}
+.cart-close:hover{ transform:rotate(90deg); }
+
+.cart-items{
+  flex:1; overflow-y:auto;
+  padding:15px;
+}
+
+.cart-item{
+  display:flex; gap:12px;
+  background:#222; border-radius:12px;
+  padding:12px; margin-bottom:10px;
+  border:1px solid #333;
+  animation:fadeInOverlay 0.3s ease;
+}
+.cart-item img{
+  width:65px; height:65px;
+  border-radius:10px; object-fit:cover;
+}
+.cart-item-info{ flex:1; }
+.cart-item-name{ color:#fff; font-size:14px; font-weight:600; }
+.cart-item-price{ color:#d4af37; font-size:13px; }
+.cart-item-remove{
+  background:none; border:none;
+  color:#ff4444; cursor:pointer;
+  font-size:16px; transition:0.3s;
+  align-self:flex-start;
+}
+.cart-item-remove:hover{ transform:scale(1.2); }
+
+.cart-empty{
+  text-align:center; padding:40px 20px;
+  color:#666;
+}
+.cart-empty i{ font-size:50px; margin-bottom:15px; color:#333; }
+
+.cart-sidebar-footer{
+  padding:20px; border-top:1px solid #333;
+}
+.cart-total{
+  display:flex; justify-content:space-between;
+  color:#d4af37; font-weight:700;
+  font-size:18px; margin-bottom:15px;
+}
+.cart-checkout-btn{
+  width:100%; padding:14px;
+  background:#d4af37; color:#000;
+  border:none; border-radius:12px;
+  font-weight:700; cursor:pointer;
+  transition:0.3s; font-size:15px;
+}
+.cart-checkout-btn:hover{
+  background:#c9a230;
+  box-shadow:0 5px 20px rgba(212,175,55,0.4);
+}
+
+.cart-overlay{
+  position:fixed; top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.6);
+  z-index:149999;
+  display:none;
+}
+.cart-overlay.show{ display:block; }
+
+/* ============ SUCCESS TOAST ============ */
+.success-toast{
+  position:fixed; top:20px; right:20px;
+  background:#1a1a1a; border:2px solid #d4af37;
+  border-radius:15px; padding:15px 25px;
+  z-index:300000; display:flex;
+  align-items:center; gap:12px;
+  animation:slideInRight 0.4s ease;
+  box-shadow:0 10px 30px rgba(0,0,0,0.5);
+  transform:translateX(150%);
+  transition:transform 0.4s ease;
+}
+.success-toast.show{ transform:translateX(0); }
+.success-toast i{ color:#d4af37; font-size:24px; }
+.success-toast span{ color:#fff; font-size:14px; font-weight:500; }
+
+@keyframes slideInRight{
+  from{ transform:translateX(150%); }
+  to{ transform:translateX(0); }
+}
+
+/* ============ ORDER PLACED MODAL ============ */
+.order-success-overlay{
+  position:fixed; top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.9);
+  z-index:500000;
+  display:none; align-items:center;
+  justify-content:center;
+  backdrop-filter:blur(10px);
+}
+.order-success-overlay.show{ display:flex; }
+
+.order-success-box{
+  background:#1a1a1a; border:2px solid #d4af37;
+  border-radius:20px; padding:40px;
+  text-align:center; max-width:450px;
+  width:90%; animation:slideUp 0.6s ease;
+}
+
+.success-check{
+  width:80px; height:80px;
+  background:#d4af37; border-radius:50%;
+  display:flex; align-items:center;
+  justify-content:center; margin:0 auto 20px;
+  animation:bounceIn 0.6s ease 0.3s both;
+}
+.success-check i{ font-size:40px; color:#000; }
+
+@keyframes bounceIn{
+  0%{ transform:scale(0); }
+  50%{ transform:scale(1.2); }
+  100%{ transform:scale(1); }
+}
+
+/* ============ TESTIMONIALS ============ */
+.testimonials-section{ border-top:1px solid #d4af37; }
+.testimonial-card{
+  background:#1a1a1a; padding:30px;
+  border-radius:15px; transition:0.4s;
 }
 .testimonial-card:hover{
   transform:translateY(-8px);
   box-shadow:0 10px 25px rgba(212,175,55,0.4);
 }
-.stars{
-  color:#d4af37;
-}
+.stars{ color:#d4af37; }
 
-/* FOOTER */
-.footer{
-  background:#000;
-  padding:60px 0 20px;
-  border-top:1px solid #d4af37; 
-}
-
-.footer h5{
-  color:#d4af37;
-  margin-bottom:20px;
-  
-}
-
-.footer a{
-  text-decoration:none;
-  color:#ccc;
-  transition:0.3s;
-}
-.footer a:hover{
-  color:#d4af37;
-}
-
-.social-icons a{
-  font-size:20px;
-  margin-right:15px;
-  color:#ccc;
-  transition:0.3s;
-}
-.social-icons a:hover{
-  color:#d4af37;
-}
-
-.footer-bottom{
-  border-top:1px solid #333;
-  margin-top:30px;
-  padding-top:15px;
-  text-align:center;
-  color:#aaa;
-}
-.quick-links li {
-  margin-bottom:10px;
-}
-
-.quick-links a {
-  position:relative;
-  display:inline-block;
-}
-
-.quick-links a::after{
-  content:"";
-  position:absolute;
-  width:0;
-  height:2px;
-  background:#d4af37;
-  left:0;
-  bottom:-3px;
-  transition:0.3s;
-}
-
-.quick-links a:hover::after{
-  width:100%;
-}
-
-.testimonials-section{
-  border-top: 1px solid #d4af37;
-}
+/* ============ FEATURED SECTION ============ */
 .featured-section{
   background:#111;
   border-top:1px solid #d4af37;
   border-bottom:1px solid #d4af37;
 }
-.price{
+
+/* ============ FOOTER ============ */
+.footer{
+  background:#000; padding:60px 0 20px;
+  border-top:1px solid #d4af37;
+}
+.footer h5{ color:#d4af37; margin-bottom:20px; }
+.footer a{ text-decoration:none; color:#ccc; transition:0.3s; }
+.footer a:hover{ color:#d4af37; }
+.social-icons a{
+  font-size:20px; margin-right:15px;
+  color:#ccc; transition:0.3s;
+}
+.social-icons a:hover{ color:#d4af37; }
+.footer-bottom{
+  border-top:1px solid #333;
+  margin-top:30px; padding-top:15px;
+  text-align:center; color:#aaa;
+}
+.quick-links li{ margin-bottom:10px; }
+.quick-links a{ position:relative; display:inline-block; }
+.quick-links a::after{
+  content:""; position:absolute;
+  width:0; height:2px; background:#d4af37;
+  left:0; bottom:-3px; transition:0.3s;
+}
+.quick-links a:hover::after{ width:100%; }
+
+/* ============ POPUP OVERLAY ============ */
+.popup-overlay{
+  position:fixed; top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.85);
+  z-index:99999;
+  display:flex; align-items:center;
+  justify-content:center;
+  backdrop-filter:blur(8px);
+  animation:fadeInOverlay 0.5s ease;
+}
+@keyframes fadeInOverlay{ from{opacity:0} to{opacity:1} }
+@keyframes slideUp{
+  from{transform:translateY(80px);opacity:0}
+  to{transform:translateY(0);opacity:1}
+}
+
+.popup-box{
+  background:#1a1a1a; border:2px solid #d4af37;
+  border-radius:20px; padding:40px 35px;
+  max-width:480px; width:90%; text-align:center;
+  animation:slideUp 0.6s ease;
+  box-shadow:0 0 60px rgba(212,175,55,0.3);
+}
+.popup-logo{
+  width:80px; height:80px;
+  background:#d4af37; border-radius:50%;
+  display:flex; align-items:center;
+  justify-content:center; margin:0 auto 20px;
+  box-shadow:0 0 30px rgba(212,175,55,0.5);
+}
+.popup-logo i{ font-size:38px; color:#000; }
+.popup-box h4{
+  font-family:'Playfair Display', serif;
+  color:#d4af37; font-size:22px; margin-bottom:8px;
+}
+.popup-box p{ color:#ccc; font-size:14px; margin-bottom:20px; }
+
+.order-type-toggle{
+  display:flex; justify-content:center;
+  gap:0; margin-bottom:25px;
+  border-radius:30px; overflow:hidden;
+  border:2px solid #d4af37;
+  width:fit-content; margin-left:auto; margin-right:auto;
+}
+.order-type-btn{
+  padding:10px 30px; border:none;
+  cursor:pointer; font-weight:600;
+  font-size:14px; letter-spacing:1px;
+  transition:0.3s; background:transparent;
   color:#d4af37;
-  font-weight:600;
-  font-size:18px;
 }
-/*login */
-.btn-login{
-  background: transparent;
-  border: 2px solid #d4af37;
-  color: #d4af37;
-  padding: 8px 22px;
-  border-radius: 30px;
-  transition: 0.3s;
+.order-type-btn.active{ background:#d4af37; color:#000; }
+.order-type-btn:hover:not(.active){ background:rgba(212,175,55,0.15); }
+
+.location-btn{
+  background:#2a2a2a; border:1px solid #444;
+  color:#ccc; padding:10px 22px;
+  border-radius:30px; cursor:pointer;
+  transition:0.3s; display:inline-flex;
+  align-items:center; gap:8px;
+  font-size:14px; margin-bottom:20px;
+}
+.location-btn:hover{
+  border-color:#d4af37; color:#d4af37;
+  background:rgba(212,175,55,0.1);
+}
+.location-btn i{ font-size:18px; }
+
+.popup-select{
+  width:100%; padding:14px 18px;
+  border-radius:12px; border:1px solid #444;
+  background:#222; color:#ccc; font-size:14px;
+  margin-bottom:15px; appearance:none;
+  -webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23d4af37' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 15px center;
+  cursor:pointer; transition:0.3s; outline:none;
+}
+.popup-select:focus{
+  border-color:#d4af37;
+  box-shadow:0 0 10px rgba(212,175,55,0.3);
 }
 
-.btn-login:hover{
-  background: #d4af37;
-  color: #000;
-  transform: scale(1.05);
-  box-shadow: 0 0 15px #d4af37;
+.popup-submit{
+  width:100%; padding:14px;
+  background:#d4af37; color:#000;
+  border:none; border-radius:12px;
+  font-weight:700; font-size:16px;
+  cursor:pointer; transition:0.3s;
+  margin-top:5px; letter-spacing:1px;
+}
+.popup-submit:hover{
+  background:#c9a230; transform:scale(1.02);
+  box-shadow:0 5px 25px rgba(212,175,55,0.5);
+}
+.popup-submit:disabled{
+  background:#333; color:#666;
+  cursor:not-allowed; transform:none;
+  box-shadow:none;
 }
 
+.popup-label{
+  color:#fff; font-weight:600;
+  font-size:15px; margin-bottom:12px;
+}
+.popup-divider{
+  border:none; border-top:1px solid #333;
+  margin:5px 0 20px;
+}
+
+/* Location Status */
+.location-status{
+  margin-top:5px; font-size:12px;
+  color:#aaa; display:none;
+}
+.location-status.show{ display:block; }
+.location-status.detecting{ color:#d4af37; }
+.location-status.success{ color:#4CAF50; }
+.location-status.error{ color:#ff4444; }
+
+/* ============ RESPONSIVE ============ */
+@media(max-width:768px){
+  .product-modal{ max-width:100%; }
+  .product-modal-img{ height:250px; }
+  .product-actions{ flex-direction:column; }
+  .cart-sidebar{ width:100%; max-width:100%; }
+  .section-title{ font-size:30px; }
+}
+/* Cart Icon Default */
+.cart-btn i{
+  color:#ffffff !important;
+  transition:0.3s ease;
+}
+
+/* Hover Effect */
+.cart-btn:hover{
+  transform:scale(1.15);
+}
+
+.cart-btn:hover i{
+  color:#d4af37 !important;
+}
 </style>
 </head>
 <body>
 
-<!-- Navbar -->
+<!-- ======================== -->
+<!-- POPUP OVERLAY - ORDER TYPE -->
+<!-- ======================== -->
+<div class="popup-overlay" id="popupOverlay">
+  <div class="popup-box">
+    <div class="popup-logo">
+      <i class="bi bi-cup-hot-fill"></i>
+    </div>
+    <h4>Select Your Order Type</h4>
+    <p>Choose how you'd like to enjoy JerryBites</p>
+
+    <div class="order-type-toggle">
+      <button class="order-type-btn active" id="deliveryBtn" onclick="selectOrderType('delivery')">
+        <i class="bi bi-truck me-1"></i> DELIVERY
+      </button>
+      <button class="order-type-btn" id="pickupBtn" onclick="selectOrderType('pickup')">
+        <i class="bi bi-bag-check me-1"></i> PICK-UP
+      </button>
+    </div>
+
+    <p class="popup-label">Please select your location</p>
+
+    <button class="location-btn" id="locationBtn" onclick="useCurrentLocation()">
+      <i class="bi bi-crosshair"></i> Use Current Location
+    </button>
+    <div class="location-status" id="locationStatus"></div>
+
+    <hr class="popup-divider">
+
+    <select class="popup-select" id="citySelect" onchange="updateAreas()">
+      <option value="" disabled selected>Select City / Region</option>
+      <option value="karachi">Karachi</option>
+      <option value="lahore">Lahore</option>
+      <option value="islamabad">Islamabad</option>
+      <option value="rawalpindi">Rawalpindi</option>
+      <option value="faisalabad">Faisalabad</option>
+      <option value="multan">Multan</option>
+      <option value="peshawar">Peshawar</option>
+      <option value="hyderabad">Hyderabad</option>
+    </select>
+
+    <select class="popup-select" id="areaSelect" disabled>
+      <option value="" disabled selected>Select Area / Sub Region</option>
+    </select>
+
+    <button class="popup-submit" id="popupSubmitBtn" disabled onclick="closePopup()">
+      Select
+    </button>
+  </div>
+</div>
+
+<!-- ======================== -->
+<!-- PRODUCT DETAIL MODAL -->
+<!-- ======================== -->
+<div class="product-modal-overlay" id="productModal">
+  <div class="product-modal position-relative">
+    <button class="product-modal-close" onclick="closeProductModal()">
+      <i class="bi bi-x-lg"></i>
+    </button>
+    <img src="" alt="" class="product-modal-img" id="modalImg">
+    <div class="product-modal-body">
+      <h3 class="product-modal-title" id="modalTitle"></h3>
+      <p class="product-modal-desc" id="modalDesc"></p>
+      <div class="product-modal-price" id="modalPrice"></div>
+
+      <!-- Quantity -->
+      <div class="d-flex align-items-center gap-3 mb-3">
+        <span class="text-white" style="font-weight:600;">Quantity:</span>
+        <div class="qty-selector">
+          <button class="qty-btn" onclick="changeQty(-1)">−</button>
+          <input type="text" class="qty-value" id="modalQty" value="1" readonly>
+          <button class="qty-btn" onclick="changeQty(1)">+</button>
+        </div>
+      </div>
+
+      <!-- Drinks Section -->
+      <div class="drinks-section">
+        <div class="drinks-title">
+          <i class="bi bi-cup-straw me-1"></i> Add Drinks (Optional)
+        </div>
+        <div id="drinksContainer">
+          <!-- Drinks will be loaded here -->
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="product-actions">
+        <button class="btn-add-cart" onclick="addToCartFromModal()">
+          <i class="bi bi-cart-plus"></i> Add to Cart
+        </button>
+        <button class="btn-buy-now" onclick="buyNow()">
+          <i class="bi bi-lightning-fill"></i> Buy Now
+        </button>
+      </div>
+
+      <!-- Ask Question -->
+      <div class="ask-question-section">
+        <button class="ask-question-btn" onclick="toggleQuestion()">
+          <i class="bi bi-chat-dots"></i> Ask Any Question About This Dish
+        </button>
+        <div class="question-form" id="questionForm">
+          <textarea class="question-input" id="questionInput" placeholder="Type your question here... e.g., Is this dish spicy?"></textarea>
+          <button class="question-submit" onclick="submitQuestion()">
+            <i class="bi bi-send me-1"></i> Submit Question
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== -->
+<!-- CUSTOMER INFO MODAL -->
+<!-- ======================== -->
+<div class="customer-modal-overlay" id="customerModal">
+  <div class="customer-modal">
+    <button class="product-modal-close" onclick="closeCustomerModal()" style="position:relative;float:right;top:-10px;right:-10px;">
+      <i class="bi bi-x-lg"></i>
+    </button>
+    <div style="clear:both;"></div>
+
+    <h4><i class="bi bi-bag-check me-2"></i>Complete Your Order</h4>
+    <p class="subtitle">Please fill in your details to place the order</p>
+
+    <!-- Order Summary -->
+    <div class="order-summary" id="orderSummary">
+      <h6><i class="bi bi-receipt me-1"></i> Order Summary</h6>
+      <div id="summaryItems"></div>
+      <div class="order-summary-total">
+        <span>Total</span>
+        <span id="summaryTotal">Rs 0</span>
+      </div>
+    </div>
+
+    <!-- Customer Form -->
+    <div class="form-field">
+      <label><i class="bi bi-person me-1"></i> Full Name *</label>
+      <input type="text" id="custName" placeholder="Enter your full name">
+    </div>
+    <div class="form-field">
+      <label><i class="bi bi-telephone me-1"></i> Phone Number *</label>
+      <input type="tel" id="custPhone" placeholder="03XX-XXXXXXX">
+    </div>
+    <div class="form-field">
+      <label><i class="bi bi-envelope me-1"></i> Email (Optional)</label>
+      <input type="email" id="custEmail" placeholder="your@email.com">
+    </div>
+    <div class="form-field" id="addressField">
+      <label><i class="bi bi-geo-alt me-1"></i> Delivery Address *</label>
+      <textarea id="custAddress" rows="2" placeholder="Enter your complete address" style="width:100%;padding:12px 15px;background:#222;border:1px solid #444;border-radius:10px;color:#fff;font-size:14px;outline:none;transition:0.3s;resize:vertical;"></textarea>
+    </div>
+    <div class="form-field">
+      <label><i class="bi bi-credit-card me-1"></i> Payment Method *</label>
+      <select id="custPayment">
+        <option value="" disabled selected>Select Payment Method</option>
+        <option value="cod">Cash on Delivery</option>
+        <option value="jazzcash">JazzCash</option>
+        <option value="easypaisa">EasyPaisa</option>
+        <option value="card">Credit/Debit Card</option>
+      </select>
+    </div>
+    <div class="form-field">
+      <label><i class="bi bi-chat-left-text me-1"></i> Special Instructions (Optional)</label>
+      <textarea id="custNotes" rows="2" placeholder="Any special requests..." style="width:100%;padding:12px 15px;background:#222;border:1px solid #444;border-radius:10px;color:#fff;font-size:14px;outline:none;transition:0.3s;resize:vertical;"></textarea>
+    </div>
+
+    <button class="place-order-btn" onclick="placeOrder()">
+      <i class="bi bi-check-circle me-1"></i> Place Order
+    </button>
+  </div>
+</div>
+
+<!-- ======================== -->
+<!-- ORDER SUCCESS MODAL -->
+<!-- ======================== -->
+<div class="order-success-overlay" id="orderSuccessModal">
+  <div class="order-success-box">
+    <div class="success-check">
+      <i class="bi bi-check-lg"></i>
+    </div>
+    <h4 style="font-family:'Playfair Display',serif;color:#d4af37;font-size:24px;margin-bottom:10px;">
+      Order Placed Successfully! 🎉
+    </h4>
+    <p style="color:#aaa;font-size:14px;margin-bottom:8px;">
+      Thank you for ordering from JerryBites!
+    </p>
+    <p style="color:#ccc;font-size:13px;margin-bottom:20px;" id="orderConfirmMsg">
+      Your order will be delivered within 30-45 minutes.
+    </p>
+    <p style="color:#d4af37;font-size:16px;font-weight:600;margin-bottom:20px;" id="orderIdText">
+      Order #JB-00000
+    </p>
+    <button class="btn-gold" onclick="closeOrderSuccess()" style="width:100%;padding:14px;font-size:16px;">
+      Continue Shopping
+    </button>
+  </div>
+</div>
+
+<!-- ======================== -->
+<!-- CART SIDEBAR -->
+<!-- ======================== -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-sidebar-header">
+    <h5><i class="bi bi-cart3 me-2"></i>Your Cart</h5>
+    <button class="cart-close" onclick="closeCart()">
+      <i class="bi bi-x-lg"></i>
+    </button>
+  </div>
+  <div class="cart-items" id="cartItemsContainer">
+    <div class="cart-empty" id="cartEmpty">
+      <i class="bi bi-cart-x d-block"></i>
+      <p>Your cart is empty</p>
+      <small style="color:#555;">Add some delicious items!</small>
+    </div>
+  </div>
+  <div class="cart-sidebar-footer">
+    <div class="cart-total">
+      <span>Total:</span>
+      <span id="cartTotal">Rs 0</span>
+    </div>
+    <button class="cart-checkout-btn" onclick="checkout()">
+      <i class="bi bi-bag-check me-1"></i> Proceed to Checkout
+    </button>
+  </div>
+</div>
+
+<!-- ======================== -->
+<!-- SUCCESS TOAST -->
+<!-- ======================== -->
+<div class="success-toast" id="successToast">
+  <i class="bi bi-check-circle-fill"></i>
+  <span id="toastMessage">Added to cart!</span>
+</div>
+
+<!-- ======================== -->
+<!-- NAVBAR -->
+<!-- ======================== -->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
   <div class="container">
-
-    <!-- Logo -->
     <a class="navbar-brand" href="index.html">JerryBites</a>
-
     <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navmenu">
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navmenu">
-
-      <!-- Center Menu -->
       <ul class="navbar-nav mx-auto">
         <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
@@ -263,199 +1008,844 @@ body{
         <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
         <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
       </ul>
-
-      <!-- Right Side Login Button -->
-      <a href="login.html" class="btn btn-login">Login</a>
-
+      <div class="d-flex align-items-center gap-3">
+        <!-- Cart Button -->
+        <div class="cart-btn" onclick="openCart()">
+          <i class="bi bi-cart3 text-white" style="font-size:22px;"></i>
+          <span class="cart-badge" id="cartBadge">0</span>
+        </div>
+        <a href="login.html" class="btn btn-login">Login</a>
+      </div>
     </div>
   </div>
 </nav>
-<!-- Hero -->
 
+<!-- ======================== -->
+<!-- HERO -->
+<!-- ======================== -->
 <section class="hero d-flex align-items-center text-center text-white">
   <div class="container">
-    <h1 class="display-3">Luxury Dining Experience</h1>
-    <p class="lead">Taste the perfection at JerryBites Restaurant</p>
-    <a href="menu.html" class="btn btn-gold mt-3">Explore Menu</a>
+    <h1 class="display-3" data-aos="fade-down">Luxury Dining Experience</h1>
+    <p class="lead" data-aos="fade-up" data-aos-delay="200">Taste the perfection at JerryBites Restaurant</p>
+    <a href="menu.html" class="btn btn-gold mt-3" data-aos="zoom-in" data-aos-delay="400">Explore Menu</a>
   </div>
 </section>
 
-<!-- Welcome -->
+<!-- ======================== -->
+<!-- WELCOME -->
+<!-- ======================== -->
 <section class="section-padding text-center">
   <div class="container">
     <h2 class="section-title" data-aos="fade-up">Welcome to JerryBites</h2>
-<p data-aos="fade-up" data-aos-delay="200">
-  Where flavor meets elegance. Experience premium dining crafted with passion and perfection.
-</p>
+    <p data-aos="fade-up" data-aos-delay="200">
+      Where flavor meets elegance. Experience premium dining crafted with passion and perfection.
+    </p>
   </div>
 </section>
 
-<!-- Featured Dishes -->
+<!-- ======================== -->
+<!-- FEATURED DISHES -->
+<!-- ======================== -->
 <section class="section-padding featured-section">
-<div class="container">
-<h2 class="section-title text-center">Featured Dishes</h2>
-<div class="row g-4">
+  <div class="container">
+    <h2 class="section-title text-center" data-aos="fade-up">Featured Dishes</h2>
+    <div class="row g-4" id="dishesContainer">
 
-<div class="col-md-4" data-aos="zoom-in">
-<div class="card dish-card">
-<img src="assests/images/new.webp" class="card-img-top">
-<div class="card-body text-center">
-<h5>Beef Burger</h5>
-<p>Delicous Beef Burger with fries</p>
-<h6 class="price">Rs 450</h6>
-</div>
-</div>
-</div>
+      <!-- Dish 1 -->
+      <div class="col-md-4" data-aos="zoom-in">
+        <div class="card dish-card"
+             data-name="Beef Burger"
+             data-desc="Delicious juicy beef patty with fresh lettuce, tomatoes, cheese, and our signature sauce served with crispy golden fries."
+             data-price="450"
+             data-img="assests/images/new.webp"
+             onclick="openProductModal(this)">
+          <div class="img-wrapper">
+            <img src="assests/images/new.webp" class="card-img-top" alt="Beef Burger">
+            <button class="like-btn" onclick="toggleLike(event, this)" data-liked="false">
+              <i class="bi bi-heart"></i>
+            </button>
+            <button class="quick-cart-btn" onclick="quickAddCart(event, this)" title="Quick Add to Cart">
+              <i class="bi bi-cart-plus"></i>
+            </button>
+          </div>
+          <div class="card-body text-center">
+            <h5>Beef Burger</h5>
+            <p>Delicious Beef Burger with fries</p>
+            <h6 class="price">Rs 450</h6>
+            <div class="like-count">
+              <i class="bi bi-heart-fill"></i>
+              <span class="like-number">24</span> likes
+            </div>
+          </div>
+        </div>
+      </div>
 
-<div class="col-md-4" data-aos="zoom-in">
-<div class="card dish-card">
-<img src="assests/images/crispy fried chicken.webp" class="card-img-top">
-<div class="card-body text-center">
-<h5>Crispy chicken</h5>
-<p>Delicous crispy fried chicken</p>
-<h6 class="price">Rs 300</h6>
-</div>
-</div>
-</div>
+      <!-- Dish 2 -->
+      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+        <div class="card dish-card"
+             data-name="Crispy Chicken"
+             data-desc="Golden crispy fried chicken, perfectly seasoned with our secret blend of spices. Crunchy outside, juicy inside!"
+             data-price="300"
+             data-img="assests/images/crispy fried chicken.webp"
+             onclick="openProductModal(this)">
+          <div class="img-wrapper">
+            <img src="assests/images/crispy fried chicken.webp" class="card-img-top" alt="Crispy Chicken">
+            <button class="like-btn" onclick="toggleLike(event, this)" data-liked="false">
+              <i class="bi bi-heart"></i>
+            </button>
+            <button class="quick-cart-btn" onclick="quickAddCart(event, this)" title="Quick Add to Cart">
+              <i class="bi bi-cart-plus"></i>
+            </button>
+          </div>
+          <div class="card-body text-center">
+            <h5>Crispy Chicken</h5>
+            <p>Delicious crispy fried chicken</p>
+            <h6 class="price">Rs 300</h6>
+            <div class="like-count">
+              <i class="bi bi-heart-fill"></i>
+              <span class="like-number">18</span> likes
+            </div>
+          </div>
+        </div>
+      </div>
 
-<div class="col-md-4" data-aos="zoom-in">
-<div class="card dish-card">
-<img src="assests/images/chocolate lava cake.webp" class="card-img-top">
-<div class="card-body text-center">
-<h5>Chocolate Lava</h5>
-<p>Rich molten chocolate cake</p>
-<h6 class="price">Rs 350</h6>
-</div>
-</div>
-</div>
+      <!-- Dish 3 -->
+      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+        <div class="card dish-card"
+             data-name="Chocolate Lava Cake"
+             data-desc="Rich molten chocolate cake with a warm gooey center, served with vanilla ice cream and fresh berries."
+             data-price="350"
+             data-img="assests/images/chocolate lava cake.webp"
+             onclick="openProductModal(this)">
+          <div class="img-wrapper">
+            <img src="assests/images/chocolate lava cake.webp" class="card-img-top" alt="Chocolate Lava">
+            <button class="like-btn" onclick="toggleLike(event, this)" data-liked="false">
+              <i class="bi bi-heart"></i>
+            </button>
+            <button class="quick-cart-btn" onclick="quickAddCart(event, this)" title="Quick Add to Cart">
+              <i class="bi bi-cart-plus"></i>
+            </button>
+          </div>
+          <div class="card-body text-center">
+            <h5>Chocolate Lava</h5>
+            <p>Rich molten chocolate cake</p>
+            <h6 class="price">Rs 350</h6>
+            <div class="like-count">
+              <i class="bi bi-heart-fill"></i>
+              <span class="like-number">31</span> likes
+            </div>
+          </div>
+        </div>
+      </div>
 
-</div>
-</div>
+    </div>
+  </div>
 </section>
 
-<!-- Testimonials -->
+<!-- ======================== -->
+<!-- TESTIMONIALS -->
+<!-- ======================== -->
 <section class="section-padding testimonials-section">
-<div class="container text-center">
-<h2 class="section-title">Customer Reviews</h2>
-
-<div class="row g-4">
-
-<div class="col-md-4" data-aos="fade-up">
-<div class="testimonial-card">
-<div class="stars mb-2">
-<i class="bi bi-star-fill"></i>
-<i class="bi bi-star-fill"></i>
-<i class="bi bi-star-fill"></i>
-<i class="bi bi-star-fill"></i>
-<i class="bi bi-star-fill"></i>
-</div>
-<p>"Absolutely luxurious experience! The ambiance and food were top-class."</p>
-<h6 class="mt-3">- Sarah</h6>
-</div>
-</div>
-
-<div class="col-md-4" data-aos="fade-up">
-<div class="testimonial-card">
-<div class="stars mb-2">
-<i class="bi bi-star-fill"></i>
-<i class="bi bi-star-fill"></i>
-<i class="bi bi-star-fill"></i>
-<i class="bi bi-star-fill"></i>
-<i class="bi bi-star-fill"></i>
-</div>
-<p>"Best steak in town! Highly recommended for fine dining lovers."</p>
-<h6 class="mt-3">- Ali</h6>
-</div>
-</div>
-
-<div class="col-md-4" data-aos="fade-up">
-<div class="testimonial-card">
-<div class="stars mb-2">
-<i class="bi bi-star-fill"></i>
-<i class="bi bi-star-fill"></i>
-<i class="bi bi-star-fill"></i>
-<i class="bi bi-star-fill"></i>
-<i class="bi bi-star-fill"></i>
-</div>
-<p>"Amazing taste, premium service, and beautiful atmosphere."</p>
-<h6 class="mt-3">- Maryam</h6>
-</div>
-</div>
-
-</div>
-</div>
+  <div class="container text-center">
+    <h2 class="section-title" data-aos="fade-up">Customer Reviews</h2>
+    <div class="row g-4">
+      <div class="col-md-4" data-aos="fade-up">
+        <div class="testimonial-card">
+          <div class="stars mb-2">
+            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+          </div>
+          <p>"Absolutely luxurious experience! The ambiance and food were top-class."</p>
+          <h6 class="mt-3">- Sarah</h6>
+        </div>
+      </div>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="testimonial-card">
+          <div class="stars mb-2">
+            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+          </div>
+          <p>"Best steak in town! Highly recommended for fine dining lovers."</p>
+          <h6 class="mt-3">- Ali</h6>
+        </div>
+      </div>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="testimonial-card">
+          <div class="stars mb-2">
+            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+          </div>
+          <p>"Amazing taste, premium service, and beautiful atmosphere."</p>
+          <h6 class="mt-3">- Maryam</h6>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
+
+<!-- ======================== -->
 <!-- FOOTER -->
+<!-- ======================== -->
 <footer class="footer text-white">
-<div class="container">
-<div class="row">
-
-<!-- Left -->
-<div class="col-md-4 mb-4">
-<h5>JerryBites Restaurant</h5>
-<p>
-Experience luxury dining with world-class chefs, premium ingredients, 
-and unforgettable ambiance.
-</p>
-</div>
-
-<!-- Middle -->
-<div class="col-md-3 mb-4 text-md-center">
-<h5>Quick Links</h5>
-<ul class="list-unstyled quick-links">
-<li><a href="index.html">Home</a></li>
-<li><a href="about.html">About Us</a></li>
-<li><a href="menu.html">Our Menu</a></li>
-<li><a href="gallery.html">Gallery</a></li>
-<li><a href="contact.html">Contact</a></li>
-</ul>
-</div>
-
-<!-- Right -->
-<div class="col-md-4 offset-md-1 mb-4 text-md-start">
-<h5>Contact Info</h5>
-
-<div class="contact-info">
-<p><i class="bi bi-geo-alt-fill me-2"></i>Shop No.08, Samia Plaza, Gulshan-e-Iqbal block o4(Near Disco Bakery Kaybees Restaurant), Karachi Pakistan</p>
-<p><i class="bi bi-telephone-fill me-2"></i>03453956208</p>
-<p>
-<i class="bi bi-envelope-fill me-2"></i>
-<a href="https://mail.google.com/mail/?view=cm&fs=1&to=faisalali@jarries.com" target="_blank">
-faisalali@jarries.com
-</a>
-</p>
-</div>
-
-<!-- Social Icons -->
-<div class="social-icons mt-3">
-<a href="#"><i class="bi bi-facebook"></i></a>
-<a href="#"><i class="bi bi-instagram"></i></a>
-<a href="https://mail.google.com/mail/?view=cm&fs=1&to=jarriesrestaurant@gmail.com" target="_blank">
-<i class="bi bi-envelope-fill"></i>
-</a>
-</div>
-
-</div>
-
-</div>
-
-<div class="footer-bottom text-center">
-© 2026 JerryBites Restaurant | All Rights Reserved
-</div>
-
-</div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <h5>JerryBites Restaurant</h5>
+        <p>Experience luxury dining with world-class chefs, premium ingredients, and unforgettable ambiance.</p>
+      </div>
+      <div class="col-md-3 mb-4 text-md-center">
+        <h5>Quick Links</h5>
+        <ul class="list-unstyled quick-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="menu.html">Our Menu</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4 offset-md-1 mb-4 text-md-start">
+        <h5>Contact Info</h5>
+        <div class="contact-info">
+          <p><i class="bi bi-geo-alt-fill me-2"></i>Shop No.08, Samia Plaza, Gulshan-e-Iqbal block 04, Karachi Pakistan</p>
+          <p><i class="bi bi-telephone-fill me-2"></i>03453956208</p>
+          <p><i class="bi bi-envelope-fill me-2"></i><a href="https://mail.google.com/mail/?view=cm&fs=1&to=faisalali@jarries.com" target="_blank">faisalali@jarries.com</a></p>
+        </div>
+        <div class="social-icons mt-3">
+          <a href="https://www.facebook.com/profile.php?id=61572902196041" target="_blank">
+    <i class="bi bi-facebook"></i>
+  </a>
+<a href="https://www.instagram.com/jerrybitesexpress/" target="_blank">
+    <i class="bi bi-instagram"></i>
+  </a>
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=jarriesrestaurant@gmail.com" target="_blank"><i class="bi bi-envelope-fill"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom text-center">
+      © 2026 JerryBites Restaurant | All Rights Reserved
+    </div>
+  </div>
 </footer>
 
+<!-- ======================== -->
+<!-- SCRIPTS -->
+<!-- ======================== -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-<!-- AOS JS -->
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
 <script>
-  // animation speed
-  AOS.init({
-    duration: 1000,   
-    once: true        
+// AOS
+AOS.init({ duration:1000, once:true });
+
+// =====================
+// DATA
+// =====================
+const areasData = {
+  karachi:["Gulshan-e-Iqbal","DHA","Clifton","North Nazimabad","Saddar","Korangi","Malir","PECHS","Gulistan-e-Johar","Bahria Town Karachi","FB Area","Tariq Road","Bahadurabad"],
+  lahore:["Gulberg","DHA Lahore","Johar Town","Model Town","Bahria Town Lahore","Liberty","Garden Town","Iqbal Town","Cantt"],
+  islamabad:["F-6 Sector","F-7 Sector","F-8 Sector","G-9 Sector","G-10 Sector","G-11 Sector","Blue Area","Bahria Town Islamabad","DHA Islamabad","I-8 Sector"],
+  rawalpindi:["Saddar Rawalpindi","Bahria Town Rawalpindi","Commercial Market","Satellite Town","Chaklala","Westridge"],
+  faisalabad:["D Ground","Peoples Colony","Madina Town","Gulberg Faisalabad","Susan Road","Jinnah Colony"],
+  multan:["Cantt Multan","Bosan Road","Shah Rukn-e-Alam","Gulgasht Colony","Bahria Town Multan"],
+  peshawar:["Hayatabad","University Town","Saddar Peshawar","Cantt Peshawar","Ring Road"],
+  hyderabad:["Latifabad","Qasimabad","City Gate","Auto Bhan Road","Heerabad"]
+};
+
+const drinksData = [
+  { name:"Coca-Cola", price:80, icon:"🥤" },
+  { name:"Pepsi", price:80, icon:"🥤" },
+  { name:"7UP", price:70, icon:"🥤" },
+  { name:"Fresh Orange Juice", price:150, icon:"🍊" },
+  { name:"Mango Shake", price:200, icon:"🥭" },
+  { name:"Water Bottle", price:50, icon:"💧" },
+  { name:"Iced Tea", price:120, icon:"🧊" },
+  { name:"Mint Lemonade", price:130, icon:"🍋" }
+];
+
+// Cart array
+let cart = [];
+let selectedOrderType = 'delivery';
+let currentProduct = null;
+let currentDrinks = {};
+
+// =====================
+// POPUP (Location)
+// =====================
+document.body.style.overflow = 'hidden';
+
+function selectOrderType(type){
+  selectedOrderType = type;
+  document.getElementById('deliveryBtn').classList.toggle('active', type==='delivery');
+  document.getElementById('pickupBtn').classList.toggle('active', type==='pickup');
+}
+
+function updateAreas(){
+  const citySelect = document.getElementById('citySelect');
+  const areaSelect = document.getElementById('areaSelect');
+  const submitBtn = document.getElementById('popupSubmitBtn');
+  const city = citySelect.value;
+
+  areaSelect.innerHTML = '<option value="" disabled selected>Select Area / Sub Region</option>';
+
+  if(areasData[city]){
+    areasData[city].forEach(area => {
+      const opt = document.createElement('option');
+      opt.value = area.toLowerCase().replace(/\s+/g,'-');
+      opt.textContent = area;
+      areaSelect.appendChild(opt);
+    });
+    areaSelect.disabled = false;
+  }
+
+  submitBtn.disabled = true;
+  areaSelect.onchange = () => { submitBtn.disabled = !areaSelect.value; };
+}
+
+// REAL LOCATION DETECTION
+function useCurrentLocation(){
+  const locationBtn = document.getElementById('locationBtn');
+  const locationStatus = document.getElementById('locationStatus');
+
+  // Show detecting status
+  locationStatus.className = 'location-status show detecting';
+  locationStatus.innerHTML = '<i class="bi bi-arrow-repeat"></i> Detecting your location...';
+  locationBtn.innerHTML = '<i class="bi bi-arrow-repeat"></i> Detecting...';
+  locationBtn.style.pointerEvents = 'none';
+
+  if(!navigator.geolocation){
+    locationStatus.className = 'location-status show error';
+    locationStatus.textContent = 'Geolocation not supported by your browser.';
+    locationBtn.innerHTML = '<i class="bi bi-crosshair"></i> Use Current Location';
+    locationBtn.style.pointerEvents = 'auto';
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    function(position){
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+
+      // Use OpenStreetMap Nominatim API for reverse geocoding (FREE)
+      fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&addressdetails=1&accept-language=en`)
+        .then(res => res.json())
+        .then(data => {
+          const address = data.address || {};
+          const city = address.city || address.town || address.county || address.state || '';
+          const suburb = address.suburb || address.neighbourhood || address.road || address.village || '';
+          const fullAddress = data.display_name || '';
+
+          // Try to match city
+          let matchedCity = '';
+          const cityLower = city.toLowerCase();
+          Object.keys(areasData).forEach(c => {
+            if(cityLower.includes(c)){ matchedCity = c; }
+          });
+
+          if(matchedCity){
+            document.getElementById('citySelect').value = matchedCity;
+            updateAreas();
+
+            // Try to match area
+            const areaSelect = document.getElementById('areaSelect');
+            const suburbLower = suburb.toLowerCase();
+            let matched = false;
+            for(let i = 0; i < areaSelect.options.length; i++){
+              if(areaSelect.options[i].textContent.toLowerCase().includes(suburbLower) ||
+                 suburbLower.includes(areaSelect.options[i].textContent.toLowerCase())){
+                areaSelect.selectedIndex = i;
+                document.getElementById('popupSubmitBtn').disabled = false;
+                matched = true;
+                break;
+              }
+            }
+
+            if(!matched && areaSelect.options.length > 1){
+              areaSelect.selectedIndex = 1;
+              document.getElementById('popupSubmitBtn').disabled = false;
+            }
+
+            locationStatus.className = 'location-status show success';
+            locationStatus.innerHTML = `<i class="bi bi-check-circle-fill"></i> ${suburb ? suburb + ', ' : ''}${city}`;
+          } else {
+            // City not in our list but show detected location
+            locationStatus.className = 'location-status show success';
+            locationStatus.innerHTML = `<i class="bi bi-geo-alt-fill"></i> Detected: ${city || 'Unknown'} - Please select city manually`;
+          }
+
+          locationBtn.innerHTML = '<i class="bi bi-check-circle-fill"></i> Location Detected!';
+          locationBtn.style.borderColor = '#4CAF50';
+          locationBtn.style.color = '#4CAF50';
+          locationBtn.style.pointerEvents = 'auto';
+        })
+        .catch(err => {
+          locationStatus.className = 'location-status show error';
+          locationStatus.textContent = 'Could not detect location details. Please select manually.';
+          locationBtn.innerHTML = '<i class="bi bi-crosshair"></i> Try Again';
+          locationBtn.style.pointerEvents = 'auto';
+        });
+    },
+    function(error){
+      let msg = 'Unable to get location.';
+      if(error.code === 1) msg = 'Location permission denied. Please allow location access.';
+      if(error.code === 2) msg = 'Location unavailable. Please select manually.';
+      if(error.code === 3) msg = 'Location request timed out. Try again.';
+
+      locationStatus.className = 'location-status show error';
+      locationStatus.textContent = msg;
+      locationBtn.innerHTML = '<i class="bi bi-crosshair"></i> Try Again';
+      locationBtn.style.pointerEvents = 'auto';
+    },
+    { enableHighAccuracy:true, timeout:15000, maximumAge:0 }
+  );
+}
+
+function closePopup(){
+  const overlay = document.getElementById('popupOverlay');
+  overlay.style.animation = 'fadeOutOverlay 0.4s ease forwards';
+  setTimeout(() => {
+    overlay.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }, 400);
+}
+
+// =====================
+// LIKE FUNCTIONALITY
+// =====================
+function toggleLike(event, btn){
+  event.stopPropagation();
+  const liked = btn.dataset.liked === 'true';
+  const card = btn.closest('.dish-card');
+  const likeNum = card.querySelector('.like-number');
+  let count = parseInt(likeNum.textContent);
+
+  if(liked){
+    btn.dataset.liked = 'false';
+    btn.classList.remove('liked');
+    btn.querySelector('i').className = 'bi bi-heart';
+    likeNum.textContent = count - 1;
+  } else {
+    btn.dataset.liked = 'true';
+    btn.classList.add('liked');
+    btn.querySelector('i').className = 'bi bi-heart-fill';
+    likeNum.textContent = count + 1;
+
+    // Heart animation
+    btn.style.transform = 'scale(1.4)';
+    setTimeout(() => btn.style.transform = '', 300);
+  }
+}
+
+// =====================
+// QUICK ADD TO CART
+// =====================
+function quickAddCart(event, btn){
+  event.stopPropagation();
+  const card = btn.closest('.dish-card');
+  const name = card.dataset.name;
+  const price = parseInt(card.dataset.price);
+  const img = card.dataset.img;
+
+  addToCart({ name, price, img, qty:1, drinks:[] });
+  showToast(name + ' added to cart!');
+
+  // Button animation
+  btn.style.transform = 'scale(1.3)';
+  btn.innerHTML = '<i class="bi bi-check-lg"></i>';
+  setTimeout(() => {
+    btn.style.transform = '';
+    btn.innerHTML = '<i class="bi bi-cart-plus"></i>';
+  }, 800);
+}
+
+// =====================
+// PRODUCT MODAL
+// =====================
+function openProductModal(card){
+  const name = card.dataset.name;
+  const desc = card.dataset.desc;
+  const price = card.dataset.price;
+  const img = card.dataset.img;
+
+  currentProduct = { name, desc, price:parseInt(price), img };
+  currentDrinks = {};
+
+  document.getElementById('modalImg').src = img;
+  document.getElementById('modalTitle').textContent = name;
+  document.getElementById('modalDesc').textContent = desc;
+  document.getElementById('modalPrice').textContent = 'Rs ' + price;
+  document.getElementById('modalQty').value = 1;
+
+  // Load drinks
+  loadDrinks();
+
+  // Reset question form
+  document.getElementById('questionForm').classList.remove('show');
+  document.getElementById('questionInput').value = '';
+
+  document.getElementById('productModal').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeProductModal(){
+  document.getElementById('productModal').classList.remove('show');
+  document.body.style.overflow = 'auto';
+}
+
+function changeQty(delta){
+  const input = document.getElementById('modalQty');
+  let val = parseInt(input.value) + delta;
+  if(val < 1) val = 1;
+  if(val > 20) val = 20;
+  input.value = val;
+}
+
+// Load Drinks
+function loadDrinks(){
+  const container = document.getElementById('drinksContainer');
+  container.innerHTML = '';
+
+  drinksData.forEach((drink, i) => {
+    container.innerHTML += `
+      <div class="drink-item" id="drinkItem${i}" onclick="toggleDrink(${i})">
+        <div class="drink-item-left">
+          <span style="font-size:20px;">${drink.icon}</span>
+          <span class="drink-item-name">${drink.name}</span>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <span class="drink-item-price">Rs ${drink.price}</span>
+          <div class="drink-qty" onclick="event.stopPropagation()">
+            <button class="drink-qty-btn" onclick="changeDrinkQty(${i},-1)">−</button>
+            <input type="text" class="drink-qty-val" id="drinkQty${i}" value="0" readonly>
+            <button class="drink-qty-btn" onclick="changeDrinkQty(${i},1)">+</button>
+          </div>
+        </div>
+      </div>
+    `;
   });
+}
+
+function toggleDrink(index){
+  const qtyInput = document.getElementById('drinkQty' + index);
+  const item = document.getElementById('drinkItem' + index);
+  let val = parseInt(qtyInput.value);
+
+  if(val === 0){
+    qtyInput.value = 1;
+    item.classList.add('selected');
+    currentDrinks[index] = 1;
+  } else {
+    qtyInput.value = 0;
+    item.classList.remove('selected');
+    delete currentDrinks[index];
+  }
+}
+
+function changeDrinkQty(index, delta){
+  const qtyInput = document.getElementById('drinkQty' + index);
+  const item = document.getElementById('drinkItem' + index);
+  let val = parseInt(qtyInput.value) + delta;
+  if(val < 0) val = 0;
+  if(val > 10) val = 10;
+  qtyInput.value = val;
+
+  if(val > 0){
+    item.classList.add('selected');
+    currentDrinks[index] = val;
+  } else {
+    item.classList.remove('selected');
+    delete currentDrinks[index];
+  }
+}
+
+// Add to cart from modal
+function addToCartFromModal(){
+  const qty = parseInt(document.getElementById('modalQty').value);
+  const selectedDrinks = [];
+
+  Object.keys(currentDrinks).forEach(i => {
+    if(currentDrinks[i] > 0){
+      selectedDrinks.push({
+        name: drinksData[i].name,
+        price: drinksData[i].price,
+        qty: currentDrinks[i]
+      });
+    }
+  });
+
+  addToCart({
+    name: currentProduct.name,
+    price: currentProduct.price,
+    img: currentProduct.img,
+    qty: qty,
+    drinks: selectedDrinks
+  });
+
+  showToast(currentProduct.name + ' added to cart!');
+  closeProductModal();
+}
+
+// Buy Now
+function buyNow(){
+  const qty = parseInt(document.getElementById('modalQty').value);
+  const selectedDrinks = [];
+
+  Object.keys(currentDrinks).forEach(i => {
+    if(currentDrinks[i] > 0){
+      selectedDrinks.push({
+        name: drinksData[i].name,
+        price: drinksData[i].price,
+        qty: currentDrinks[i]
+      });
+    }
+  });
+
+  // Clear cart and add only this item
+  cart = [];
+  addToCart({
+    name: currentProduct.name,
+    price: currentProduct.price,
+    img: currentProduct.img,
+    qty: qty,
+    drinks: selectedDrinks
+  });
+
+  closeProductModal();
+  openCustomerModal();
+}
+
+// =====================
+// ASK QUESTION
+// =====================
+function toggleQuestion(){
+  document.getElementById('questionForm').classList.toggle('show');
+}
+
+function submitQuestion(){
+  const q = document.getElementById('questionInput').value.trim();
+  if(!q){
+    document.getElementById('questionInput').style.borderColor = '#ff4444';
+    setTimeout(() => document.getElementById('questionInput').style.borderColor = '#444', 2000);
+    return;
+  }
+  showToast('Question submitted! We\'ll respond soon.');
+  document.getElementById('questionInput').value = '';
+  document.getElementById('questionForm').classList.remove('show');
+}
+
+// =====================
+// CART SYSTEM
+// =====================
+function addToCart(item){
+  // Check if same item exists
+  const existing = cart.find(c => c.name === item.name && JSON.stringify(c.drinks) === JSON.stringify(item.drinks));
+  if(existing){
+    existing.qty += item.qty;
+  } else {
+    cart.push({...item, id: Date.now()});
+  }
+  updateCartUI();
+}
+
+function removeFromCart(id){
+  cart = cart.filter(c => c.id !== id);
+  updateCartUI();
+}
+
+function getCartTotal(){
+  let total = 0;
+  cart.forEach(item => {
+    total += item.price * item.qty;
+    if(item.drinks){
+      item.drinks.forEach(d => { total += d.price * d.qty; });
+    }
+  });
+  return total;
+}
+
+function updateCartUI(){
+  const container = document.getElementById('cartItemsContainer');
+  const badge = document.getElementById('cartBadge');
+  const total = document.getElementById('cartTotal');
+  const empty = document.getElementById('cartEmpty');
+
+  const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+  badge.textContent = totalItems;
+
+  if(cart.length === 0){
+    container.innerHTML = `
+      <div class="cart-empty">
+        <i class="bi bi-cart-x d-block"></i>
+        <p>Your cart is empty</p>
+        <small style="color:#555;">Add some delicious items!</small>
+      </div>
+    `;
+  } else {
+    let html = '';
+    cart.forEach(item => {
+      let itemTotal = item.price * item.qty;
+      let drinkInfo = '';
+      if(item.drinks && item.drinks.length > 0){
+        item.drinks.forEach(d => {
+          itemTotal += d.price * d.qty;
+          drinkInfo += `<div style="font-size:11px;color:#aaa;">+ ${d.name} x${d.qty}</div>`;
+        });
+      }
+      html += `
+        <div class="cart-item">
+          <img src="${item.img}" alt="${item.name}">
+          <div class="cart-item-info">
+            <div class="cart-item-name">${item.name} x${item.qty}</div>
+            ${drinkInfo}
+            <div class="cart-item-price">Rs ${itemTotal}</div>
+          </div>
+          <button class="cart-item-remove" onclick="removeFromCart(${item.id})">
+            <i class="bi bi-trash3"></i>
+          </button>
+        </div>
+      `;
+    });
+    container.innerHTML = html;
+  }
+
+  total.textContent = 'Rs ' + getCartTotal();
+}
+
+function openCart(){
+  document.getElementById('cartSidebar').classList.add('open');
+  document.getElementById('cartOverlay').classList.add('show');
+}
+
+function closeCart(){
+  document.getElementById('cartSidebar').classList.remove('open');
+  document.getElementById('cartOverlay').classList.remove('show');
+}
+
+function checkout(){
+  if(cart.length === 0){
+    showToast('Your cart is empty!');
+    return;
+  }
+  closeCart();
+  openCustomerModal();
+}
+
+// =====================
+// CUSTOMER MODAL
+// =====================
+function openCustomerModal(){
+  // Build summary
+  const summaryItems = document.getElementById('summaryItems');
+  let html = '';
+  cart.forEach(item => {
+    let itemTotal = item.price * item.qty;
+    html += `<div class="order-summary-item"><span>${item.name} x${item.qty}</span><span>Rs ${itemTotal}</span></div>`;
+    if(item.drinks){
+      item.drinks.forEach(d => {
+        let dTotal = d.price * d.qty;
+        html += `<div class="order-summary-item"><span style="padding-left:15px;font-size:12px;color:#aaa;">+ ${d.name} x${d.qty}</span><span style="font-size:12px;color:#aaa;">Rs ${dTotal}</span></div>`;
+      });
+    }
+  });
+  summaryItems.innerHTML = html;
+  document.getElementById('summaryTotal').textContent = 'Rs ' + getCartTotal();
+
+  // Show/hide address field
+  document.getElementById('addressField').style.display = selectedOrderType === 'delivery' ? 'block' : 'none';
+
+  document.getElementById('customerModal').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCustomerModal(){
+  document.getElementById('customerModal').classList.remove('show');
+  document.body.style.overflow = 'auto';
+}
+
+function placeOrder(){
+  const name = document.getElementById('custName').value.trim();
+  const phone = document.getElementById('custPhone').value.trim();
+  const payment = document.getElementById('custPayment').value;
+  const address = document.getElementById('custAddress').value.trim();
+
+  if(!name){
+    showToast('Please enter your name!'); return;
+  }
+  if(!phone || phone.length < 10){
+    showToast('Please enter a valid phone number!'); return;
+  }
+  if(selectedOrderType === 'delivery' && !address){
+    showToast('Please enter your delivery address!'); return;
+  }
+  if(!payment){
+    showToast('Please select a payment method!'); return;
+  }
+
+  // Generate order ID
+  const orderId = 'JB-' + Math.floor(10000 + Math.random() * 90000);
+
+  closeCustomerModal();
+
+  // Show success
+  document.getElementById('orderIdText').textContent = 'Order #' + orderId;
+  if(selectedOrderType === 'delivery'){
+    document.getElementById('orderConfirmMsg').textContent = 'Your order will be delivered within 30-45 minutes.';
+  } else {
+    document.getElementById('orderConfirmMsg').textContent = 'Your order will be ready for pickup in 15-20 minutes.';
+  }
+
+  document.getElementById('orderSuccessModal').classList.add('show');
+  document.body.style.overflow = 'hidden';
+
+  // Clear cart
+  cart = [];
+  updateCartUI();
+
+  // Clear form
+  document.getElementById('custName').value = '';
+  document.getElementById('custPhone').value = '';
+  document.getElementById('custEmail').value = '';
+  document.getElementById('custAddress').value = '';
+  document.getElementById('custPayment').selectedIndex = 0;
+  document.getElementById('custNotes').value = '';
+}
+
+function closeOrderSuccess(){
+  document.getElementById('orderSuccessModal').classList.remove('show');
+  document.body.style.overflow = 'auto';
+}
+
+// =====================
+// TOAST
+// =====================
+function showToast(msg){
+  const toast = document.getElementById('successToast');
+  document.getElementById('toastMessage').textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+// =====================
+// FADE OUT ANIMATION
+// =====================
+const fadeStyle = document.createElement('style');
+fadeStyle.textContent = `@keyframes fadeOutOverlay{from{opacity:1}to{opacity:0}}`;
+document.head.appendChild(fadeStyle);
+
+// Close modals on Escape key
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape'){
+    if(document.getElementById('orderSuccessModal').classList.contains('show')){
+      closeOrderSuccess();
+    } else if(document.getElementById('customerModal').classList.contains('show')){
+      closeCustomerModal();
+    } else if(document.getElementById('productModal').classList.contains('show')){
+      closeProductModal();
+    } else if(document.getElementById('cartSidebar').classList.contains('open')){
+      closeCart();
+    }
+  }
+});
+
+// Initialize cart UI
+updateCartUI();
 </script>
+
+</body>
 </html>

@@ -387,24 +387,311 @@ z-index:9999;
   background:#111 !important;
 }
 
+/* =========== CART ICON & SIDEBAR =========== */
+.cart-btn{
+  position:relative;
+  cursor:pointer;
+  transition:0.3s;
+}
+.cart-btn:hover{
+  transform:scale(1.15);
+}
+.cart-btn:hover i{
+  color:#d4af37 !important;
+}
+.cart-badge{
+  position:absolute;
+  top:-8px;
+  right:-10px;
+  background:#d4af37;
+  color:#000;
+  font-size:11px;
+  font-weight:700;
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  animation:popBadge 0.3s ease;
+}
+@keyframes popBadge{
+  0%{transform:scale(0);}
+  80%{transform:scale(1.25);}
+  100%{transform:scale(1);}
+}
+
+/* Cart Sidebar Overlay */
+.cart-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.6);
+  z-index:10000;
+  opacity:0;
+  visibility:hidden;
+  transition:0.3s;
+}
+.cart-overlay.active{
+  opacity:1;
+  visibility:visible;
+}
+
+/* Cart Sidebar Panel */
+.cart-sidebar{
+  position:fixed;
+  top:0;
+  right:-420px;
+  width:400px;
+  max-width:90vw;
+  height:100vh;
+  background:#1a1a1a;
+  z-index:10001;
+  transition:0.4s cubic-bezier(0.25,0.8,0.25,1);
+  display:flex;
+  flex-direction:column;
+  box-shadow:-5px 0 30px rgba(0,0,0,0.8);
+  border-left:2px solid #d4af37;
+}
+.cart-sidebar.active{
+  right:0;
+}
+
+.cart-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:20px 25px;
+  border-bottom:1px solid #333;
+}
+.cart-header h4{
+  margin:0;
+  color:#d4af37;
+  font-family:'Playfair Display', serif;
+  font-size:22px;
+}
+.cart-close{
+  background:none;
+  border:none;
+  color:#fff;
+  font-size:26px;
+  cursor:pointer;
+  transition:0.3s;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.cart-close:hover{
+  background:#d4af37;
+  color:#000;
+  transform:rotate(90deg);
+}
+
+.cart-body{
+  flex:1;
+  overflow-y:auto;
+  padding:20px 25px;
+}
+
+/* Cart Item */
+.cart-item{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  background:#222;
+  border-radius:12px;
+  padding:12px;
+  margin-bottom:12px;
+  border:1px solid #333;
+  transition:0.3s;
+  animation:slideInCart 0.3s ease;
+}
+@keyframes slideInCart{
+  from{opacity:0; transform:translateX(30px);}
+  to{opacity:1; transform:translateX(0);}
+}
+.cart-item:hover{
+  border-color:#d4af37;
+  box-shadow:0 4px 15px rgba(212,175,55,0.2);
+}
+.cart-item img{
+  width:60px;
+  height:60px;
+  object-fit:cover;
+  border-radius:10px;
+}
+.cart-item-info{
+  flex:1;
+}
+.cart-item-info h6{
+  margin:0 0 4px;
+  color:#fff;
+  font-size:14px;
+}
+.cart-item-info .cart-item-price{
+  color:#d4af37;
+  font-weight:600;
+  font-size:14px;
+}
+
+/* Quantity Controls */
+.qty-controls{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.qty-controls button{
+  width:28px;
+  height:28px;
+  border:1px solid #d4af37;
+  background:transparent;
+  color:#d4af37;
+  border-radius:50%;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+  transition:0.3s;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.qty-controls button:hover{
+  background:#d4af37;
+  color:#000;
+}
+.qty-controls span{
+  color:#fff;
+  font-weight:600;
+  min-width:20px;
+  text-align:center;
+}
+
+.cart-item-remove{
+  background:none;
+  border:none;
+  color:#ff4444;
+  font-size:18px;
+  cursor:pointer;
+  transition:0.3s;
+  padding:5px;
+  border-radius:50%;
+}
+.cart-item-remove:hover{
+  background:rgba(255,68,68,0.2);
+  transform:scale(1.2);
+}
+
+/* Empty Cart */
+.cart-empty{
+  text-align:center;
+  padding:60px 20px;
+  color:#888;
+}
+.cart-empty i{
+  font-size:60px;
+  color:#333;
+  margin-bottom:15px;
+}
+.cart-empty p{
+  font-size:16px;
+}
+
+/* Cart Footer */
+.cart-footer{
+  padding:20px 25px;
+  border-top:1px solid #333;
+}
+.cart-total{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:15px;
+}
+.cart-total span:first-child{
+  color:#ccc;
+  font-size:16px;
+}
+.cart-total span:last-child{
+  color:#d4af37;
+  font-size:22px;
+  font-weight:700;
+}
+
+.btn-checkout{
+  width:100%;
+  padding:14px;
+  background:linear-gradient(135deg, #d4af37, #b8962e);
+  color:#000;
+  border:none;
+  border-radius:30px;
+  font-weight:600;
+  font-size:16px;
+  cursor:pointer;
+  transition:0.3s;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+.btn-checkout:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 25px rgba(212,175,55,0.5);
+}
+.btn-checkout:active{
+  transform:translateY(0);
+}
+
+.btn-clear-cart{
+  width:100%;
+  padding:10px;
+  background:transparent;
+  color:#ff4444;
+  border:1px solid #ff4444;
+  border-radius:30px;
+  font-size:13px;
+  cursor:pointer;
+  transition:0.3s;
+  margin-top:10px;
+}
+.btn-clear-cart:hover{
+  background:#ff4444;
+  color:#fff;
+}
+
+/* Toast Notification */
+.cart-toast{
+  position:fixed;
+  bottom:30px;
+  left:30px;
+  background:#1a1a1a;
+  color:#d4af37;
+  padding:15px 25px;
+  border-radius:12px;
+  border:1px solid #d4af37;
+  z-index:99999;
+  font-weight:500;
+  box-shadow:0 10px 30px rgba(0,0,0,0.5);
+  transform:translateY(100px);
+  opacity:0;
+  transition:0.4s;
+}
+.cart-toast.show{
+  transform:translateY(0);
+  opacity:1;
+}
+
 </style>
 </head>
 
 <body>
-    <!-- Navbar -->
+<!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
   <div class="container">
-
-    <!-- Logo -->
-    <a class="navbar-brand" href="contact.html">JerryBites</a>
-
+    <a class="navbar-brand" href="index.html">JerryBites</a>
     <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navmenu">
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navmenu">
-
-      <!-- Center Menu -->
       <ul class="navbar-nav mx-auto">
         <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
@@ -412,13 +699,37 @@ z-index:9999;
         <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
         <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
       </ul>
-
-      <!-- Right Side Login Button -->
-      <a href="login.html" class="btn btn-login">Login</a>
-
+      <div class="d-flex align-items-center gap-3">
+        <!-- Cart Button -->
+        <div class="cart-btn" onclick="openCart()">
+          <i class="bi bi-cart3 text-white" style="font-size:22px;"></i>
+          <span class="cart-badge" id="cartBadge">0</span>
+        </div>
+        <a href="login.html" class="btn btn-login">Login</a>
+      </div>
     </div>
   </div>
 </nav>
+
+<!-- CART OVERLAY -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+
+<!-- CART SIDEBAR -->
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h4><i class="bi bi-cart3 me-2"></i>Your Cart</h4>
+    <button class="cart-close" onclick="closeCart()"><i class="bi bi-x"></i></button>
+  </div>
+  <div class="cart-body" id="cartBody">
+    <!-- Cart items render here -->
+  </div>
+  <div class="cart-footer" id="cartFooter">
+    <!-- Total & buttons render here -->
+  </div>
+</div>
+
+<!-- TOAST NOTIFICATION -->
+<div class="cart-toast" id="cartToast"></div>
 
 <!-- HERO -->
 <section class="contact-hero">
@@ -520,6 +831,7 @@ placeholder="Comments / Questions *" required></textarea>
     loading="lazy">
   </iframe>
 </section>
+
 <!-- RESERVATION MODAL -->
 <div class="modal fade" id="reservationModal" tabindex="-1">
   <div class="modal-dialog">
@@ -613,8 +925,12 @@ faisalali@jarries.com
 
 <!-- Social Icons  -->
 <div class="social-icons mt-3">
-<a href="#"><i class="bi bi-facebook"></i></a>
-<a href="#"><i class="bi bi-instagram"></i></a>
+<a href="https://www.facebook.com/profile.php?id=61572902196041" target="_blank">
+    <i class="bi bi-facebook"></i>
+  </a>
+<a href="https://www.instagram.com/jerrybitesexpress/" target="_blank">
+    <i class="bi bi-instagram"></i>
+  </a>
 <a href="https://mail.google.com/mail/?view=cm&fs=1&to=jarriesrestaurant@gmail.com" target="_blank">
 <i class="bi bi-envelope-fill"></i>
 </a>
@@ -630,6 +946,7 @@ faisalali@jarries.com
 
 </div>
 </footer>
+
 <!-- CHAT ICON -->
 <button id="chatToggle">💬</button>
 
@@ -652,6 +969,9 @@ faisalali@jarries.com
     </div>
   </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
 
 /* FORM VALIDATION + ALERT */
@@ -845,8 +1165,166 @@ function toggleFullScreen() {
   const chat = document.getElementById("chatContainer");
   chat.classList.toggle("fullscreen");
 }
+
+
+// ==========================================
+//         CART SYSTEM (LocalStorage)
+// ==========================================
+
+// Load cart on page ready
+document.addEventListener("DOMContentLoaded", function(){
+  renderCart();
+});
+
+// Get cart from localStorage
+function getCart(){
+  return JSON.parse(localStorage.getItem("jerrybites_cart")) || [];
+}
+
+// Save cart to localStorage
+function saveCart(cart){
+  localStorage.setItem("jerrybites_cart", JSON.stringify(cart));
+}
+
+// Update badge count
+function updateBadge(){
+  let cart = getCart();
+  let totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+  let badge = document.getElementById("cartBadge");
+  badge.innerText = totalQty;
+  badge.style.animation = "none";
+  setTimeout(() => { badge.style.animation = "popBadge 0.3s ease"; }, 10);
+}
+
+// Open cart sidebar
+function openCart(){
+  document.getElementById("cartSidebar").classList.add("active");
+  document.getElementById("cartOverlay").classList.add("active");
+  document.body.style.overflow = "hidden";
+  renderCart();
+}
+
+// Close cart sidebar
+function closeCart(){
+  document.getElementById("cartSidebar").classList.remove("active");
+  document.getElementById("cartOverlay").classList.remove("active");
+  document.body.style.overflow = "auto";
+}
+
+// Render cart items in sidebar
+function renderCart(){
+  let cart = getCart();
+  let cartBody = document.getElementById("cartBody");
+  let cartFooter = document.getElementById("cartFooter");
+
+  updateBadge();
+
+  if(cart.length === 0){
+    cartBody.innerHTML = `
+      <div class="cart-empty">
+        <i class="bi bi-cart-x d-block"></i>
+        <p>Your cart is empty</p>
+        <p style="font-size:13px; color:#555;">Go to Menu or Gallery page to add items!</p>
+      </div>
+    `;
+    cartFooter.innerHTML = "";
+    return;
+  }
+
+  let html = "";
+  let total = 0;
+
+  cart.forEach((item, index) => {
+    let itemTotal = item.price * item.qty;
+    total += itemTotal;
+
+    html += `
+      <div class="cart-item">
+        <img src="${item.image}" alt="${item.name}">
+        <div class="cart-item-info">
+          <h6>${item.name}</h6>
+          <span class="cart-item-price">Rs ${item.price} × ${item.qty} = Rs ${itemTotal}</span>
+          <div class="qty-controls mt-1">
+            <button onclick="changeQty(${index}, -1)">−</button>
+            <span>${item.qty}</span>
+            <button onclick="changeQty(${index}, 1)">+</button>
+          </div>
+        </div>
+        <button class="cart-item-remove" onclick="removeItem(${index})">
+          <i class="bi bi-trash3"></i>
+        </button>
+      </div>
+    `;
+  });
+
+  cartBody.innerHTML = html;
+
+  cartFooter.innerHTML = `
+    <div class="cart-total">
+      <span>Total:</span>
+      <span>Rs ${total}</span>
+    </div>
+    <button class="btn-checkout" onclick="checkout()">
+      <i class="bi bi-bag-check me-2"></i>Checkout
+    </button>
+    <button class="btn-clear-cart" onclick="clearCart()">
+      <i class="bi bi-trash me-1"></i>Clear Cart
+    </button>
+  `;
+}
+
+// Change quantity
+function changeQty(index, delta){
+  let cart = getCart();
+  cart[index].qty += delta;
+  if(cart[index].qty <= 0){
+    cart.splice(index, 1);
+  }
+  saveCart(cart);
+  renderCart();
+}
+
+// Remove single item
+function removeItem(index){
+  let cart = getCart();
+  let removed = cart[index].name;
+  cart.splice(index, 1);
+  saveCart(cart);
+  renderCart();
+  showToast(`${removed} removed from cart`);
+}
+
+// Clear entire cart
+function clearCart(){
+  localStorage.removeItem("jerrybites_cart");
+  renderCart();
+  showToast("Cart cleared!");
+}
+
+// Checkout via WhatsApp
+function checkout(){
+  let cart = getCart();
+  let total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+  let msg = "🧾 *JerryBites Order*\n\n";
+  cart.forEach(item => {
+    msg += `• ${item.name} × ${item.qty} = Rs ${item.price * item.qty}\n`;
+  });
+  msg += `\n�� *Total: Rs ${total}*`;
+
+  let phone = "923453956208";
+  let url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+  window.open(url, "_blank");
+}
+
+// Toast notification
+function showToast(message){
+  let toast = document.getElementById("cartToast");
+  toast.innerHTML = `<i class="bi bi-check-circle me-2"></i>${message}`;
+  toast.classList.add("show");
+  setTimeout(() => { toast.classList.remove("show"); }, 2500);
+}
+
 </script>
 
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</html> 
+</html>

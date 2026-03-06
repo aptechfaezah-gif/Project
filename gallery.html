@@ -3,10 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gallery | JerrryBites</title>
+<title>Gallery | JerryBites</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
 
@@ -31,7 +32,8 @@ body{
 
 /* NAVBAR */
 .navbar{
-  background:rgba(0,0,0,0.9);
+  background:rgba(0,0,0,0.95);
+  backdrop-filter:blur(10px);
 }
 .navbar-brand{
   font-family:'Playfair Display', serif;
@@ -41,11 +43,9 @@ body{
 .nav-link:hover{
   color:#d4af37 !important;
 }
-/* Navbar Hover */
 .navbar .nav-link{
   position: relative;
 }
-
 .navbar .nav-link::after{
   content: "";
   position: absolute;
@@ -56,26 +56,40 @@ body{
   bottom: -5px;
   transition: 0.3s;
 }
-
 .navbar .nav-link:hover::after{
   width: 100%;
 }
+/* Cart Button Hover */
+.cart-btn{
+  transition:0.3s ease;
+}
 
+.cart-btn:hover{
+  transform:scale(1.15);
+}
 
+.cart-btn:hover i{
+  color:#d4af37 !important;
+}
 
-/* HERO */
+/* HERO - UNTOUCHED */
 .gallery-hero{
   min-height:100vh;
   display:flex;
   align-items:center;
+  opacity:0;
+  transform:translateY(40px);
+  transition:all 1s ease;
 }
-
+.gallery-hero.show{
+  opacity:1;
+  transform:translateY(0);
+}
 .gallery-heading{
   font-size:55px;
   color:#d4af37;
   font-weight:700;
 }
-
 .gallery-images img{
   width:80px;
   margin-right:15px;
@@ -83,31 +97,25 @@ body{
   transition:0.3s;
   border-bottom:3px solid transparent;
 }
-
 .gallery-images img:hover{
   border-bottom:3px solid #d4af37;
   transform:translateY(-5px);
 }
-
 .active-thumb{
   border-bottom:3px solid #d4af37 !important;
 }
-
 .preview-box{
-  background:#222;
+  background:#111;
   padding:20px;
   border-radius:20px;
   text-align:center;
 }
-
 .preview-box img{
   width:100%;
   max-height:400px;
   object-fit:contain;
   border-radius:15px;
 }
-
-/* Button */
 .view-btn{
   background:#d4af37;
   color:#000;
@@ -117,124 +125,712 @@ body{
   display:inline-block;
   margin-top:30px;
   transition:0.3s;
+  font-weight:600;
 }
-
 .view-btn:hover{
   background:#fff;
+  color:#000;
 }
 
-/* Hidden Gallery */
+/* ========== FULL GALLERY - ENHANCED ========== */
 .full-gallery{
   display:none;
   padding:60px 0;
 }
 
-.full-gallery img{
-  width:100%;
+.gallery-card{
+  position:relative;
   border-radius:15px;
-  margin-bottom:20px;
+  overflow:hidden;
+  margin-bottom:25px;
+  cursor:pointer;
+  box-shadow:0 10px 30px rgba(0,0,0,0.5);
+  transition:0.4s;
+}
+
+.gallery-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 20px 50px rgba(212,175,55,0.2);
+}
+
+.gallery-card img{
+  width:100%;
+  height:280px;
+  object-fit:cover;
+  transition:0.5s;
+}
+
+.gallery-card:hover img{
+  transform:scale(1.1);
+}
+
+.gallery-card-overlay{
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  background:linear-gradient(transparent, rgba(0,0,0,0.9));
+  padding:20px 15px 15px;
   transition:0.3s;
 }
 
-.full-gallery img:hover{
-  transform:scale(1.05);
-}
-.preview-box{
-  background:#111;
-}
-/* Hero Animation */
-.gallery-hero{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  opacity:0;
-  transform:translateY(40px);
-  transition:all 1s ease;
+.gallery-card-overlay h5{
+  color:#fff;
+  font-size:16px;
+  margin:0;
 }
 
-.gallery-hero.show{
-  opacity:1;
-  transform:translateY(0);
+.gallery-card-overlay .price-tag{
+  color:#d4af37;
+  font-weight:700;
+  font-size:15px;
 }
-/* Image Overlay Modal */
+
+/* Like Button on Card */
+.like-heart{
+  position:absolute;
+  top:12px;
+  right:12px;
+  width:40px;
+  height:40px;
+  background:rgba(0,0,0,0.6);
+  backdrop-filter:blur(5px);
+  border:none;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:0.3s;
+  z-index:10;
+  font-size:18px;
+  color:#fff;
+}
+
+.like-heart:hover{
+  transform:scale(1.2);
+}
+
+.like-heart.liked{
+  background:rgba(255,0,0,0.8);
+  color:#fff;
+  animation:heartPop 0.4s ease;
+}
+
+@keyframes heartPop{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.4);}
+  100%{transform:scale(1);}
+}
+
+/* ========== FULLSCREEN IMAGE MODAL ========== */
 .image-modal{
   position:fixed;
   top:0;
   left:0;
   width:100%;
   height:100%;
-  background:rgba(0,0,0,0.8);
-  backdrop-filter:blur(10px);
+  background:rgba(0,0,0,0.92);
+  backdrop-filter:blur(20px);
   display:none;
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
-  flex-direction:column;
+  z-index:99999;
+  overflow-y:auto;
 }
 
-.image-modal img{
-  max-width:70%;
-  max-height:80%;
-  border-radius:20px;
-  transition:0.3s;
+.modal-inner{
+  max-width:900px;
+  margin:60px auto 40px;
+  padding:0 20px;
 }
 
-.close-btn{
-  position:absolute;
-  top:30px;
-  right:40px;
-  font-size:30px;
+.modal-close{
+  position:fixed;
+  top:20px;
+  right:30px;
+  font-size:35px;
   color:#fff;
   cursor:pointer;
-}
-
-.image-info{
-  position:absolute;
-  bottom:50px;
-  text-align:center;
-  color:#fff;
-  opacity:0;
+  z-index:100000;
+  width:50px;
+  height:50px;
+  background:rgba(255,255,255,0.1);
+  border:none;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   transition:0.3s;
 }
 
-.image-modal:hover .image-info{
-  opacity:1;
+.modal-close:hover{
+  background:#d4af37;
+  color:#000;
+  transform:rotate(90deg);
 }
 
-.like-btn{
+.modal-image-box{
+  text-align:center;
+  margin-bottom:30px;
+}
+
+.modal-image-box img{
+  max-width:100%;
+  max-height:450px;
+  border-radius:20px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.6);
+}
+
+.modal-details{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(212,175,55,0.3);
+  border-radius:20px;
+  padding:30px;
+}
+
+.modal-details h3{
+  color:#d4af37;
+  font-family:'Playfair Display', serif;
+  font-size:28px;
+}
+
+.modal-details .modal-price{
+  font-size:24px;
+  color:#d4af37;
+  font-weight:700;
+}
+
+/* Quantity Controls */
+.qty-controls{
+  display:flex;
+  align-items:center;
+  gap:0;
+  margin:20px 0;
+}
+
+.qty-btn{
+  width:45px;
+  height:45px;
+  border:2px solid #d4af37;
+  background:transparent;
+  color:#d4af37;
+  font-size:22px;
+  font-weight:700;
+  cursor:pointer;
+  transition:0.3s;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.qty-btn:first-child{
+  border-radius:12px 0 0 12px;
+}
+
+.qty-btn:last-child{
+  border-radius:0 12px 12px 0;
+}
+
+.qty-btn:hover{
   background:#d4af37;
+  color:#000;
+}
+
+.qty-display{
+  width:60px;
+  height:45px;
+  border-top:2px solid #d4af37;
+  border-bottom:2px solid #d4af37;
+  background:rgba(212,175,55,0.1);
+  color:#fff;
+  font-size:18px;
+  font-weight:600;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* Modal Buttons */
+.modal-add-cart{
+  background:#d4af37;
+  color:#000;
   border:none;
-  padding:10px 25px;
+  padding:14px 35px;
   border-radius:30px;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.3s;
+  margin-right:10px;
+}
+
+.modal-add-cart:hover{
+  background:#fff;
+  transform:scale(1.05);
+}
+
+.modal-like-btn{
+  background:transparent;
+  border:2px solid #ff4757;
+  color:#ff4757;
+  padding:14px 25px;
+  border-radius:30px;
+  font-size:16px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.modal-like-btn:hover,
+.modal-like-btn.liked{
+  background:#ff4757;
+  color:#fff;
+}
+
+/* ========== DRINKS SECTION ========== */
+.drinks-section{
+  background:linear-gradient(135deg, #0d0d0d, #1a1a1a);
+  border-top:1px solid rgba(212,175,55,0.3);
+  border-bottom:1px solid rgba(212,175,55,0.3);
+}
+
+.drink-card{
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(212,175,55,0.2);
+  border-radius:20px;
+  padding:20px;
+  text-align:center;
+  transition:0.4s;
+  margin-bottom:25px;
+}
+
+.drink-card:hover{
+  transform:translateY(-10px);
+  border-color:#d4af37;
+  box-shadow:0 15px 40px rgba(212,175,55,0.15);
+}
+
+.drink-card img{
+  width:100%;
+  height:200px;
+  object-fit:cover;
+  border-radius:15px;
+  margin-bottom:15px;
+}
+
+.drink-card h5{
+  color:#fff;
+  font-size:17px;
+}
+
+.drink-card .drink-price{
+  color:#d4af37;
+  font-weight:700;
+  font-size:18px;
+}
+
+.drink-add-btn{
+  background:transparent;
+  border:2px solid #d4af37;
+  color:#d4af37;
+  padding:8px 25px;
+  border-radius:25px;
   margin-top:10px;
   cursor:pointer;
+  transition:0.3s;
+  font-weight:500;
 }
 
-.like-btn.liked{
-  background:red;
+.drink-add-btn:hover{
+  background:#d4af37;
+  color:#000;
+}
+
+/* ========== ASK QUESTION SECTION ========== */
+.ask-section{
+  background:#111;
+}
+
+.ask-card{
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(212,175,55,0.2);
+  border-radius:25px;
+  padding:40px;
+}
+
+.ask-card input,
+.ask-card textarea{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(212,175,55,0.3);
+  border-radius:12px;
+  padding:14px 18px;
+  color:#fff;
+  width:100%;
+  margin-bottom:15px;
+  font-size:15px;
+  transition:0.3s;
+}
+
+.ask-card input:focus,
+.ask-card textarea:focus{
+  outline:none;
+  border-color:#d4af37;
+  box-shadow:0 0 15px rgba(212,175,55,0.2);
+}
+
+.ask-card input::placeholder,
+.ask-card textarea::placeholder{
+  color:#666;
+}
+
+.ask-submit-btn{
+  background:#d4af37;
+  color:#000;
+  border:none;
+  padding:14px 40px;
+  border-radius:30px;
+  font-weight:600;
+  font-size:16px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.ask-submit-btn:hover{
+  background:#fff;
+  transform:scale(1.05);
+}
+
+/* ========== CART SIDEBAR ========== */
+.cart-overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.7);
+  z-index:99998;
+  display:none;
+}
+
+.cart-sidebar{
+  position:fixed;
+  top:0;
+  right:-450px;
+  width:420px;
+  height:100%;
+  background:#1a1a1a;
+  border-left:2px solid #d4af37;
+  z-index:99999;
+  transition:0.4s ease;
+  overflow-y:auto;
+  padding:30px 25px;
+}
+
+.cart-sidebar.open{
+  right:0;
+}
+
+.cart-sidebar h3{
+  color:#d4af37;
+  font-family:'Playfair Display', serif;
+  margin-bottom:25px;
+  font-size:26px;
+}
+
+.cart-close{
+  position:absolute;
+  top:20px;
+  right:20px;
+  background:none;
+  border:none;
+  color:#fff;
+  font-size:28px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.cart-close:hover{
+  color:#d4af37;
+}
+
+.cart-item{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(212,175,55,0.15);
+  border-radius:15px;
+  padding:12px;
+  margin-bottom:12px;
+  position:relative;
+}
+
+.cart-item img{
+  width:60px;
+  height:60px;
+  object-fit:cover;
+  border-radius:10px;
+}
+
+.cart-item-info h6{
+  color:#fff;
+  margin:0;
+  font-size:14px;
+}
+
+.cart-item-info span{
+  color:#d4af37;
+  font-size:13px;
+  font-weight:600;
+}
+
+.cart-item-remove{
+  position:absolute;
+  top:8px;
+  right:10px;
+  background:none;
+  border:none;
+  color:#ff4757;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.cart-total{
+  background:rgba(212,175,55,0.1);
+  border:1px solid #d4af37;
+  border-radius:15px;
+  padding:20px;
+  margin-top:20px;
+  text-align:center;
+}
+
+.cart-total h4{
+  color:#d4af37;
+  font-size:24px;
+}
+
+.checkout-btn{
+  width:100%;
+  background:#d4af37;
+  color:#000;
+  border:none;
+  padding:15px;
+  border-radius:30px;
+  font-size:17px;
+  font-weight:700;
+  cursor:pointer;
+  margin-top:15px;
+  transition:0.3s;
+}
+
+.checkout-btn:hover{
+  background:#fff;
+}
+
+/* Cart Badge */
+.cart-btn{
+  position:relative;
+  cursor:pointer;
+}
+
+.cart-badge{
+  position:absolute;
+  top:-8px;
+  right:-8px;
+  background:#d4af37;
+  color:#000;
+  font-size:11px;
+  font-weight:700;
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* ========== ORDER FORM MODAL ========== */
+.order-modal{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.9);
+  backdrop-filter:blur(15px);
+  z-index:100001;
+  display:none;
+  overflow-y:auto;
+}
+
+.order-form-box{
+  max-width:600px;
+  margin:80px auto 40px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(212,175,55,0.3);
+  border-radius:25px;
+  padding:40px 35px;
+}
+
+.order-form-box h3{
+  color:#d4af37;
+  font-family:'Playfair Display', serif;
+  text-align:center;
+  margin-bottom:10px;
+  font-size:30px;
+}
+
+.order-form-box p{
+  text-align:center;
+  color:#888;
+  margin-bottom:30px;
+}
+
+.order-form-box label{
+  color:#d4af37;
+  font-size:14px;
+  font-weight:500;
+  margin-bottom:5px;
+  display:block;
+}
+
+.order-form-box input,
+.order-form-box select,
+.order-form-box textarea{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(212,175,55,0.3);
+  border-radius:12px;
+  padding:13px 16px;
+  color:#fff;
+  width:100%;
+  margin-bottom:18px;
+  font-size:15px;
+  transition:0.3s;
+}
+
+.order-form-box input:focus,
+.order-form-box select:focus,
+.order-form-box textarea:focus{
+  outline:none;
+  border-color:#d4af37;
+  box-shadow:0 0 15px rgba(212,175,55,0.2);
+}
+
+.order-form-box select{
+  appearance:none;
+  cursor:pointer;
+}
+
+.order-form-box select option{
+  background:#1a1a1a;
   color:#fff;
 }
+
+.place-order-btn{
+  width:100%;
+  background:#d4af37;
+  color:#000;
+  border:none;
+  padding:16px;
+  border-radius:30px;
+  font-size:18px;
+  font-weight:700;
+  cursor:pointer;
+  transition:0.3s;
+  margin-top:10px;
+}
+
+.place-order-btn:hover{
+  background:#fff;
+  transform:scale(1.02);
+}
+
+.order-close{
+  position:fixed;
+  top:20px;
+  right:30px;
+  background:rgba(255,255,255,0.1);
+  border:none;
+  color:#fff;
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  font-size:30px;
+  cursor:pointer;
+  z-index:100002;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:0.3s;
+}
+
+.order-close:hover{
+  background:#d4af37;
+  color:#000;
+}
+
+/* Order Success */
+.order-success{
+  display:none;
+  text-align:center;
+  padding:40px 20px;
+}
+
+.order-success i{
+  font-size:80px;
+  color:#00b894;
+  margin-bottom:20px;
+}
+
+.order-success h2{
+  color:#d4af37;
+  font-family:'Playfair Display', serif;
+}
+
+/* LOGIN BUTTON - UNTOUCHED */
+.btn-login{
+  background: transparent;
+  border: 2px solid #d4af37;
+  color: #d4af37;
+  padding: 8px 22px;
+  border-radius: 30px;
+  transition: 0.3s;
+}
+.btn-login:hover{
+  background: #d4af37;
+  color: #000;
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #d4af37;
+}
+
+/* RESTAURANT SECTION */
+.restaurant-section{
+  background:#1a1a1a;
+  border-top:1px solid #d4af37;
+  border-bottom:1px solid #d4af37;
+}
+.restaurant-section img{
+  box-shadow:0 20px 40px rgba(0,0,0,0.6);
+}
+
+/* Reveal Animation */
 .reveal{
   opacity:0;
   transform:translateY(60px);
   transition:all 1s ease;
 }
-
 .reveal.active{
   opacity:1;
   transform:translateY(0);
 }
+
 /* FOOTER */
 .footer{
   background:#000;
   padding:60px 0 20px;
 }
-
 .footer h5{
   color:#d4af37;
   margin-bottom:20px;
 }
-
 .footer a{
   text-decoration:none;
   color:#ccc;
@@ -243,7 +839,6 @@ body{
 .footer a:hover{
   color:#d4af37;
 }
-
 .social-icons a{
   font-size:20px;
   margin-right:15px;
@@ -253,7 +848,6 @@ body{
 .social-icons a:hover{
   color:#d4af37;
 }
-
 .footer-bottom{
   border-top:1px solid #333;
   margin-top:30px;
@@ -261,15 +855,13 @@ body{
   text-align:center;
   color:#aaa;
 }
-.quick-links li {
+.quick-links li{
   margin-bottom:10px;
 }
-
-.quick-links a {
+.quick-links a{
   position:relative;
   display:inline-block;
 }
-
 .quick-links a::after{
   content:"";
   position:absolute;
@@ -280,61 +872,89 @@ body{
   bottom:-3px;
   transition:0.3s;
 }
-
 .quick-links a:hover::after{
   width:100%;
 }
-body.locked {
-  overflow: hidden;  
+
+body.locked{
+  overflow:hidden;
 }
 
- 
- .restaurant-section{
-  background: linear-gradient(135deg, #111, #1a1a1a, #0d0d0d);
-}
-.restaurant-section{
-  background:#1a1a1a;
-  border-top:1px solid #d4af37;
-  border-bottom:1px solid #d4af37;
-}
-.restaurant-section img{
-  box-shadow:0 20px 40px rgba(0,0,0,0.6);
-}
-/*login */
-.btn-login{
-  background: transparent;
-  border: 2px solid #d4af37;
-  color: #d4af37;
-  padding: 8px 22px;
-  border-radius: 30px;
-  transition: 0.3s;
+/* Responsive */
+@media(max-width:576px){
+  .cart-sidebar{
+    width:100%;
+    right:-100%;
+  }
+  .gallery-heading{
+    font-size:35px;
+  }
+  .modal-inner{
+    margin-top:80px;
+  }
 }
 
-.btn-login:hover{
-  background: #d4af37;
-  color: #000;
-  transform: scale(1.05);
-  box-shadow: 0 0 15px #d4af37;
+/* Added to cart toast */
+.toast-notification{
+  position:fixed;
+  bottom:30px;
+  right:30px;
+  background:#d4af37;
+  color:#000;
+  padding:15px 25px;
+  border-radius:15px;
+  font-weight:600;
+  z-index:100003;
+  transform:translateY(100px);
+  opacity:0;
+  transition:0.4s;
+  box-shadow:0 10px 30px rgba(212,175,55,0.4);
+}
+
+.toast-notification.show{
+  transform:translateY(0);
+  opacity:1;
+}
+
+/* Empty cart */
+.empty-cart{
+  text-align:center;
+  padding:40px 0;
+}
+
+.empty-cart i{
+  font-size:60px;
+  color:#333;
+  margin-bottom:15px;
+}
+
+.empty-cart p{
+  color:#666;
+}
+/* Fix White Background on Autofill */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px rgba(255,255,255,0.05) inset !important;
+  -webkit-text-fill-color: #fff !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 </style>
 </head>
 
 <body>
-    <!-- Navbar -->
+
+<!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
   <div class="container">
-
-    <!-- Logo -->
-    <a class="navbar-brand" href="gallery.html">JerryBites</a>
-
+    <a class="navbar-brand" href="index.html">JerryBites</a>
     <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navmenu">
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navmenu">
-
-      <!-- Center Menu -->
       <ul class="navbar-nav mx-auto">
         <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
@@ -342,30 +962,29 @@ body.locked {
         <li class="nav-item"><a class="nav-link active" href="gallery.html">Gallery</a></li>
         <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
       </ul>
-
-      <!-- Right Side Login Button -->
-      <a href="login.html" class="btn btn-login">Login</a>
-
+      <div class="d-flex align-items-center gap-3">
+        <!-- Cart Button -->
+        <div class="cart-btn" onclick="openCart()">
+          <i class="bi bi-cart3 text-white" style="font-size:22px;"></i>
+          <span class="cart-badge" id="cartBadge">0</span>
+        </div>
+        <a href="login.html" class="btn btn-login">Login</a>
+      </div>
     </div>
   </div>
 </nav>
 
 
+<!-- HERO SECTION - COMPLETELY UNTOUCHED -->
 <section class="gallery-hero section-padding">
 <div class="container">
 <div class="row align-items-center">
-
-<!-- LEFT SIDE -->
 <div class="col-lg-6">
-
 <h1 class="gallery-heading">Our Delicious Creations</h1>
-
 <p class="mt-3">
 Explore our handcrafted dishes made with passion and premium ingredients.
 Each meal tells a story of flavor and perfection.
 </p>
-
-<!-- 5 Thumbnails -->
 <div class="gallery-images mt-4">
 <img src="assests/images/burger-removebg-preview (1).png" onclick="changeImage(this)" class="active-thumb">
 <img src="assests/images/pzza-removebg-preview.png" onclick="changeImage(this)">
@@ -373,117 +992,439 @@ Each meal tells a story of flavor and perfection.
 <img src="assests/images/hd_restoration_result_image.png" onclick="changeImage(this)">
 <img src="" onclick="changeImage(this)">
 </div>
-
 <a href="javascript:void(0)" class="view-btn" onclick="openGallery()">View Gallery</a>
 </div>
-
-<!-- RIGHT SIDE PREVIEW -->
 <div class="col-lg-6">
 <div class="preview-box">
 <img id="mainImage" src="assests/images/burger-removebg-preview (1).png">
 </div>
 </div>
-
 </div>
 </div>
 </section>
 
-<!-- FULL GALLERY -->
- 
+
+<!-- ========== ENHANCED FULL GALLERY ========== -->
 <section id="gallery-section" class="full-gallery">
 <div class="container">
-    <h2 class="text-center mb-5" style="color:#d4af37; font-size:40px; font-weight:700;">
-  Our Gallery</h2>
-<div class="row">
+  <h2 class="text-center mb-2" style="color:#d4af37; font-size:42px; font-weight:700; font-family:'Playfair Display',serif;">
+    Our Gallery
+  </h2>
+  <p class="text-center mb-5" style="color:#888;">Click on any dish to view details, like & add to cart</p>
+  
+  <div class="row" id="galleryGrid">
 
-<div class="col-md-4">
-<img src="assests/images/steak plater2.jpg" onclick="openModal(this)" data-name="Steak"data-price="Rs. 1200">
-</div>
+    <div class="col-md-4 col-sm-6">
+      <div class="gallery-card" onclick="openModal(this)" data-name="Premium Steak Platter" data-price="1200" data-img="assests/images/steak plater2.jpg">
+        <button class="like-heart" onclick="event.stopPropagation(); toggleCardLike(this)"><i class="bi bi-heart"></i></button>
+        <img src="assests/images/steak plater2.jpg">
+        <div class="gallery-card-overlay">
+          <h5>Premium Steak Platter</h5>
+          <span class="price-tag">Rs. 1200</span>
+        </div>
+      </div>
+    </div>
 
-<div class="col-md-4">
-<img src="assests/images/fried rice.jpg" onclick="openModal(this)" data-name="Chicken Fried Rice"data-price="Rs. 400">
-</div>
+    <div class="col-md-4 col-sm-6">
+      <div class="gallery-card" onclick="openModal(this)" data-name="Chicken Fried Rice" data-price="400" data-img="assests/images/fried rice.jpg">
+        <button class="like-heart" onclick="event.stopPropagation(); toggleCardLike(this)"><i class="bi bi-heart"></i></button>
+        <img src="assests/images/fried rice.jpg">
+        <div class="gallery-card-overlay">
+          <h5>Chicken Fried Rice</h5>
+          <span class="price-tag">Rs. 400</span>
+        </div>
+      </div>
+    </div>
 
-<div class="col-md-4">
-<img src="assests/images/ice creamnew.webp" onclick="openModal(this)" data-name="Ice cream"data-price="Rs. 320">
-</div>
+    <div class="col-md-4 col-sm-6">
+      <div class="gallery-card" onclick="openModal(this)" data-name="Ice Cream Delight" data-price="320" data-img="assests/images/ice creamnew.webp">
+        <button class="like-heart" onclick="event.stopPropagation(); toggleCardLike(this)"><i class="bi bi-heart"></i></button>
+        <img src="assests/images/ice creamnew.webp">
+        <div class="gallery-card-overlay">
+          <h5>Ice Cream Delight</h5>
+          <span class="price-tag">Rs. 320</span>
+        </div>
+      </div>
+    </div>
 
-<div class="col-md-4">
-<img src="assests/images/sandwich.webp" onclick="openModal(this)" data-name="Sandwich"data-price="Rs. 400">
-</div>
+    <div class="col-md-4 col-sm-6">
+      <div class="gallery-card" onclick="openModal(this)" data-name="Club Sandwich" data-price="400" data-img="assests/images/sandwich.webp">
+        <button class="like-heart" onclick="event.stopPropagation(); toggleCardLike(this)"><i class="bi bi-heart"></i></button>
+        <img src="assests/images/sandwich.webp">
+        <div class="gallery-card-overlay">
+          <h5>Club Sandwich</h5>
+          <span class="price-tag">Rs. 400</span>
+        </div>
+      </div>
+    </div>
 
-<div class="col-md-4">
-<img src="assests/images/new masla wings.avif" onclick="openModal(this)" data-name="Chicken extra masala wings"data-price="Rs. 300">
-</div>
+    <div class="col-md-4 col-sm-6">
+      <div class="gallery-card" onclick="openModal(this)" data-name="Extra Masala Wings" data-price="300" data-img="assests/images/new masla wings.avif">
+        <button class="like-heart" onclick="event.stopPropagation(); toggleCardLike(this)"><i class="bi bi-heart"></i></button>
+        <img src="assests/images/new masla wings.avif">
+        <div class="gallery-card-overlay">
+          <h5>Extra Masala Wings</h5>
+          <span class="price-tag">Rs. 300</span>
+        </div>
+      </div>
+    </div>
 
-<div class="col-md-4">
-<img src="assests/images/12beef burger.webp" onclick="openModal(this)" data-name="Juicy Beef Burger"data-price="Rs. 500">
-</div>
+    <div class="col-md-4 col-sm-6">
+      <div class="gallery-card" onclick="openModal(this)" data-name="Juicy Beef Burger" data-price="500" data-img="assests/images/12beef burger.webp">
+        <button class="like-heart" onclick="event.stopPropagation(); toggleCardLike(this)"><i class="bi bi-heart"></i></button>
+        <img src="assests/images/12beef burger.webp">
+        <div class="gallery-card-overlay">
+          <h5>Juicy Beef Burger</h5>
+          <span class="price-tag">Rs. 500</span>
+        </div>
+      </div>
+    </div>
 
-<div class="col-md-4">
-<img src="assests/images/gold cake.avif" onclick="openModal(this)" data-name="GOld Cake"data-price="Rs. 3500">
-</div>
+    <div class="col-md-4 col-sm-6">
+      <div class="gallery-card" onclick="openModal(this)" data-name="Gold Cake Special" data-price="3500" data-img="assests/images/gold cake.avif">
+        <button class="like-heart" onclick="event.stopPropagation(); toggleCardLike(this)"><i class="bi bi-heart"></i></button>
+        <img src="assests/images/gold cake.avif">
+        <div class="gallery-card-overlay">
+          <h5>Gold Cake Special</h5>
+          <span class="price-tag">Rs. 3500</span>
+        </div>
+      </div>
+    </div>
 
-<div class="col-md-4">
-<img src="assests/images/chicken broast123.webp" onclick="openModal(this)" data-name="Chicken Broast"data-price="Rs. 450">
-</div>
+    <div class="col-md-4 col-sm-6">
+      <div class="gallery-card" onclick="openModal(this)" data-name="Chicken Broast" data-price="450" data-img="assests/images/chicken broast123.webp">
+        <button class="like-heart" onclick="event.stopPropagation(); toggleCardLike(this)"><i class="bi bi-heart"></i></button>
+        <img src="assests/images/chicken broast123.webp">
+        <div class="gallery-card-overlay">
+          <h5>Chicken Broast</h5>
+          <span class="price-tag">Rs. 450</span>
+        </div>
+      </div>
+    </div>
 
-<div class="col-md-4">
-<img src="assests/images/seekh kebab.webp" onclick="openModal(this)" data-name="Seekh Kebab"data-price="Rs. 400">
-</div>
+    <div class="col-md-4 col-sm-6">
+      <div class="gallery-card" onclick="openModal(this)" data-name="Seekh Kebab" data-price="400" data-img="assests/images/seekh kebab.webp">
+        <button class="like-heart" onclick="event.stopPropagation(); toggleCardLike(this)"><i class="bi bi-heart"></i></button>
+        <img src="assests/images/seekh kebab.webp">
+        <div class="gallery-card-overlay">
+          <h5>Seekh Kebab</h5>
+          <span class="price-tag">Rs. 400</span>
+        </div>
+      </div>
+    </div>
 
-</div>
-</div>
-</section>
-<!-- IMAGE MODAL -->
-<div class="image-modal" id="imageModal">
-  <span class="close-btn" onclick="closeModal()">✖</span>
-  <img id="modalImage">
-  <div class="image-info">
-    <h4 id="imageName">Delicious Dish</h4>
-    <h5 id="imagePrice" style="color :#d4af37;"></h5>
-    <button class="like-btn" onclick="toggleLike(this)">❤ Like</button>
   </div>
 </div>
+</section>
+
+
+<!-- ========== ADD DRINKS SECTION ========== -->
+<section class="drinks-section section-padding reveal" id="drinks-section">
+<div class="container">
+  <h2 class="text-center mb-2" style="color:#d4af37; font-size:42px; font-weight:700; font-family:'Playfair Display',serif;">
+    <i class="bi bi-cup-straw me-2"></i>Add Drinks
+  </h2>
+  <p class="text-center mb-5" style="color:#888;">Complete your meal with our refreshing beverages</p>
+  
+  <div class="row">
+
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="drink-card">
+        <img src="assests/images/coca cola.webp" alt="Coca Cola">
+        <h5>Coca Cola</h5>
+        <p class="drink-price">Rs. 100</p>
+        <button class="drink-add-btn" onclick="addDrinkToCart('Coca Cola', 100, this)">
+          <i class="bi bi-plus-circle me-1"></i> Add
+        </button>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="drink-card">
+        <img src="assests/images/orange juice.webp" alt="Fresh Juice">
+        <h5>Fresh Orange Juice</h5>
+        <p class="drink-price">Rs. 200</p>
+        <button class="drink-add-btn" onclick="addDrinkToCart('Fresh Orange Juice', 200, this)">
+          <i class="bi bi-plus-circle me-1"></i> Add
+        </button>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="drink-card">
+        <img src="assests/images/lemonade.jpg" alt="Mint Lemonade">
+        <h5>Mint Lemonade</h5>
+        <p class="drink-price">Rs. 180</p>
+        <button class="drink-add-btn" onclick="addDrinkToCart('Mint Lemonade', 180, this)">
+          <i class="bi bi-plus-circle me-1"></i> Add
+        </button>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="drink-card">
+        <img src="assests/images/mango milkshake.jpg" alt="Mango Shake">
+        <h5>Mango Milkshake</h5>
+        <p class="drink-price">Rs. 250</p>
+        <button class="drink-add-btn" onclick="addDrinkToCart('Mango Milkshake', 250, this)">
+          <i class="bi bi-plus-circle me-1"></i> Add
+        </button>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="drink-card">
+        <img src="assests/images/strawberry shake.webp" alt="Strawberry Shake">
+        <h5>Strawberry Shake</h5>
+        <p class="drink-price">Rs. 280</p>
+        <button class="drink-add-btn" onclick="addDrinkToCart('Strawberry Shake', 280, this)">
+          <i class="bi bi-plus-circle me-1"></i> Add
+        </button>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="drink-card">
+        <img src="assests/images/ice coffe.jpg" alt="Iced Coffee">
+        <h5>Iced Coffee</h5>
+        <p class="drink-price">Rs. 350</p>
+        <button class="drink-add-btn" onclick="addDrinkToCart('Iced Coffee', 350, this)">
+          <i class="bi bi-plus-circle me-1"></i> Add
+        </button>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="drink-card">
+        <img src="assests/images/green tea.webp" alt="Green Tea">
+        <h5>Green Tea</h5>
+        <p class="drink-price">Rs. 150</p>
+        <button class="drink-add-btn" onclick="addDrinkToCart('Green Tea', 150, this)">
+          <i class="bi bi-plus-circle me-1"></i> Add
+        </button>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="drink-card">
+        <img src="assests/images/pepsi.webp" alt="Pepsi">
+        <h5>Pepsi</h5>
+        <p class="drink-price">Rs. 100</p>
+        <button class="drink-add-btn" onclick="addDrinkToCart('Pepsi', 100, this)">
+          <i class="bi bi-plus-circle me-1"></i> Add
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+</section>
+
+
+<!-- ========== ASK ANY QUESTION ========== -->
+<section class="ask-section section-padding reveal">
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+
+      <h2 class="text-center mb-2" style="color:#d4af37; font-size:42px; font-weight:700; font-family:'Playfair Display',serif;">
+        <i class="bi bi-chat-dots me-2"></i>Ask Any Question
+      </h2>
+      <p class="text-center mb-5" style="color:#888;">Have a question about our food, ingredients or services? Ask away!</p>
+
+      <div class="ask-card">
+        <div class="row">
+          <div class="col-md-6">
+            <input type="text" id="askName" placeholder="Your Name">
+          </div>
+          <div class="col-md-6">
+            <input type="email" id="askEmail" placeholder="Your Email">
+          </div>
+        </div>
+        <input type="text" id="askSubject" placeholder="Subject (e.g. Ingredients, Halal, Delivery)">
+        <textarea id="askMessage" rows="5" placeholder="Type your question here..."></textarea>
+        <div class="text-center">
+          <button class="ask-submit-btn" onclick="submitQuestion()">
+            <i class="bi bi-send me-2"></i>Send Question
+          </button>
+        </div>
+        <div id="askSuccess" style="display:none; text-align:center; margin-top:20px;">
+          <i class="bi bi-check-circle" style="font-size:40px; color:#00b894;"></i>
+          <p style="color:#00b894; margin-top:10px; font-weight:600;">Thank you! We'll reply within 24 hours.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</section>
+
+
 <!-- RESTAURANT SECTION -->
 <section class="restaurant-section section-padding">
 <div class="container">
 <div class="row align-items-center">
-
 <div class="col-lg-6 reveal">
-<h2 style="color:#d4af37; font-weight:700;">
-  About Our Restaurant
-</h2>
-
+<h2 style="color:#d4af37; font-weight:700;">About Our Restaurant</h2>
 <p class="mt-3">
 We serve premium quality food with fresh ingredients and modern presentation.
 Our mission is to deliver taste, comfort and unforgettable dining experience.
 </p>
-
 </div>
-
 <div class="col-lg-6 reveal">
 <img src="assests/images/our restaurant.jpg" class="img-fluid rounded-4">
 </div>
-
 </div>
 </div>
 </section>
+
+
+<!-- ========== FULLSCREEN IMAGE MODAL ========== -->
+<div class="image-modal" id="imageModal">
+  <button class="modal-close" onclick="closeModal()">✕</button>
+  <div class="modal-inner">
+    <div class="modal-image-box">
+      <img id="modalImage" src="">
+    </div>
+    <div class="modal-details">
+      <h3 id="modalName">Dish Name</h3>
+      <p class="modal-price" id="modalPrice">Rs. 0</p>
+      
+      <div class="d-flex align-items-center gap-4 flex-wrap">
+        <div>
+          <label style="color:#888; font-size:13px; margin-bottom:5px;">Quantity</label>
+          <div class="qty-controls">
+            <button class="qty-btn" onclick="changeQty(-1)">−</button>
+            <div class="qty-display" id="qtyDisplay">1</div>
+            <button class="qty-btn" onclick="changeQty(1)">+</button>
+          </div>
+        </div>
+        <div class="mt-3">
+          <label style="color:#888; font-size:13px; margin-bottom:5px;">Total</label>
+          <p id="modalTotal" style="color:#d4af37; font-size:22px; font-weight:700;">Rs. 0</p>
+        </div>
+      </div>
+
+      <div class="mt-3 d-flex flex-wrap gap-2">
+        <button class="modal-add-cart" onclick="addToCartFromModal()">
+          <i class="bi bi-cart-plus me-2"></i>Add to Cart
+        </button>
+        <button class="modal-like-btn" id="modalLikeBtn" onclick="toggleModalLike()">
+          <i class="bi bi-heart me-1"></i> Like
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ========== CART SIDEBAR ========== -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <button class="cart-close" onclick="closeCart()">✕</button>
+  <h3><i class="bi bi-cart3 me-2"></i>Your Cart</h3>
+  
+  <div id="cartItems">
+    <div class="empty-cart" id="emptyCart">
+      <i class="bi bi-cart-x d-block"></i>
+      <p>Your cart is empty</p>
+    </div>
+  </div>
+
+  <div class="cart-total" id="cartTotalBox" style="display:none;">
+    <p style="color:#888; margin-bottom:5px;">Total Amount</p>
+    <h4 id="cartTotalAmount">Rs. 0</h4>
+    <button class="checkout-btn" onclick="openOrderForm()">
+      <i class="bi bi-bag-check me-2"></i>Proceed to Order
+    </button>
+  </div>
+</div>
+
+
+<!-- ========== ORDER FORM MODAL ========== -->
+<div class="order-modal" id="orderModal">
+  <button class="order-close" onclick="closeOrderForm()">✕</button>
+  
+  <div class="order-form-box" id="orderFormContent">
+    <h3><i class="bi bi-clipboard-check me-2"></i>Complete Your Order</h3>
+    <p>Please fill in your details to confirm your order</p>
+
+    <label>Full Name *</label>
+    <input type="text" id="orderName" placeholder="Enter your full name">
+
+    <label>Phone Number *</label>
+    <input type="tel" id="orderPhone" placeholder="03XX-XXXXXXX">
+
+    <label>Email Address</label>
+    <input type="email" id="orderEmail" placeholder="your@email.com">
+
+    <label>Delivery Address *</label>
+    <textarea id="orderAddress" rows="3" placeholder="Complete delivery address with area & landmark"></textarea>
+
+    <label>City *</label>
+    <input type="text" id="orderCity" placeholder="e.g. Karachi">
+
+    <label>Order Type *</label>
+    <select id="orderType">
+      <option value="">-- Select --</option>
+      <option value="delivery">Home Delivery</option>
+      <option value="pickup">Self Pickup</option>
+      <option value="dinein">Dine In</option>
+    </select>
+
+    <label>Payment Method *</label>
+    <select id="paymentMethod">
+      <option value="">-- Select --</option>
+      <option value="cod">Cash on Delivery</option>
+      <option value="jazzcash">JazzCash</option>
+      <option value="easypaisa">EasyPaisa</option>
+      <option value="bank">Bank Transfer</option>
+    </select>
+
+    <label>Special Instructions</label>
+    <textarea id="orderNotes" rows="2" placeholder="Any special request? (extra spicy, no onion, etc.)"></textarea>
+
+    <div id="orderSummary" style="background:rgba(212,175,55,0.1); border-radius:15px; padding:15px; margin:15px 0;">
+      <h6 style="color:#d4af37;">Order Summary</h6>
+      <div id="orderSummaryItems"></div>
+      <hr style="border-color:#333;">
+      <h5 style="color:#d4af37;" id="orderSummaryTotal">Total: Rs. 0</h5>
+    </div>
+
+    <button class="place-order-btn" onclick="placeOrder()">
+      <i class="bi bi-check-circle me-2"></i>Place Order
+    </button>
+  </div>
+
+  <!-- Success Message -->
+  <div class="order-success" id="orderSuccess">
+    <i class="bi bi-check-circle d-block"></i>
+    <h2>Order Placed Successfully!</h2>
+    <p style="color:#888; margin-top:10px; font-size:18px;">Thank you for ordering from JerryBites!</p>
+    <p style="color:#ccc;">We will contact you shortly to confirm your order.</p>
+    <p style="color:#d4af37; font-size:20px; font-weight:600; margin-top:15px;" id="orderIdText"></p>
+    <button class="place-order-btn" style="max-width:300px; margin-top:20px;" onclick="closeOrderForm(); location.reload();">
+      <i class="bi bi-house me-2"></i>Back to Gallery
+    </button>
+  </div>
+</div>
+
+
+<!-- TOAST NOTIFICATION -->
+<div class="toast-notification" id="toastNotification">
+  <i class="bi bi-check-circle me-2"></i>
+  <span id="toastMessage">Added to cart!</span>
+</div>
+
+
 <!-- FOOTER -->
 <footer class="footer text-white">
 <div class="container">
 <div class="row">
-
-<!-- Left -->
 <div class="col-md-4 mb-4">
 <h5>JerryBites Restaurant</h5>
-<p>
-Experience luxury dining with world-class chefs, premium ingredients, 
-and unforgettable ambiance.
-</p>
+<p>Experience luxury dining with world-class chefs, premium ingredients, and unforgettable ambiance.</p>
 </div>
-
-<!-- Middle -->
 <div class="col-md-3 mb-4 text-md-center">
 <h5>Quick Links</h5>
 <ul class="list-unstyled quick-links">
@@ -494,120 +1435,342 @@ and unforgettable ambiance.
 <li><a href="contact.html">Contact</a></li>
 </ul>
 </div>
-
-<!-- Right  -->
 <div class="col-md-4 offset-md-1 mb-4 text-md-start">
 <h5>Contact Info</h5>
-
 <div class="contact-info">
 <p><i class="bi bi-geo-alt-fill me-2"></i>Shop No.08, Samia Plaza, Gulshan-e-Iqbal block o4(Near Disco Bakery Kaybees Restaurant), Karachi Pakistan</p>
 <p><i class="bi bi-telephone-fill me-2"></i>03453956208</p>
-<p>
-<i class="bi bi-envelope-fill me-2"></i>
-<a href="https://mail.google.com/mail/?view=cm&fs=1&to=faisalali@jarries.com" target="_blank">
-faisalali@jarries.com
-</a>
-</p>
+<p><i class="bi bi-envelope-fill me-2"></i><a href="https://mail.google.com/mail/?view=cm&fs=1&to=faisalali@jarries.com" target="_blank">faisalali@jarries.com</a></p>
 </div>
-
-<!-- Social Icons  -->
 <div class="social-icons mt-3">
-<a href="#"><i class="bi bi-facebook"></i></a>
-<a href="#"><i class="bi bi-instagram"></i></a>
-<a href="https://mail.google.com/mail/?view=cm&fs=1&to=jarriesrestaurant@gmail.com" target="_blank">
-<i class="bi bi-envelope-fill"></i>
-</a>
+<a href="https://www.facebook.com/profile.php?id=61572902196041" target="_blank">
+    <i class="bi bi-facebook"></i>
+  </a>
+<a href="https://www.instagram.com/jerrybitesexpress/" target="_blank">
+    <i class="bi bi-instagram"></i>
+  </a>
+<a href="https://mail.google.com/mail/?view=cm&fs=1&to=jarriesrestaurant@gmail.com" target="_blank"><i class="bi bi-envelope-fill"></i></a>
 </div>
-
 </div>
-
 </div>
-
-<div class="footer-bottom text-center">
-© 2026 JerryBites Restaurant | All Rights Reserved
-</div>
-
+<div class="footer-bottom text-center">© 2026 JerryBites Restaurant | All Rights Reserved</div>
 </div>
 </footer>
 
+
 <script>
 
+// ========== CART DATA ==========
+let cart = [];
+let currentModalItem = {name:'', price:0, img:'', qty:1};
+
+// ========== HERO FUNCTIONS (UNTOUCHED) ==========
 function changeImage(element){
-
   document.getElementById("mainImage").src = element.src;
-
   let thumbs = document.querySelectorAll(".gallery-images img");
   thumbs.forEach(img=> img.classList.remove("active-thumb"));
-
   element.classList.add("active-thumb");
 }
+
 function openGallery(){
-
-  // Unlock page scrolling
   document.body.classList.remove("locked");
-
-  // Show full gallery
   document.querySelector(".full-gallery").style.display = "block";
-
-  // Smooth scroll to gallery
-  document.getElementById("gallery-section").scrollIntoView({
-    behavior: "smooth"
-  });
-
+  document.getElementById("gallery-section").scrollIntoView({ behavior: "smooth" });
 }
+
 window.addEventListener("load", function(){
-
   document.querySelector(".gallery-hero").classList.add("show");
-
-  // Hide full sections
   document.querySelector(".full-gallery").style.display = "none";
-
-  // Lock scrolling
   document.body.classList.add("locked");
-
 });
 
-function openModal(element){
-  document.getElementById("imageModal").style.display="flex";
-  document.getElementById("modalImage").src = element.src;
 
-  document.getElementById("imageName").innerText =
-      element.getAttribute("data-name");
+// ========== LIKE ON GALLERY CARDS ==========
+function toggleCardLike(btn){
+  btn.classList.toggle("liked");
+  let icon = btn.querySelector("i");
+  if(btn.classList.contains("liked")){
+    icon.className = "bi bi-heart-fill";
+    showToast("Added to favorites! ❤");
+  } else {
+    icon.className = "bi bi-heart";
+  }
+}
 
-  document.getElementById("imagePrice").innerText =
-      element.getAttribute("data-price");
+
+// ========== FULLSCREEN MODAL ==========
+function openModal(card){
+  let name = card.getAttribute("data-name");
+  let price = parseInt(card.getAttribute("data-price"));
+  let img = card.querySelector("img").src;
+
+  currentModalItem = {name, price, img, qty:1};
+
+  document.getElementById("modalImage").src = img;
+  document.getElementById("modalName").innerText = name;
+  document.getElementById("modalPrice").innerText = "Rs. " + price;
+  document.getElementById("qtyDisplay").innerText = 1;
+  document.getElementById("modalTotal").innerText = "Rs. " + price;
+  document.getElementById("modalLikeBtn").classList.remove("liked");
+  document.getElementById("modalLikeBtn").innerHTML = '<i class="bi bi-heart me-1"></i> Like';
+
+  document.getElementById("imageModal").style.display = "block";
+  document.body.style.overflow = "hidden";
 }
 
 function closeModal(){
-  document.getElementById("imageModal").style.display="none";
+  document.getElementById("imageModal").style.display = "none";
+  document.body.style.overflow = "";
 }
 
-function toggleLike(button){
-  button.classList.toggle("liked");
+function changeQty(delta){
+  currentModalItem.qty += delta;
+  if(currentModalItem.qty < 1) currentModalItem.qty = 1;
+  if(currentModalItem.qty > 20) currentModalItem.qty = 20;
+  document.getElementById("qtyDisplay").innerText = currentModalItem.qty;
+  document.getElementById("modalTotal").innerText = "Rs. " + (currentModalItem.price * currentModalItem.qty);
+}
 
-  if(button.classList.contains("liked")){
-    button.innerText="❤ Liked";
-  }else{
-    button.innerText="❤ Like";
+function toggleModalLike(){
+  let btn = document.getElementById("modalLikeBtn");
+  btn.classList.toggle("liked");
+  if(btn.classList.contains("liked")){
+    btn.innerHTML = '<i class="bi bi-heart-fill me-1"></i> Liked';
+  } else {
+    btn.innerHTML = '<i class="bi bi-heart me-1"></i> Like';
   }
 }
-// Scroll Animation
+
+
+// ========== ADD TO CART ==========
+function addToCartFromModal(){
+  let item = {
+    name: currentModalItem.name,
+    price: currentModalItem.price,
+    img: currentModalItem.img,
+    qty: currentModalItem.qty
+  };
+  
+  // Check if already exists
+  let existing = cart.find(c => c.name === item.name);
+  if(existing){
+    existing.qty += item.qty;
+  } else {
+    cart.push(item);
+  }
+  
+  updateCartBadge();
+  showToast(item.name + " added to cart!");
+  closeModal();
+}
+
+function addDrinkToCart(name, price, btn){
+  let existing = cart.find(c => c.name === name);
+  if(existing){
+    existing.qty += 1;
+  } else {
+    cart.push({name, price, img:'', qty:1});
+  }
+  updateCartBadge();
+  showToast(name + " added!");
+  
+  // Button feedback
+  let originalText = btn.innerHTML;
+  btn.innerHTML = '<i class="bi bi-check-circle me-1"></i> Added!';
+  btn.style.background = '#d4af37';
+  btn.style.color = '#000';
+  setTimeout(()=>{
+    btn.innerHTML = originalText;
+    btn.style.background = '';
+    btn.style.color = '';
+  }, 1500);
+}
+
+
+// ========== CART SIDEBAR ==========
+function openCart(){
+  document.getElementById("cartSidebar").classList.add("open");
+  document.getElementById("cartOverlay").style.display = "block";
+  renderCart();
+}
+
+function closeCart(){
+  document.getElementById("cartSidebar").classList.remove("open");
+  document.getElementById("cartOverlay").style.display = "none";
+}
+
+function renderCart(){
+  let container = document.getElementById("cartItems");
+  let emptyCart = document.getElementById("emptyCart");
+  let totalBox = document.getElementById("cartTotalBox");
+  
+  // Clear previous items (keep empty cart div)
+  container.innerHTML = '';
+  
+  if(cart.length === 0){
+    container.innerHTML = '<div class="empty-cart"><i class="bi bi-cart-x d-block"></i><p>Your cart is empty</p></div>';
+    totalBox.style.display = "none";
+    return;
+  }
+  
+  let total = 0;
+  cart.forEach((item, index) => {
+    total += item.price * item.qty;
+    container.innerHTML += `
+      <div class="cart-item">
+        ${item.img ? '<img src="'+item.img+'">' : '<div style="width:60px;height:60px;background:#333;border-radius:10px;display:flex;align-items:center;justify-content:center;"><i class="bi bi-cup-straw" style="font-size:24px;color:#d4af37;"></i></div>'}
+        <div class="cart-item-info">
+          <h6>${item.name}</h6>
+          <span>Rs. ${item.price} x ${item.qty} = Rs. ${item.price * item.qty}</span>
+        </div>
+        <button class="cart-item-remove" onclick="removeFromCart(${index})">
+          <i class="bi bi-trash"></i>
+        </button>
+      </div>
+    `;
+  });
+  
+  totalBox.style.display = "block";
+  document.getElementById("cartTotalAmount").innerText = "Rs. " + total;
+}
+
+function removeFromCart(index){
+  cart.splice(index, 1);
+  updateCartBadge();
+  renderCart();
+  showToast("Item removed from cart");
+}
+
+function updateCartBadge(){
+  let totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+  document.getElementById("cartBadge").innerText = totalItems;
+}
+
+
+// ========== ORDER FORM ==========
+function openOrderForm(){
+  closeCart();
+  document.getElementById("orderModal").style.display = "block";
+  document.getElementById("orderFormContent").style.display = "block";
+  document.getElementById("orderSuccess").style.display = "none";
+  document.body.style.overflow = "hidden";
+  
+  // Fill order summary
+  let summaryHTML = '';
+  let total = 0;
+  cart.forEach(item => {
+    total += item.price * item.qty;
+    summaryHTML += `<p style="margin:5px 0; color:#ccc; font-size:14px;">${item.name} x${item.qty} <span style="float:right; color:#d4af37;">Rs. ${item.price * item.qty}</span></p>`;
+  });
+  document.getElementById("orderSummaryItems").innerHTML = summaryHTML;
+  document.getElementById("orderSummaryTotal").innerText = "Total: Rs. " + total;
+}
+
+function closeOrderForm(){
+  document.getElementById("orderModal").style.display = "none";
+  document.body.style.overflow = "";
+}
+
+function placeOrder(){
+  let name = document.getElementById("orderName").value.trim();
+  let phone = document.getElementById("orderPhone").value.trim();
+  let address = document.getElementById("orderAddress").value.trim();
+  let city = document.getElementById("orderCity").value.trim();
+  let orderType = document.getElementById("orderType").value;
+  let payment = document.getElementById("paymentMethod").value;
+
+  // Validation
+  if(!name){
+    alert("Please enter your full name"); return;
+  }
+  if(!phone || phone.length < 10){
+    alert("Please enter a valid phone number"); return;
+  }
+  if(!address && orderType !== 'dinein'){
+    alert("Please enter your delivery address"); return;
+  }
+  if(!city){
+    alert("Please enter your city"); return;
+  }
+  if(!orderType){
+    alert("Please select order type"); return;
+  }
+  if(!payment){
+    alert("Please select payment method"); return;
+  }
+
+  // Generate Order ID
+  let orderId = "JB-" + Date.now().toString().slice(-8);
+  
+  document.getElementById("orderFormContent").style.display = "none";
+  document.getElementById("orderSuccess").style.display = "block";
+  document.getElementById("orderIdText").innerText = "Order ID: " + orderId;
+
+  // Clear cart
+  cart = [];
+  updateCartBadge();
+}
+
+
+// ========== ASK QUESTION ==========
+function submitQuestion(){
+  let name = document.getElementById("askName").value.trim();
+  let email = document.getElementById("askEmail").value.trim();
+  let subject = document.getElementById("askSubject").value.trim();
+  let message = document.getElementById("askMessage").value.trim();
+
+  if(!name || !email || !message){
+    alert("Please fill in Name, Email and your Question");
+    return;
+  }
+
+  document.getElementById("askSuccess").style.display = "block";
+  document.getElementById("askName").value = '';
+  document.getElementById("askEmail").value = '';
+  document.getElementById("askSubject").value = '';
+  document.getElementById("askMessage").value = '';
+
+  setTimeout(()=>{
+    document.getElementById("askSuccess").style.display = "none";
+  }, 5000);
+}
+
+
+// ========== TOAST NOTIFICATION ==========
+function showToast(message){
+  let toast = document.getElementById("toastNotification");
+  document.getElementById("toastMessage").innerText = message;
+  toast.classList.add("show");
+  setTimeout(()=>{
+    toast.classList.remove("show");
+  }, 2500);
+}
+
+
+// ========== SCROLL REVEAL ==========
 function revealOnScroll(){
   let elements = document.querySelectorAll(".reveal");
-
   elements.forEach(el=>{
     let windowHeight = window.innerHeight;
     let elementTop = el.getBoundingClientRect().top;
-
     if(elementTop < windowHeight - 100){
       el.classList.add("active");
     }
   });
 }
-
 window.addEventListener("scroll", revealOnScroll);
 
+// Close modal on ESC key
+document.addEventListener("keydown", function(e){
+  if(e.key === "Escape"){
+    closeModal();
+    closeCart();
+    closeOrderForm();
+  }
+});
+
 </script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
