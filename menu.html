@@ -30,51 +30,39 @@ body {
 
 .section-padding { padding:80px 0; }
 
-/* ==================== NAVBAR ==================== */
-.navbar {
-  background:rgba(0,0,0,0.95);
-  backdrop-filter:blur(15px);
-  padding:12px 0;
-  border-bottom:1px solid rgba(212,175,55,0.1);
-  z-index:9999;
-}
 
-.navbar-brand {
+/* NAVBAR */
+.navbar{
+  background:rgba(0,0,0,0.9);
+}
+.navbar-brand{
   font-family:'Playfair Display', serif;
   color:#d4af37 !important;
   font-size:28px;
-  font-weight:700;
 }
-
-.nav-link {
-  color:#ccc !important;
-  font-weight:400;
-  position:relative;
-  margin:0 5px;
-  transition:0.3s;
-}
-
-.nav-link:hover, .nav-link.active {
+.nav-link:hover{
   color:#d4af37 !important;
 }
-
-.nav-link::after {
-  content:"";
-  position:absolute;
-  width:0%;
-  height:2px;
-  background:#d4af37;
-  left:50%;
-  bottom:-5px;
-  transform:translateX(-50%);
-  transition:0.3s;
+/* Navbar Hover  */
+.navbar .nav-link{
+  position: relative;
 }
 
-.nav-link:hover::after, .nav-link.active::after {
-  width:80%;
+.navbar .nav-link::after{
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background: #d4af37;
+  left: 0;
+  bottom: -5px;
+  transition: 0.3s;
 }
 
-/* Login Button - SAME AS INDEX PAGE */
+.navbar .nav-link:hover::after{
+  width: 100%;
+}
+/* Login Button */
 .btn-login {
   background:transparent;
   border:2px solid #d4af37;
@@ -973,11 +961,27 @@ body {
   padding:60px 0 20px;
   border-top:1px solid #d4af37; 
 }
+/* Contact Info Color Fix */
+.contact-info p{
+  color:#ccc;
+}
+
+.contact-info a{
+  color:#ccc;
+  text-decoration:none;
+}
+
+.contact-info a:hover{
+  color:#d4af37;
+}
+
+.contact-info i{
+  color:#d4af37;
+}
 
 .footer h5{
   color:#d4af37;
   margin-bottom:20px;
-  
 }
 
 .footer a{
@@ -1067,12 +1071,10 @@ body {
         <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
       </ul>
       <div class="d-flex align-items-center gap-3">
-        <!-- Cart Icon -->
         <div class="cart-icon-btn" onclick="openCart()">
           <i class="bi bi-cart3"></i>
           <span class="cart-badge" id="cartBadge">0</span>
         </div>
-        <!-- Login Button - SIMPLE LINK LIKE INDEX PAGE -->
         <a href="login.html" class="btn btn-login">Login</a>
       </div>
     </div>
@@ -1112,7 +1114,7 @@ body {
 <section id="menu-section" class="section-padding">
   <div class="container">
     <div class="text-center mb-5">
-      <h2 class="menu-heading">Our Delicious Menu</h2>
+      <h2 class="menu-heading">Our Delicious Latest Menu</h2>
       <p class="menu-subtitle">Fresh • Premium • Made With Love</p>
     </div>
 
@@ -1133,17 +1135,26 @@ body {
           <button class="list-group-item list-group-item-dark" onclick="filterMenu('broast', this)">
             <i class="bi bi-egg-fried me-2"></i>Broast
           </button>
-          <button class="list-group-item list-group-item-dark" onclick="filterMenu('chickenwings', this)">
-            <i class="bi bi-fire me-2"></i>Chicken Wings
+          <button class="list-group-item list-group-item-dark" onclick="filterMenu('wraps', this)">
+            <i class="bi bi-wrap me-2"></i>Wraps
           </button>
-          <button class="list-group-item list-group-item-dark" onclick="filterMenu('icecreamitems', this)">
-            <i class="bi bi-snow me-2"></i>Ice Cream
+          <button class="list-group-item list-group-item-dark" onclick="filterMenu('sandwich', this)">
+            <i class="bi bi-layers me-2"></i>Sandwich
           </button>
-          <button class="list-group-item list-group-item-dark" onclick="filterMenu('cake', this)">
-            <i class="bi bi-cake2 me-2"></i>Cake
+          <button class="list-group-item list-group-item-dark" onclick="filterMenu('pasta', this)">
+            <i class="bi bi-cup-hot me-2"></i>Pasta
+          </button>
+          <button class="list-group-item list-group-item-dark" onclick="filterMenu('chinese', this)">
+            <i class="bi bi-fire me-2"></i>Chinese
           </button>
           <button class="list-group-item list-group-item-dark" onclick="filterMenu('steak', this)">
             <i class="bi bi-dribbble me-2"></i>Steak
+          </button>
+          <button class="list-group-item list-group-item-dark" onclick="filterMenu('bbq', this)">
+            <i class="bi bi-flame me-2"></i>BBQ
+          </button>
+          <button class="list-group-item list-group-item-dark" onclick="filterMenu('rolls', this)">
+            <i class="bi bi-arrow-repeat me-2"></i>Rolls
           </button>
           <button class="list-group-item list-group-item-dark" onclick="filterMenu('fries', this)">
             <i class="bi bi-basket me-2"></i>Fries
@@ -1174,7 +1185,6 @@ body {
       <p class="lb-price" id="lbPrice"></p>
       <p class="lb-desc" id="lbDesc"></p>
 
-      <!-- Quantity Selector -->
       <div class="qty-selector">
         <button class="qty-btn" onclick="changeLbQty(-1)">−</button>
         <span class="qty-number" id="lbQty">1</span>
@@ -1200,9 +1210,7 @@ body {
     <h4><i class="bi bi-cart3 me-2"></i>Your Cart</h4>
     <button class="cart-close" onclick="closeCart()">&times;</button>
   </div>
-  <div class="cart-items" id="cartItemsContainer">
-    <!-- Cart items rendered by JS -->
-  </div>
+  <div class="cart-items" id="cartItemsContainer"></div>
   <div class="cart-footer" id="cartFooter" style="display:none;">
     <div class="cart-total">
       <span>Total:</span>
@@ -1220,9 +1228,7 @@ body {
     <h3><i class="bi bi-bag-check me-2"></i>Checkout</h3>
     <p class="checkout-subtitle">Complete your order details</p>
 
-    <div class="order-summary-mini" id="orderSummaryMini">
-      <!-- Filled by JS -->
-    </div>
+    <div class="order-summary-mini" id="orderSummaryMini"></div>
 
     <label class="form-label">Full Name</label>
     <input type="text" class="form-control" id="coName" placeholder="Your full name">
@@ -1270,7 +1276,6 @@ body {
 <div class="container">
 <div class="row">
 
-<!-- Left -->
 <div class="col-md-4 mb-4">
 <h5>JerryBites Restaurant</h5>
 <p>
@@ -1279,7 +1284,6 @@ and unforgettable ambiance.
 </p>
 </div>
 
-<!-- Middle -->
 <div class="col-md-3 mb-4 text-md-center">
 <h5>Quick Links</h5>
 <ul class="list-unstyled quick-links">
@@ -1291,10 +1295,8 @@ and unforgettable ambiance.
 </ul>
 </div>
 
-<!-- Right  -->
 <div class="col-md-4 offset-md-1 mb-4 text-md-start">
 <h5>Contact Info</h5>
-
 <div class="contact-info">
 <p><i class="bi bi-geo-alt-fill me-2"></i>Shop No.08, Samia Plaza, Gulshan-e-Iqbal block o4(Near Disco Bakery Kaybees Restaurant), Karachi Pakistan</p>
 <p><i class="bi bi-telephone-fill me-2"></i>03453956208</p>
@@ -1305,8 +1307,6 @@ info@jerrybites.com
 </a>
 </p>
 </div>
-
-<!-- Social Icons  -->
 
 <div class="social-icons mt-3">
   <a href="https://www.facebook.com/profile.php?id=61572902196041" target="_blank">
@@ -1345,7 +1345,7 @@ let lbQty = 1;
 cart = JSON.parse(localStorage.getItem('jerryCart') || '[]');
 updateCartBadge();
 
-// Try to fetch from JSON, fallback to demo data
+// Try to fetch from JSON, fallback to hardcoded data
 fetch("assests/data/menu.json")
   .then(res => {
     if(!res.ok) throw new Error('Not found');
@@ -1356,8 +1356,9 @@ fetch("assests/data/menu.json")
     displayMenu(allMenu);
   })
   .catch(() => {
-    // If no JSON file found, show empty or you can add demo data here
-    allMenu = [];
+    // Fallback hardcoded menu data
+    allMenu = [
+     ];
     displayMenu(allMenu);
   });
 
@@ -1680,14 +1681,12 @@ function placeOrder() {
     }
   }
 
-  // Success!
   const totalAmount = getCartTotal();
   closeCheckout();
   cart = [];
   saveCart();
   updateCartBadge();
 
-  // Clear form
   document.getElementById('coName').value = '';
   document.getElementById('coPhone').value = '';
   document.getElementById('coAddress').value = '';
@@ -1720,7 +1719,6 @@ document.addEventListener('keydown', function(e) {
   }
 });
 
-// Close on overlay click
 document.getElementById('lightbox').addEventListener('click', function(e) {
   if(e.target === this) closeLightbox();
 });
